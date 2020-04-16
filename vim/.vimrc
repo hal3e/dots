@@ -30,7 +30,7 @@ function Keyboard(type)
               " a       append text after the cursor
               " A       append text at the end of the line
       noremap u i|    " insert text before the cursor
-      noremap U I|    " insert text before the first non-blank in the line
+      noremap U I|    " insert text before the first non-blank in thne line
       noremap p o|    " begin a new line below the cursor and insert text
       noremap P O|    " begin a new line above the cursor and insert text
 
@@ -132,9 +132,15 @@ function LoadKeyboard()
    endif
 endfunction
 
-autocmd VimEnter * call Keyboard("workman")| " load workman layout at startup
+autocmd VimEnter * call Keyboard("workman")| " Load workman layout at startup
 imap nn <Esc>| " use 'nn' to exit insert mode
 
-" quickly change layouts - default <Leader> = \
+" Quickly change layouts - default <Leader> = \
 :noremap <Leader>q :call Keyboard("qwerty")<CR>:echom "qwerty keyboard layout"<CR>
 :noremap <Leader>w :call Keyboard("workman")<CR>:echom "workman keyboard layout"<CR>
+
+" Set interactive line numbering
+set number
+set relativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber

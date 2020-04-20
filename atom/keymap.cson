@@ -93,6 +93,7 @@
   'K': 'vim-mode-plus:repeat-search-reverse'
 
   'u': 'vim-mode-plus:activate-insert-mode'
+  'U': 'vim-mode-plus:insert-at-first-character-of-line'
   'f': 'vim-mode-plus:undo'
 
   'P': 'vim-mode-plus:insert-above-with-newline'
@@ -157,3 +158,6 @@
 
 'atom-text-editor[data-grammar~="latex"]':
   'alt-l': 'atom-latex:build'
+
+'atom-text-editor':
+  'ctrl-u': 'datatip:toggle'

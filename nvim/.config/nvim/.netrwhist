@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/hal3e/src'
+let g:netrw_dirhist_9='/home/hal3e/src/st-distrotube'
+let g:netrw_dirhist_8='/home/hal3e/src'
+let g:netrw_dirhist_7='/home/hal3e/src/dwm-distrotube'
+let g:netrw_dirhist_6='/home/hal3e/.config/nvim'
+let g:netrw_dirhist_5='/home/hal3e/src/it'
+let g:netrw_dirhist_4='/home/hal3e/.config/nvim/autoload/plugged/skim.vim/plugin'
+let g:netrw_dirhist_3='/home/hal3e/.config/nvim/autoload/plugged/skim.vim'
+let g:netrw_dirhist_2='/home/hal3e/.config/nvim/autoload/plugged'
+let g:netrw_dirhist_1='/home/hal3e/.config/nvim/autoload'

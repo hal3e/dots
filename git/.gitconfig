@@ -6,3 +6,5 @@
         lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
 [core]
 	editor = vim
+[credential]
+	helper = store --file ~/.git-credentials

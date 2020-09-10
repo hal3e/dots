@@ -1,10 +1,26 @@
 [user]
-        email = hal3e.git@gmail.com
-        name = hal3e
+  email = hal3e.git@gmail.com
+  name = hal3e
+
 [alias]
-        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
-        lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+  lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
+
 [core]
-	editor = vim
+	editor = nvim
+  pager = delta
+
 [credential]
 	helper = store --file ~/.git-credentials
+
+[delta]
+  syntax-theme = OneHalfDark
+  whitespace-error-style = 22 reverse
+  features = side-by-side line-numbers decorations
+
+[delta "decorations"]
+  file-style = "#c5cad3"
+  file-decoration-style = "#c5cad3 ul"
+  line-numbers-left-style = "#20222b"
+  line-numbers-right-style = "#20222b"
+

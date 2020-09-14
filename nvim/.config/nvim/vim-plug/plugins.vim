@@ -7,14 +7,16 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-
-    Plug 'joshdick/onedark.vim'
-    Plug 'ap/vim-buftabline'
-    Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-    Plug 'lotabout/skim.vim'
-    Plug 'tpope/vim-commentary'    
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'machakann/vim-highlightedyank'
-    Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'joshdick/onedark.vim'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'ap/vim-buftabline'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-commentary'    
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'nicwest/vim-workman'
+  Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()

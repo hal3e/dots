@@ -1,4 +1,4 @@
-imap nn <Esc>| " Use 'nn' to exit insert mode
+imap nj <Esc>| " Use 'nn' to exit insert mode
 
 set number " Set interactive line numbering
 set relativenumber
@@ -7,8 +7,6 @@ autocmd InsertLeave * :set relativenumber
 
 set hidden
 set undofile
-
-syntax enable
 
 set undofile
 
@@ -26,9 +24,8 @@ set noshowmode                          " We don't need to see things like -- IN
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-set laststatus=1
+set laststatus=0
 set breakindent
-
 
 let g:highlightedyank_highlight_duration = 100
 
@@ -46,8 +43,8 @@ nnoremap <C-\> :Commentary<CR>
 vnoremap <C-\> :Commentary<CR>
 
 " Half page movement
-nnoremap N <C-d>
-nnoremap E <C-u>
+nnoremap J <C-d>
+nnoremap K <C-u>
 
 " Set foldmethod to indent but fold manually
 set foldmethod=indent
@@ -57,4 +54,10 @@ set foldlevelstart=99
 nnoremap <Leader>s ea<C-X><C-S>
 inoremap <expr> <CR> pumvisible() ? "\<C-y><Esc>" : "\<CR>"
 
+let g:workman_normal_qwerty = 1
+
 let g:python3_host_prog = expand("/home/hal3e/miniconda3/envs/py3/bin/python3.7")
+
+" Fzf settings
+command! -nargs=* -complete=dir -bang F :Files
+command! -nargs=* -complete=dir -bang H :History

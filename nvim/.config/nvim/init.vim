@@ -1,7 +1,8 @@
-source $HOME/.config/nvim/vim-plug/plugins.vim
-source $HOME/.config/nvim/plug-configs/coc.vim
-source $HOME/.config/nvim/general/settings.vim
-source $HOME/.config/nvim/themes/nord.vim
+source  ~/.config/nvim/configs/plugins.vim
+source  ~/.config/nvim/configs/editor.vim
+source  ~/.config/nvim/configs/keymap.vim
+source  ~/.config/nvim/themes/nord.vim
+source  ~/.config/nvim/configs-plug/coc.vim
+source  ~/.config/nvim/configs-plug/start.vim
 
-luafile $HOME/.config/nvim/lua/plug-colorizer.lua
-
+luafile ~/.config/nvim/lua/plug-colorizer.lua

@@ -1,3 +1,5 @@
+let mapleader = ' '
+
 set number                 " Set interactive line numbering
 set relativenumber
 autocmd InsertEnter * :set norelativenumber
@@ -6,7 +8,7 @@ autocmd InsertLeave * :set relativenumber
 set hidden                 " History for files
 set undofile
 
-set spell
+" set spell
 
 set tabstop=2              " Insert 2 spaces for a tab
 set shiftwidth=2           " Change the number of space characters inserted for indentation
@@ -21,7 +23,7 @@ set foldmethod=indent
 set foldlevelstart=99      "Fold manually
 
 set noshowmode             " We don't need to see things like -- INSERT -- anymore
-set timeoutlen=300         " By default timeoutlen is 1000 ms
+set timeoutlen=175         " By default timeoutlen is 1000 ms
 set formatoptions-=cro     " Stop newline continuation of comments
 set clipboard=unnamedplus  " Copy paste between vim and everything else
 set laststatus=0           " Don't show status bar
@@ -34,12 +36,10 @@ command! -nargs=* -complete=dir -bang F :Files <args>
 command! H :History
 command! Bd execute '%bd | Startify'| " Delete all buffers
 
-let s:a=getcwd()
-let g:fzf_layout = { 'down': '~40%' }
-command! -bang -nargs=* Prg
-  \ call fzf#vim#grep(
-  \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': '/mnt/c/Users/u17g69/Desktop/halil/adas-ph/code/osiviz/frontend/'}), <bang>0)
+" let g:fzf_layout = { 'down': '~40%' }
+"
+command! -bang -nargs=? -complete=dir F
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 let g:highlightedyank_highlight_duration=150
 

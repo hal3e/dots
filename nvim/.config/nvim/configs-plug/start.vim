@@ -1,5 +1,5 @@
 let g:startify_center = 50
-let g:startify_change_to_vcs_root = 1   " Change project folder
+" let g:startify_change_to_vcs_root = 1   " Change project folder
 
 
 let s:padding_left = startify#get_padding()

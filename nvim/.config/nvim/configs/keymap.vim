@@ -1,7 +1,8 @@
 imap nj <Esc>|                  " Use 'nn' to exit insert mode
 nnoremap <Esc> :noh<CR>         " Clear search
 
-cmap w!! w !sudo tee %          " Write with privileges 
+" Write with privileges 
+cmap w!! w !sudo tee %
 
 nnoremap <Tab> :bn<CR>          " Change buffers
 nnoremap <S-Tab> :bp<CR>
@@ -16,5 +17,16 @@ nnoremap K <C-u>
 nnoremap <Leader>s ea<C-X><C-S>
 inoremap <expr> <CR> pumvisible() ? "\<C-y><Esc>" : "\<CR>"
 
-let g:workman_normal_qwerty=1  " Map Workman to Qwerty in Normal mode
+nnoremap <leader>b :bd<CR>
+nnoremap <leader>bb :Bd<CR>
 
+nnoremap <leader>q :H<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>r :Rg<CR>
+
+nmap <leader>j  <Plug>(easymotion-bd-f2)
+nmap <leader>jj <Plug>(easymotion-bd-fn)
+nmap <leader>l  <Plug>(easymotion-lineforward)
+nmap <leader>h  <Plug>(easymotion-linebackward)
+
+let g:workman_normal_qwerty=1  " Map Workman to Qwerty in Normal mode

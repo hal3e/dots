@@ -144,3 +144,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+let g:coc_global_extensions = ['coc-explorer', 'coc-python', 'coc-html', 'coc-json']
+
+" Close coc-explorer if it is last open
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

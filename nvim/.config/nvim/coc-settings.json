@@ -1,5 +1,7 @@
 {
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "coc.preferences.formatOnSaveFiletypes": ["rust", "javascript"]
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "javascript", "html", "python"],
+  // explorer
+  "explorer.previewAction.onHover": false
 }

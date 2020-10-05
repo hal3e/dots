@@ -1,11 +1,22 @@
 let mapleader = ' '
 
-set number                 " Set interactive line numbering
+" Write with privileges 
+cmap w!! w !sudo tee %
+
+" Used with zt not to scroll to the top
+set scrolloff=5
+
+" Live substitution
+set inccommand=nosplit
+
+" Set interactive line numbering
+set number
 set relativenumber
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
-set hidden                 " History for files
+" History for files
+set hidden
 set undofile
 
 " set spell
@@ -18,7 +29,6 @@ set smartindent            " Makes indenting smart
 set autoindent             " Good auto indent
 set breakindent            " Indent as line before
 
-
 set foldmethod=indent
 set foldlevelstart=99      "Fold manually
 
@@ -28,16 +38,18 @@ set formatoptions-=cro     " Stop newline continuation of comments
 set clipboard=unnamedplus  " Copy paste between vim and everything else
 set laststatus=0           " Don't show status bar
 
-set splitbelow             " Split locations
+" Split locations
+set splitbelow
 set splitright
 
 " Search commands
 command! -nargs=* -complete=dir -bang F :Files <args>
 command! H :History
-command! Bd execute '%bd | Startify'| " Delete all buffers
+command! Bd execute 'bp | bd #'| " Delete buffer
+command! BD execute '%bd | Startify'| " Delete all buffers
 
-" let g:fzf_layout = { 'down': '~40%' }
-"
+let g:fzf_layout = { 'down': '~40%' }
+
 command! -bang -nargs=? -complete=dir F
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 

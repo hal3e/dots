@@ -5,7 +5,6 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'pangloss/vim-javascript'
-  Plug 'joshdick/onedark.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug 'ap/vim-buftabline'
   Plug 'lotabout/skim'

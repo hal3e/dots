@@ -29,8 +29,14 @@ set smartindent            " Makes indenting smart
 set autoindent             " Good auto indent
 set breakindent            " Indent as line before
 
+" Fold settings
 set foldmethod=indent
-set foldlevelstart=99      "Fold manually
+set foldlevelstart=99
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave ?* mkview
+  autocmd BufWinEnter ?* silent! loadview
+augroup END
 
 set noshowmode             " We don't need to see things like -- INSERT -- anymore
 set timeoutlen=175         " By default timeoutlen is 1000 ms

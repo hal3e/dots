@@ -48,7 +48,8 @@ command! H :History
 command! Bd execute 'bp | bd #'| " Delete buffer
 command! BD execute '%bd | Startify'| " Delete all buffers
 
-let g:fzf_layout = { 'down': '~40%' }
+" let g:fzf_layout  = { 'down': '~40%' }
+let g:skim_layout = { 'down': '~40%' }
 
 command! -bang -nargs=? -complete=dir F
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)

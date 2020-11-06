@@ -25,14 +25,22 @@ vnoremap <C-\> :Commentary<CR>
 
 
 " Search keymaps
-nnoremap <leader>q :H<CR>
+nnoremap <leader>a :History<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>r :Rg<CR>
-nnoremap <leader>c :Commands<CR>
+nnoremap <leader>c :History:<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
 nnoremap # #zz
+
+" Git fugitive keymaps
+nnoremap <leader>g :G<CR>
+nnoremap <leader>gl :Gllog<CR>
+nnoremap <leader>gc :Commits<CR>
+
 
 " Easymotion keymaps
 nmap <leader>  <Plug>(easymotion-bd-f2)

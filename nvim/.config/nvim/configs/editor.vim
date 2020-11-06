@@ -48,16 +48,11 @@ set laststatus=0           " Don't show status bar
 set splitbelow
 set splitright
 
-" Search commands
-command! -nargs=* -complete=dir -bang F :Files <args>
-command! H :History
-command! Bd execute 'bp | bd #'| " Delete buffer
-command! BD execute '%bd | Startify'| " Delete all buffers
+" Delete current and all buffers
+command! Bd execute 'bp | bd #' 
+command! BD execute '%bd | Startify' 
 
 let g:skim_layout = { 'down': '~40%' }
-
-command! -bang -nargs=? -complete=dir F
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 let g:highlightedyank_highlight_duration=150
 
@@ -65,6 +60,9 @@ let g:python3_host_prog = expand("/home/hal3e/miniconda3/envs/py3/bin/python3.7"
 
 au! BufWritePost $MYVIMRC source %      " Source when writing to init.vm
 
-" indentLine configuration
+" IindentLine configuration
 let g:indentLine_char = '▏'
 let g:indentLine_fileType = ['rust', 'python', 'javascript', 'typescript', 'html', 'vim']
+
+" Set spell for git commits 
+au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell

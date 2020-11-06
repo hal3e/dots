@@ -10,6 +10,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'arcticicestudio/nord-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'tpope/vim-commentary'    
+  Plug 'tpope/vim-surround'    
+  Plug 'tpope/vim-fugitive'    
   Plug 'jiangmiao/auto-pairs'
   Plug 'machakann/vim-highlightedyank'
   Plug 'airblade/vim-gitgutter'

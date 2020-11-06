@@ -34,8 +34,8 @@ set foldmethod=indent
 set foldlevelstart=99
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave ?* mkview
-  autocmd BufWinEnter ?* silent! loadview
+  autocmd BufWinLeave *.vim,*.py,*.html,*.js,*.ts,*.rs mkview
+  autocmd BufWinEnter *.vim,*.py,*.html,*.js,*.ts,*.rs loadview
 augroup END
 
 set noshowmode             " We don't need to see things like -- INSERT -- anymore
@@ -54,7 +54,6 @@ command! H :History
 command! Bd execute 'bp | bd #'| " Delete buffer
 command! BD execute '%bd | Startify'| " Delete all buffers
 
-" let g:fzf_layout  = { 'down': '~40%' }
 let g:skim_layout = { 'down': '~40%' }
 
 command! -bang -nargs=? -complete=dir F
@@ -65,3 +64,7 @@ let g:highlightedyank_highlight_duration=150
 let g:python3_host_prog = expand("/home/hal3e/miniconda3/envs/py3/bin/python3.7")
 
 au! BufWritePost $MYVIMRC source %      " Source when writing to init.vm
+
+" indentLine configuration
+let g:indentLine_char = '▏'
+let g:indentLine_fileType = ['rust', 'python', 'javascript', 'typescript', 'html', 'vim']

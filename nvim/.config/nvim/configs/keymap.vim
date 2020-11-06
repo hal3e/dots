@@ -5,8 +5,8 @@ nnoremap <Esc> :noh<CR>         " Clear search
 nnoremap J <C-d>                " Half page movement
 nnoremap K <C-u>
 nmap <leader>h  <C-w>h
-nmap <leader>j  <C-w>l
-nmap <leader>k  <C-w>l
+nmap <leader>j  <C-w>j
+nmap <leader>k  <C-w>k
 nmap <leader>l  <C-w>l
 
 " Used for spelling <Leader>s enters spell menu, enter exits to normal mode

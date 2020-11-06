@@ -4,20 +4,19 @@ if empty(glob('~/.config/nvim/autoload/plug.vim')) " Auto-install vim-plug
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  Plug 'pangloss/vim-javascript'
-  Plug 'arcticicestudio/nord-vim'
   Plug 'ap/vim-buftabline'
   Plug 'lotabout/skim'
   Plug 'lotabout/skim.vim'
-  " Plug 'junegunn/fzf'
-  " Plug 'junegunn/fzf.vim'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'Yggdroot/indentLine'
   Plug 'tpope/vim-commentary'    
   Plug 'jiangmiao/auto-pairs'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'machakann/vim-highlightedyank'
   Plug 'airblade/vim-gitgutter'
   Plug 'nicwest/vim-workman'
-  Plug 'mhinz/vim-startify', {'branch': 'center'}
   Plug 'easymotion/vim-easymotion'
   Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'pangloss/vim-javascript'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'mhinz/vim-startify', {'branch': 'center'}
 call plug#end()

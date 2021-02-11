@@ -19,3 +19,5 @@ highlight EasyMotionShade  guifg=#616E88
 highlight EasyMotionIncSearch guifg=#88C0D0
 
 let g:indentLine_color_gui = '#616E88'
+
+highlight Comment cterm=italic gui=italic

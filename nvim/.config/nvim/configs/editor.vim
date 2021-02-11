@@ -56,13 +56,15 @@ let g:skim_layout = { 'down': '~40%' }
 
 let g:highlightedyank_highlight_duration=150
 
-let g:python3_host_prog = expand("/home/hal3e/miniconda3/envs/py3/bin/python3.7")
+let g:python3_host_prog = expand("/home/hal3e/bin/miniconda3/envs/py37/bin/python")
 
 au! BufWritePost $MYVIMRC source %      " Source when writing to init.vm
 
 " IindentLine configuration
 let g:indentLine_char = '▏'
-let g:indentLine_fileType = ['rust', 'python', 'javascript', 'typescript', 'html', 'vim']
+let g:indentLine_fileType = ['python', 'rust', 'c', 'cpp', 'javascript', 'typescript', 'html', 'vim']
 
 " Set spell for git commits 
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
+
+let g:workman_normal_qwerty=1  " Map Workman to Qwerty in Normal mode

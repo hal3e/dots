@@ -8,6 +8,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'lotabout/skim'
   Plug 'lotabout/skim.vim'
   Plug 'arcticicestudio/nord-vim'
+  Plug 'wmvanvliet/jupyter-vim'
   Plug 'Yggdroot/indentLine'
   Plug 'tpope/vim-commentary'    
   Plug 'tpope/vim-surround'    

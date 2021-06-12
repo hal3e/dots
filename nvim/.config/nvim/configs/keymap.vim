@@ -1,9 +1,9 @@
-imap nj <Esc>|                  " Use 'nn' to exit insert mode
-nnoremap <silent> <Esc> :noh<CR>         " Clear search
+imap nj <Esc>|                    " Use 'nn' to exit insert mode
+nnoremap <silent> <Esc> :noh<CR>  " Clear search
 
 " Movement keymaps
 nnoremap <C-p>  <C-o>
-nnoremap J <C-d>                " Half page movement
+nnoremap J <C-d>
 nnoremap K <C-u>
 nnoremap <C-y>  <C-w>h
 nnoremap <C-n>  <C-w>j

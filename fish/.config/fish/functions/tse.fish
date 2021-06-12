@@ -1,4 +1,4 @@
-# Defined in - @ line 1
-function tse --wraps='nvim ~/time/*' --description 'alias tse=nvim ~/time/*'
-  nvim ~/time/* $argv;
+# Defined via `source`
+function tse --wraps='nvim ~/time/*' --wraps='nvim (fd -e time . ~)' --description 'alias tse=nvim (fd -e time . ~)'
+  nvim (fd -e time . ~) $argv; 
 end

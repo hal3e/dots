@@ -1,6 +1,9 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export EDITOR:nvim
+SETUVAR EDITOR:nvim
+SETUVAR MANPAGER:nvim\x20\x2bMan\x21
+SETUVAR SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x2347516b\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2347516b\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381A1C1
+SETUVAR SUDO_ASKPASS:/home/hal3e/scpt/askpass/pass\x2dterm\x2esh
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/hal3e/\x2elocal/share/z/data

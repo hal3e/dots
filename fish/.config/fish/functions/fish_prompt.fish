@@ -16,7 +16,7 @@ function __lucid_abort_check
     if set -q __lucid_check_pid
         set -l pid $__lucid_check_pid
         functions -e __lucid_on_finish_$pid
-        command kill $pid >/dev/null 2>&1
+        command kill $pid > /dev/null 2>&1
         set -e __lucid_check_pid
     end
 end
@@ -32,7 +32,6 @@ function __lucid_git_status
         set __lucid_dirty ""
         set  __lucid_color (set_color normal)
     end
-
     # Fetch git position & action synchronously.
     # Memoize results to avoid recomputation on subsequent redraws.
     if test -z $__lucid_git_static
@@ -205,5 +204,4 @@ function fish_prompt
 
     end
     echo -sn " "
-
 end

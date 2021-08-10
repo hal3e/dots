@@ -56,7 +56,7 @@ let g:skim_layout = { 'down': '~40%' }
 
 let g:highlightedyank_highlight_duration=150
 
-let g:python3_host_prog = expand("/home/hal3e/bin/miniconda3/envs/py37/bin/python")
+let g:python3_host_prog = expand("/home/hal3e/bin/miniconda3/envs/py38/bin/python")
 
 au! BufWritePost $MYVIMRC source %      " Source when writing to init.vm
 

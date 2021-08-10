@@ -1,15 +1,18 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR EDITOR:nvim
-SETUVAR MANPAGER:nvim\x20\x2bMan\x21
-SETUVAR SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x2347516b\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2347516b\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381A1C1
-SETUVAR SUDO_ASKPASS:/home/hal3e/scpt/askpass/pass\x2dterm\x2esh
+SETUVAR --export EDITOR:nvim
+SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
+SETUVAR --export SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x2347516b\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2347516b\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381A1C1
+SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/gnupg/S\x2egpg\x2dagent\x2essh
+SETUVAR --export SUDO_ASKPASS:/home/hal3e/scpt/askpass/pass\x2dterm\x2esh
+SETUVAR --export SVDIR:/home/hal3e/\x2eservice/
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/hal3e/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/hal3e/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/hal3e\x24
 SETUVAR __fish_initialized:3100
+SETUVAR _fisher_plugins:fishpkg/fish\x2dhost\x2dinfo\x1efishpkg/fish\x2dhumanize\x2dduration\x1efishpkg/fish\x2dlast\x2djob\x2did\x1efishpkg/fish\x2dpwd\x2dinfo\x1efishpkg/fish\x2dpwd\x2dis\x2dhome\x1ehal3e/fish\x2dprompt\x2dlucid\x2dmono\x1ehal3e/fish\x2dprompt\x2dmono
 SETUVAR fish_color_autosuggestion:afafaf
 SETUVAR fish_color_cancel:normal
 SETUVAR fish_color_command:5fafff

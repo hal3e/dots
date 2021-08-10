@@ -24,3 +24,5 @@
   line-numbers-left-style = "#20222b"
   line-numbers-right-style = "#20222b"
 
+[init]
+	defaultBranch = master

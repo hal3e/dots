@@ -1,4 +1,3 @@
-# Defined via `source`
-function upgrade --wraps='sudo xbps-install -Suv && ~/scpt/xpbs-packages.sh' --wraps='sudo xbps-install -Suv && /home/hal3e/scpt/xbps-packages.sh' --wraps='sudo xbps-install -Suv && /home/hal3e/scrpt/xbps-packages.sh && sudo xbps-remov -Oo' --wraps='sudo xbps-install -Suv && /home/hal3e/scpt/xbps-packages.sh && sudo xbps-remov -Oo' --wraps='sudo xbps-install -Suv && /home/hal3e/scpt/xbps-packages.sh && sudo xbps-remove -Oo' --description 'alias upgrade=sudo xbps-install -Suv && /home/hal3e/scpt/xbps-packages.sh && sudo xbps-remove -Oo'
-  sudo xbps-install -Suv && /home/hal3e/scpt/xbps-packages.sh && sudo xbps-remove -Oo $argv; 
+function upgrade --wraps='sudo xbps-install -Suv && /home/hal3e/bin/xbps-num-packages.sh && sudo xbps-remove -Oo && xcheckrestart' --description 'alias upgrade=sudo xbps-install -Suv && /home/hal3e/bin/xbps-num-packages.sh && sudo xbps-remove -Oo && xcheckrestart'
+  sudo xbps-install -Suv && /home/hal3e/bin/xbps-num-packages.sh && sudo xbps-remove -Oo && xcheckrestart; 
 end

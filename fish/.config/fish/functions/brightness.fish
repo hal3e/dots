@@ -1,4 +1,3 @@
-# Defined in - @ line 1
-function brightness --wraps='~/scrpt/brightness.sh' --wraps='~/scpt/brightness.sh' --description 'alias brightness=~/scpt/brightness.sh'
-  ~/scpt/brightness.sh  $argv;
+function brightness --wraps='~/scrpt/brightness.sh' --wraps='~/scpt/brightness.sh' --wraps='~/bin/brightness.sh' --description 'alias brightness=~/bin/brightness.sh'
+  ~/bin/brightness.sh $argv; 
 end

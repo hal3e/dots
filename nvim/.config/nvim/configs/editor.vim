@@ -62,7 +62,7 @@ au! BufWritePost $MYVIMRC source %      " Source when writing to init.vm
 
 " IindentLine configuration
 let g:indentLine_char = '▏'
-let g:indentLine_fileType = ['python', 'rust', 'c', 'cpp', 'javascript', 'typescript', 'html', 'vim']
+let g:indentLine_fileType = ['python',  'vue', 'rust', 'c', 'cpp', 'javascript', 'typescript', 'html', 'vim']
 
 " Set spell for git commits 
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell

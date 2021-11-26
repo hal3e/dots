@@ -71,7 +71,7 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/LuaSnip",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["better-escape.nvim"] = {
@@ -79,63 +79,63 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     only_cond = false,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/opt/better-escape.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/better-escape.nvim",
     url = "https://github.com/max397574/better-escape.nvim"
   },
   ["bufferline.nvim"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/bufferline.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/cmp-buffer",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-path"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/cmp-path",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
   cmp_luasnip = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/cmp_luasnip",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["feline.nvim"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/feline.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/feline.nvim",
     url = "https://github.com/famiu/feline.nvim"
   },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\0026\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/gitsigns.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   indentLine = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/indentLine",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/indentLine",
     url = "https://github.com/Yggdroot/indentLine"
   },
   ["nord.nvim"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nord.nvim",
-    url = "https://github.com/shaunsingh/nord.nvim"
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nord.nvim",
+    url = "https://github.com/hal3e/nord.nvim"
   },
   ["nvim-base16.lua"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-base16.lua",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-base16.lua",
     url = "https://github.com/NvChad/nvim-base16.lua"
   },
   ["nvim-cmp"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-cmp",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-colorizer.lua"] = {
@@ -143,23 +143,23 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     only_cond = false,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/opt/nvim-colorizer.lua",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-comment"] = {
     config = { "\27LJ\2\2a\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\2\20create_mappings\1\18comment_empty\1\nsetup\17nvim_comment\frequire\0" },
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-comment",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-comment",
     url = "https://github.com/terrortylor/nvim-comment"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-lspconfig",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-tree.lua",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
@@ -167,24 +167,24 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = true,
     only_cond = false,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/opt/nvim-treesitter",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/nvim-web-devicons",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = false,
     needs_bufread = false,
     only_cond = false,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/opt/packer.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/hal3e/temp-local/nvim/site/pack/packer/start/plenary.nvim",
+    path = "/home/hal3e/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   }
 }

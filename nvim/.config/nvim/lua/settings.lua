@@ -4,9 +4,10 @@ local fn = vim.fn       				-- call Vim functions
 local g = vim.g         				-- global variables
 local opt = vim.opt         		-- global/buffer/windows-scoped options
 
-opt.shortmess='I'
-opt.scrolloff=5
-opt.timeoutlen=175            -- By default timeoutlen is 1000 ms
+opt.shortmess = 'I'
+opt.showmode = false
+opt.scrolloff = 5
+opt.timeoutlen = 175            -- By default timeoutlen is 1000 ms
 
 g.mapleader = ' '             -- change leader to a comma
 

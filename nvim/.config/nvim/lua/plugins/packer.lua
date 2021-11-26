@@ -17,10 +17,6 @@ return packer.startup(function(use)
 
   use "kyazdani42/nvim-web-devicons"
 
-  use "akinsho/bufferline.nvim"
-
-  use 'kyazdani42/nvim-tree.lua'
-
   use 'Yggdroot/indentLine'
 
   use {
@@ -42,7 +38,7 @@ return packer.startup(function(use)
     event = "InsertEnter",
   }
 
-   use {
+  use {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require('nvim-treesitter.configs').setup{
@@ -54,9 +50,8 @@ return packer.startup(function(use)
     event = "BufRead",
   }
 
-  use 'neovim/nvim-lspconfig'
-
-  use { 'hrsh7th/nvim-cmp',
+  use {
+    'hrsh7th/nvim-cmp',
     requires = {
       'L3MON4D3/LuaSnip',
       'hrsh7th/cmp-nvim-lsp',
@@ -64,9 +59,29 @@ return packer.startup(function(use)
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
     },
+    setup = require('plugins/nvim-cmp')
   }
 
-  use "famiu/feline.nvim"
+  use {
+    'neovim/nvim-lspconfig',
+    setup = require('plugins/nvim-lspconfig')
+  }
+
+  use {
+    "akinsho/bufferline.nvim",
+    setup = require('plugins/bufferline')
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    setup = require('plugins/nvim-tree')
+  }
+
+  use {
+    "famiu/feline.nvim",
+    after = "nvim-web-devicons",
+    setup = require('plugins/feline')
+  }
 
   use { 'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },

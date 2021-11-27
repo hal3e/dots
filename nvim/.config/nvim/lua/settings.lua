@@ -4,6 +4,10 @@ local fn = vim.fn       				-- call Vim functions
 local g = vim.g         				-- global variables
 local opt = vim.opt         		-- global/buffer/windows-scoped options
 
+opt.shell = "/bin/dash"
+opt.lazyredraw = true
+opt.fillchars = { eob = " " }
+
 opt.shortmess = 'I'
 opt.showmode = false
 opt.scrolloff = 5
@@ -73,10 +77,6 @@ cmd [[
   autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
 ]]
 
--- IndentLine
---g.indentLine_setColors = 0  -- set indentLine color
-g.indentLine_char = '|'       -- set indentLine character
-
 -- Disable IndentLine for markdown files (avoid concealing)
 cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
 
@@ -93,3 +93,28 @@ cmd [[
     autocmd TermOpen * startinsert
     autocmd BufLeave term://* stopinsert
 ]]
+
+local disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    "matchit"
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+    vim.g["loaded_" .. plugin] = 1
+end

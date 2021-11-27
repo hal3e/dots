@@ -31,14 +31,11 @@ map('n', '<leader>qq', ':quitall!<CR>', default_opts)
 -- Close pane
 map('n', '<leader>c', ':close<CR>', default_opts)
 
--- Close pane
-map('n', '<leader>b', ':bdel<CR>', default_opts)
-
 -- Open terminal
 map('n', '<C-t>', ':Term<CR>', {noremap = true})
 
 -- Nvim-tree
-map('n', '<leader>e', ':NvimTreeToggle<CR>', default_opts)
+map('n', '<leader>e', ':silent NvimTreeToggle<CR>', default_opts)
 map('n', '<leader>n', ':NvimTreeFindFile<CR>', default_opts)
 
 map('n', '<C-p>', '<C-o>', default_opts)
@@ -46,17 +43,17 @@ map('n', 'J', '<C-d>', default_opts)
 map('n', 'K', '<C-u>', default_opts)
 
 -- Used for spelling <Leader>s enters spell menu, enter exits to normal mode
---nnoremap <Leader>s ea<C-X><C-S>
+map('n', '<leader>ss', ':set spell!<CR>', default_opts)
+map('n', '<leader>s', 'ea<C-X><C-S>', default_opts)
 --inoremap <expr> <CR> pumvisible() ? "\<C-y><Esc>" : "\<CR>"
 
--- Buffers keymaps
+-- Buffers key maps
+map('n', '<leader>b', ':bdel<CR>', default_opts)
 --nnoremap <silent> <leader>b :Bd<CR>
 --nnoremap <silent> <leader>bb :BD<CR>
 --
 map('n', '<Tab>', ':bn<CR>', default_opts)
 map('n', '<S-Tab>', ':bp<CR>', default_opts)
-
-map('n', '<Tab>', ':bn<CR>', default_opts)
 
 -- Commentary keymaps
 map('n', "<C-_>", ':CommentToggle<CR>', default_opts)

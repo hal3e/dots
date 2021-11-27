@@ -1,6 +1,8 @@
 local colors = {
   bg = '#292e3d',
+  bg2 = "#2E3445",
   fg = '#eceff4',
+  fg2 = "#434C5E",
   yellow = '#ebcb8b',
   cyan = '#88c0d0',
   blue = '#81a1c1',
@@ -205,8 +207,8 @@ table.insert(components.active[2], comps.file.position)
 table.insert(components.active[2], comps.file.line_percentage)
 
 local InactiveStatusHL = {
-   fg = colors.fg,
-   bg = colors.bg,
+  fg = colors.fg2,
+  bg = colors.bg,
 }
 
 components.inactive = {

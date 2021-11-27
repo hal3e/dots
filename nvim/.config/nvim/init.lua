@@ -1,4 +1,4 @@
+require('plugins.packer')
 require('settings')
-require('plugins/packer')
 require('keymaps')
 

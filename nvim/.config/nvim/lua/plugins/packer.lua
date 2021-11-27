@@ -4,23 +4,41 @@ cmd [[packadd packer.nvim]]
 local packer = require 'packer'
 
 return packer.startup(function(use)
-   use {
-      "wbthomason/packer.nvim",
-      event = "VimEnter",
-   }
+  use {
+    "wbthomason/packer.nvim",
+    event = "VimEnter",
+  }
 
-  use 'hal3e/nord.nvim'
-
-  use "NvChad/nvim-base16.lua"
+  use {
+    'hal3e/nord.nvim',
+  }
 
   use 'nvim-lua/plenary.nvim'
 
-  use "kyazdani42/nvim-web-devicons"
+  use {
+    "kyazdani42/nvim-web-devicons",
+    after = "nord.nvim",
+  }
 
-  use 'Yggdroot/indentLine'
+  use {
+    event = "BufRead",
+    'ggandor/lightspeed.nvim'
+  }
+
+
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = function()
+      require('indent_blankline').setup{
+        show_current_context = true,
+        show_trailing_blankline_indent = false,
+    } end,
+  }
 
   use {
     "terrortylor/nvim-comment",
+    cmd = "CommentToggle",
     config = function()
       require('nvim_comment').setup{
         comment_empty = false,
@@ -30,16 +48,17 @@ return packer.startup(function(use)
 
   use {
     "max397574/better-escape.nvim",
+    event = "InsertEnter",
     config = function()
       require('better_escape').setup{
         mapping = 'nn',
         timeout = 200
       } end,
-    event = "InsertEnter",
   }
 
   use {
     "nvim-treesitter/nvim-treesitter",
+    event = "BufRead",
     config = function()
       require('nvim-treesitter.configs').setup{
         highlight = {
@@ -47,7 +66,6 @@ return packer.startup(function(use)
           use_languagetree = true,
         }
       } end,
-    event = "BufRead",
   }
 
   use {
@@ -59,32 +77,46 @@ return packer.startup(function(use)
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
     },
-    setup = require('plugins/nvim-cmp')
+    config = function()
+      require('plugins.nvim-cmp')
+    end,
   }
 
   use {
     'neovim/nvim-lspconfig',
-    setup = require('plugins/nvim-lspconfig')
-  }
-
-  use {
-    "akinsho/bufferline.nvim",
-    setup = require('plugins/bufferline')
-  }
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    setup = require('plugins/nvim-tree')
+    config = function()
+      require('plugins.nvim-lspconfig')
+    end,
   }
 
   use {
     "famiu/feline.nvim",
-    after = "nvim-web-devicons",
-    setup = require('plugins/feline')
+    after = "nvim-lspconfig",
+    config = function()
+      require('plugins.feline')
+    end,
   }
+
+  use {
+    "akinsho/bufferline.nvim",
+    after = "nvim-web-devicons",
+    config = function()
+      require('plugins.bufferline')
+    end,
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    config = function()
+      require('plugins.nvim-tree')
+    end,
+  }
+
 
   use { 'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
+    event = "BufRead",
     config = function()
       require('gitsigns').setup()
     end,

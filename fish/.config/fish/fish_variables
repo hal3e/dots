@@ -5,7 +5,7 @@ SETUVAR --export EDITOR:nvim
 SETUVAR --export LANGUAGE:en_US\x2eUTF\x2d8
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
-SETUVAR --export SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x2347516b\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2347516b\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381A1C1
+SETUVAR --export SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x1e\x2d\x2dcolor\x3dbg\x2b\x3a\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2381a1c1\x2cmatched_bg\x3a\x2ccurrent_match_bg\x3a\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381a1c1
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/gnupg/S\x2egpg\x2dagent\x2essh
 SETUVAR --export SUDO_ASKPASS:/home/hal3e/bin/askpass/pass\x2dterm\x2esh
 SETUVAR --export SVDIR:/home/hal3e/\x2eservice/

@@ -10,10 +10,12 @@ return packer.startup(function(use)
   }
 
   use {
-    'hal3e/nord.nvim',
+    'hal3e/nord.nvim'
   }
 
-  use 'nvim-lua/plenary.nvim'
+  use {
+    'nvim-lua/plenary.nvim'
+  }
 
   use {
     "kyazdani42/nvim-web-devicons",
@@ -24,7 +26,6 @@ return packer.startup(function(use)
     event = "BufRead",
     'ggandor/lightspeed.nvim'
   }
-
 
   use {
     "lukas-reineke/indent-blankline.nvim",

@@ -1,6 +1,5 @@
 local colors = {
-  bg = '#292e3d',
-  bg2 = "#2E3445",
+  bg = '#292E3D',
   fg = '#eceff4',
   fg2 = "#434C5E",
   yellow = '#ebcb8b',
@@ -221,9 +220,9 @@ components.inactive = {
 }
 
 require('feline').setup {
-  colors = {
+  theme = {
+    fg = colors.fg,
     bg = colors.bg,
-    fg = colors.fg
   },
   components = components,
   vi_mode_colors = vi_mode_colors,

@@ -39,7 +39,7 @@ require('nvim-tree').setup{
   view = {
      allow_resize = true,
      side = "left",
-     width = 25,
+     width = 30,
   },
   update_focused_file = {
     enable      = true,

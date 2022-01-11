@@ -48,7 +48,7 @@ map('n', '<leader>s', 'ea<C-X><C-S>', default_opts)
 --inoremap <expr> <CR> pumvisible() ? "\<C-y><Esc>" : "\<CR>"
 
 -- Buffers key maps
-map('n', '<leader>b', ':bdel<CR>', default_opts)
+map('n', '<leader>b', ':bp | bd #<CR>', default_opts)
 --nnoremap <silent> <leader>b :Bd<CR>
 --nnoremap <silent> <leader>bb :BD<CR>
 --

@@ -1,4 +1,4 @@
-local bg = '#292e3d'
+local bg = '#292E3D'
 
 require('bufferline').setup {
    options = {

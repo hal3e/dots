@@ -57,7 +57,7 @@ end
 time([[Luarocks path setup]], false)
 time([[try_loadstring definition]], true)
 local function try_loadstring(s, component, name)
-  local success, result = pcall(loadstring(s))
+  local success, result = pcall(loadstring(s), name, _G.packer_plugins[name])
   if not success then
     vim.schedule(function()
       vim.api.nvim_notify('packer.nvim: Error running ' .. component .. ' for ' .. name .. ': ' .. result, vim.log.levels.ERROR, {})
@@ -193,6 +193,7 @@ _G.packer_plugins = {
   },
   ["nvim-web-devicons"] = {
     after = { "bufferline.nvim" },
+    load_after = {},
     loaded = true,
     needs_bufread = false,
     path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
@@ -223,6 +224,7 @@ try_loadstring("\27LJ\2\0026\0\0\2\0\2\0\0046\0\0\0'\1\1\0B\0\2\1K\0\1\0\27plugi
 time([[Config for nvim-lspconfig]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
+vim.cmd [[ packadd nord.nvim ]]
 vim.cmd [[ packadd nvim-web-devicons ]]
 vim.cmd [[ packadd bufferline.nvim ]]
 

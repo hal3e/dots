@@ -1,38 +1,40 @@
 auto-reload yes
 max-items 99
+openbrowser-and-mark-jumps-to-next-unread yes
+toggleitemread-jumps-to-next-unread yes
+show-keymap-hint  no
 
 bind-key n down
 bind-key e up
-bind-key l next articlelist
-bind-key L prev articlelist
-bind-key N next-feed articlelist
-bind-key E prev-feed articlelist
+bind-key N next
+bind-key E prev
+bind-key Y next-feed articlelist
+bind-key O prev-feed articlelist
+bind-key o open
 bind-key G end
 bind-key g home
-bind-key o open
 bind-key y quit
 bind-key w toggle-article-read
 bind-key k next-unread
-bind-key K prev-unread
+bind-key ; prev-unread
 bind-key t show-urls
+bind-key p open-in-browser-and-mark-read
 
-color listnormal         blue default
-color listnormal_unread  green  default bold
+color listnormal         color15 default
+color listnormal_unread  green  default
 
 color listfocus          blue black
 color listfocus_unread   green black bold
 
-color info red black bold
+color info red black
 color article white default
 
 feedlist-format "%?T?%2n %8u %t &-  %t  -?"
-highlight feedlist "-.*" yellow default bold
+highlight feedlist "-.*" blue default bold
 
 highlight article "^(Feed):.*$" blue default
 highlight article "^(Title):.*$" green default bold
 highlight article ".*\\(link\\)" green default bold
 highlight article ".*\\(image\\)" yellow default bold
 
-browser "/usr/bin/firefox %u"
-bind-key SPACE macro-prefix
-macro c set browser "setsid -f mpv --really-quiet --no-terminal" ; open-in-browser ; set browser "/usr/bin/firefox %u"
+browser "/home/hal3e/bin/linkhandler.sh"

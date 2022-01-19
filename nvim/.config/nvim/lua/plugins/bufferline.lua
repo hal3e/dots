@@ -1,7 +1,7 @@
 local bg = '#292E3D'
 
 require('bufferline').setup {
-   options = {
+  options = {
     always_show_bufferline = true,
     show_tab_indicators = false,
     show_buffer_close_icons = false,
@@ -14,7 +14,7 @@ require('bufferline').setup {
     separator_style = "thin",
     diagnostics = false,
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-   },
+  },
 
   highlights = {
     fill = {
@@ -46,6 +46,6 @@ require('bufferline').setup {
 
     duplicate = {
       guibg = bg,
-    },
+    }
   }
- }
+}

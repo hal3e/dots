@@ -23,6 +23,22 @@ return packer.startup(function(use)
   }
 
   use {
+    'nvim-telescope/telescope.nvim',
+    cmd = "Telescope",
+    config = function()
+      require('telescope').setup{
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-e>"] = "move_selection_previous"
+            }
+          }
+        },
+    } end,
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  use {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufRead",
     config = function()

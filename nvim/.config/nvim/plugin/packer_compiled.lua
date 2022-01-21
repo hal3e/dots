@@ -186,6 +186,7 @@ _G.packer_plugins = {
   },
   ["nvim-web-devicons"] = {
     after = { "bufferline.nvim" },
+    config = { "\27LJ\2\2-\0\0\2\0\2\0\0046\0\0\0'\1\1\0B\0\2\1K\0\1\0\18plugins.icons\frequire\0" },
     load_after = {},
     loaded = true,
     needs_bufread = false,
@@ -228,6 +229,10 @@ time([[Config for nvim-lspconfig]], false)
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nord.nvim ]]
 vim.cmd [[ packadd nvim-web-devicons ]]
+
+-- Config for: nvim-web-devicons
+try_loadstring("\27LJ\2\2-\0\0\2\0\2\0\0046\0\0\0'\1\1\0B\0\2\1K\0\1\0\18plugins.icons\frequire\0", "config", "nvim-web-devicons")
+
 vim.cmd [[ packadd bufferline.nvim ]]
 
 -- Config for: bufferline.nvim

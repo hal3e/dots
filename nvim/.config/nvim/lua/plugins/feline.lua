@@ -1,32 +1,32 @@
 local colors = {
-  bg = '#292E3D',
-  fg = '#eceff4',
-  fg2 = "#434C5E",
+  bg =     '#292E3D',
+  fg =     '#eceff4',
+  fg2 =    '#434C5E',
+  red =    '#bf616a',
+  cyan =   '#88c0d0',
+  blue =   '#81a1c1',
+  pink =   '#8fbcbb',
+  green =  '#a3be8c',
   yellow = '#ebcb8b',
-  cyan = '#88c0d0',
-  blue = '#81a1c1',
-  green = '#a3be8c',
   orange = '#ebcb8b',
   violet = '#b48ead',
-  pink = '#8fbcbb',
-  red = '#bf616a',
 }
 
 local vi_mode_colors = {
-  NORMAL = colors.blue,
-  INSERT = colors.green,
-  VISUAL = colors.yellow,
-  OP = colors.cyan,
-  BLOCK = colors.cyan,
+  NORMAL =  colors.blue,
+  INSERT =  colors.green,
+  VISUAL =  colors.yellow,
+  OP =      colors.cyan,
+  BLOCK =   colors.cyan,
   REPLACE = colors.red,
-  ['V-REPLACE'] = colors.red,
-  ENTER = colors.orange,
-  MORE = colors.orange,
-  SELECT = colors.pink,
+  ENTER =   colors.orange,
+  MORE =    colors.orange,
+  SELECT =  colors.pink,
   COMMAND = colors.cyan,
-  SHELL = colors.cyan,
-  TERM = colors.green,
-  NONE = colors.blue
+  SHELL =   colors.cyan,
+  TERM =    colors.green,
+  NONE =    colors.blue,
+  ['V-REPLACE'] = colors.red
 }
 
 local lsp = require('feline.providers.lsp')

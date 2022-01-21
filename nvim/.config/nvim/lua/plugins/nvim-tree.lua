@@ -21,7 +21,25 @@ g.nvim_tree_show_icons = {
 }
 
 g.nvim_tree_icons = {
-   default = "",
+   default = "",
+   symlink = "",
+   git = {
+      deleted = "",
+      ignored = "",
+      renamed = "",
+      staged = "",
+      unmerged = "",
+      unstaged = "",
+      untracked = "",
+   },
+   folder = {
+      default = "",
+      empty = "",
+      empty_open = "",
+      open = "",
+      symlink = "",
+      symlink_open = "",
+   },
 }
 
 require('nvim-tree').setup{

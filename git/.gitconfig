@@ -3,26 +3,43 @@
   name = hal3e
 
 [alias]
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
-  lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
+  a = add
+  c = commit
+  s = status
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
+  lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+
+[credential]
+	helper = store --file ~/.git-credentials
+
+[init]
+	defaultBranch = master
 
 [core]
 	editor = nvim
   pager = delta
 
-[credential]
-	helper = store --file ~/.git-credentials
-
 [delta]
-  syntax-theme = OneHalfDark
+  syntax-theme = Nord
+  paging = always
+  navigate = true
   whitespace-error-style = 22 reverse
-  features = side-by-side line-numbers decorations
+  features = side-by-side decorations
 
 [delta "decorations"]
-  file-style = "#c5cad3"
-  file-decoration-style = "#c5cad3 ul"
-  line-numbers-left-style = "#20222b"
-  line-numbers-right-style = "#20222b"
-
-[init]
-	defaultBranch = master
+  line-numbers = true
+  line-numbers-minus-style = red
+  line-numbers-plus-style = green
+  line-numbers-left-format = "{nm:>4} "
+  line-numbers-right-format = "{np:>4} "
+  file-style = bold blue
+  file-decoration-style = blue ul
+  hunk-header-style = green
+  hunk-header-decoration-style = green ul
+  line-numbers-zero-style = white
+  minus-style = syntax "#80393d"
+  minus-emph-style = black red
+  minus-non-emph-style = syntax
+  plus-style = syntax "#648349 "
+  plus-non-emph-style = syntax
+  plus-emph-style = black green

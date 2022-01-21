@@ -115,7 +115,7 @@ local comps = {
   diagnos = {
     err = {
       provider = 'diagnostic_errors',
-      icon = '⚠ ',
+      icon = ' ',
       hl = { fg = colors.red },
       left_sep = ' ',
     },
@@ -133,7 +133,7 @@ local comps = {
     },
     hint = {
       provider = 'diagnostic_hints',
-      icon = ' ',
+      icon = ' ',
       hl = { fg = colors.cyan },
       left_sep = ' ',
     },

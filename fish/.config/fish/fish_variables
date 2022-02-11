@@ -16,10 +16,11 @@ SETUVAR Z_DATA:/home/hal3e/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/hal3e/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/hal3e\x24
 SETUVAR __fish_initialized:3100
+SETUVAR _fisher_andreiborisov_2F_sponge_files:/home/hal3e/\x2econfig/fish/functions/_sponge_clear_state\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_exit\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_postexec\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_preexec\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_remove_from_history\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/sponge_filter_failed\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/sponge_filter_matched\x2efish\x1e/home/hal3e/\x2econfig/fish/conf\x2ed/sponge\x2efish
 SETUVAR _fisher_hal3e_2F_lumo_2E_fish_files:/home/hal3e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/fish_right_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/host_info\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/humanize_duration\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/last_job_id\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/pwd_info\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/pwd_is_home\x2efish
 SETUVAR _fisher_jethrokuan_2F_z_files:/home/hal3e/\x2econfig/fish/functions/__z\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_add\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_clean\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_complete\x2efish\x1e/home/hal3e/\x2econfig/fish/conf\x2ed/z\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/hal3e/\x2econfig/fish/functions/fisher\x2efish\x1e/home/hal3e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ehal3e/lumo\x2efish\x1ejethrokuan/z
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ehal3e/lumo\x2efish\x1ejethrokuan/z\x1eandreiborisov/sponge
 SETUVAR fish_color_autosuggestion:afafaf
 SETUVAR fish_color_cancel:normal
 SETUVAR fish_color_command:79B3EC
@@ -52,3 +53,8 @@ SETUVAR fish_pager_color_progress:normal
 SETUVAR fish_pager_color_selected_completion:79B3EC
 SETUVAR fish_pager_color_selected_description:A2D775
 SETUVAR fish_user_paths:/opt/texlive/2020/bin/x86_64\x2dlinux/\x1e/home/hal3e/\x2ecargo/bin/\x1e/home/hal3e/\x2elocal/bin
+SETUVAR sponge_allow_previously_successful:true
+SETUVAR sponge_delay:2
+SETUVAR sponge_filters:sponge_filter_failed\x1esponge_filter_matched
+SETUVAR sponge_regex_patterns:\x1d
+SETUVAR sponge_successful_exit_codes:0

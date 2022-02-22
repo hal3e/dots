@@ -2,21 +2,15 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 cmp.setup {
-  -- load snippet support
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-
--- completion settings
   completion = {
-    -- completeopt = 'menu,menuone,noselect'
     completeopt = 'menu,menuone,noselect',
     keyword_length = 2
   },
-
-  -- key mapping
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-e>'] = cmp.mapping.select_prev_item(),
@@ -28,8 +22,6 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-
-    -- Tab mapping
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -49,8 +41,6 @@ cmp.setup {
       end
     end
   },
-
-  -- load sources, see: https://github.com/topics/nvim-cmp
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },

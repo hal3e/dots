@@ -30,7 +30,7 @@ map('n', '<leader>q',  ':quitall<CR>', default_opts)
 map('n', '<leader>qq', ':quitall!<CR>', default_opts)
 
 -- Close pane
-map('n', '<leader>c', ':close<CR>', default_opts)
+map('n', '<leader>x', ':close<CR>', default_opts)
 
 -- Open terminal
 map('n', '<C-t>', ':Term<CR>', {noremap = true})
@@ -67,6 +67,12 @@ map('n', '<leader>f',       ':Telescope git_files<CR>', default_opts)
 map('n', '<leader>r',       ':Telescope live_grep<CR>', default_opts)
 map('n', '<leader><Tab>',   ':Telescope buffers<CR>', default_opts)
 map('n', '<leader><space>', ':Telescope commands<CR>', default_opts)
-map('n', '<leader>h',       ':Telescope help_tags<CR>', default_opts)
+map('n', '<leader>th',       ':Telescope help_tags<CR>', default_opts)
 map('n', '<leader>gs',      ':Telescope git_status<CR>', default_opts)
 
+-- Gitsigns
+map('n', '<leader>cp',       ':Gitsigns preview_hunk<CR>', default_opts)
+map('n', '<leader>cr',       ':Gitsigns reset_hunk<CR>', default_opts)
+map('n', '<leader>cd',       ':Gitsigns diffthis<CR>', default_opts)
+map('n', '[c',       ':Gitsigns prev_hunk | Gitsigns preview_hunk<CR>', default_opts)
+map('n', ']c',       ':Gitsigns next_hunk | Gitsigns preview_hunk<CR>', default_opts)

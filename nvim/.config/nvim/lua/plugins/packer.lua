@@ -18,6 +18,14 @@ return packer.startup(function(use)
   }
 
   use {
+    'petertriho/nvim-scrollbar',
+    event = "BufRead",
+    config = function()
+      require('scrollbar').setup()
+    end,
+  }
+
+  use {
     "kyazdani42/nvim-web-devicons",
     after = "nord.nvim",
     config = function()
@@ -85,7 +93,6 @@ return packer.startup(function(use)
 
   use {
     'hrsh7th/nvim-cmp',
-    commit = '243d5f4',
     requires = {
       'L3MON4D3/LuaSnip',
       'hrsh7th/cmp-nvim-lsp',

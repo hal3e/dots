@@ -115,7 +115,7 @@ local comps = {
   diagnos = {
     err = {
       provider = 'diagnostic_errors',
-      icon = ' ',
+      icon = ' ',
       hl = { fg = colors.red },
       left_sep = ' ',
     },

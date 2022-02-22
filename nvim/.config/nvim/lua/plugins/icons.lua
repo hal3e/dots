@@ -40,8 +40,13 @@ icons.setup {
       },
       html = {
          icon = "",
-         color = colors.nord15_gui,
+         color = colors.nord14_gui,
          name = "html",
+      },
+      xml = {
+         icon = "",
+         color = colors.nord15_gui,
+         name = "xml",
       },
       jpeg = {
          icon = "",
@@ -55,8 +60,18 @@ icons.setup {
       },
       png = {
          icon = "",
-         color = colors.nord9_gui,
+         color = colors.nord12_gui,
          name = "png",
+      },
+      ["favicon.ico"] = {
+         icon = "",
+         color = colors.nord13_gui,
+         name = "favicon",
+      },
+      svg = {
+         icon = "",
+         color = colors.nord15_gui,
+         name = "svg",
       },
       md = {
          icon = "",
@@ -73,6 +88,11 @@ icons.setup {
          color = colors.nord10_gui,
          name = "js",
       },
+      [".gitignore"] = {
+         icon = "",
+         color = colors.nord3_gui,
+         name = "gitignore",
+      },
       yml = {
          icon = "",
          color = colors.nord10_gui,
@@ -82,6 +102,11 @@ icons.setup {
          icon = "",
          color = colors.nord10_gui,
          name = "yaml",
+      },
+      conf = {
+         icon = "",
+         color = colors.nord10_gui,
+         name = "conf",
       },
       json = {
          icon = "",
@@ -124,9 +149,14 @@ icons.setup {
          name = "toml",
       },
       ts = {
-         icon = "",
+         icon = "",
          color = colors.nord8_gui,
          name = "ts",
+      },
+      tsx = {
+         icon = "",
+         color = colors.nord8_gui,
+         name = "tsx",
       },
       ttf = {
          icon = "",

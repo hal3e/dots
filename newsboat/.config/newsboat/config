@@ -26,7 +26,7 @@ color listnormal_unread  green  default
 color listfocus          blue black
 color listfocus_unread   green black bold
 
-color info red black
+color info red default bold
 color article white default
 
 feedlist-format "%?T?%2n %8u %t &-  %t  -?"

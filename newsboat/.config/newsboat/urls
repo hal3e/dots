@@ -4,15 +4,16 @@ https://pudding.cool/projects/newsletter/feed/index.xml Articles "~Pudding Top A
 
 Reddit
 https://www.reddit.com/r/linux/top.rss?t=month Reddit "~Linux"
-https://www.reddit.com/r/privacy/top.rss?t=month Reddit "~Privacy"
-https://www.reddit.com/r/commandline/top.rss?t=month Reddit "~Command line"
 https://www.reddit.com/r/opensource/top.rss?t=month Reddit "~Open source"
+https://www.reddit.com/r/privacy/top.rss?t=month Reddit "~Privacy"
+https://www.reddit.com/r/privacyguides/top.rss?t=month Reddit "~PrivacyGuides"
+https://www.reddit.com/r/commandline/top.rss?t=month Reddit "~Command line"
+https://www.reddit.com/r/neovim/top.rss?t=month Reddit "~Neovim"
 https://www.reddit.com/r/selfhosted/top.rss?t=month Reddit "~Self Hosted"
-https://www.reddit.com/r/programming/top.rss?t=month Reddit "~Programming"
 https://www.reddit.com/r/machinelearning/top.rss?t=month Reddit "~MachineLearning"
 https://www.reddit.com/r/ergomechkeyboards/top.rss?t=month Reddit "~ErgoMechKeyboards"
 https://www.reddit.com/r/mechanicalkeyboards/top.rss?t=month Reddit "~MechanicalKeyboards"
-https://www.reddit.com/r/privacyguides/top.rss?t=month Reddit "~PrivacyGuides"
+https://www.reddit.com/r/programming/top.rss?t=month Reddit "~Programming"
 
 YouTube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw YouTube "~The Primeagen"

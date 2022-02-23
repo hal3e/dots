@@ -1,3 +1,4 @@
+-- TODO: fix gitsigns jump to and preview
 local map = vim.api.nvim_set_keymap
 local default_opts = {noremap = true, silent = true}
 local cmd = vim.cmd
@@ -74,5 +75,5 @@ map('n', '<leader>gs',      ':Telescope git_status<CR>', default_opts)
 map('n', '<leader>cp',       ':Gitsigns preview_hunk<CR>', default_opts)
 map('n', '<leader>cr',       ':Gitsigns reset_hunk<CR>', default_opts)
 map('n', '<leader>cd',       ':Gitsigns diffthis<CR>', default_opts)
-map('n', '[c',       ':Gitsigns prev_hunk | Gitsigns preview_hunk<CR>', default_opts)
-map('n', ']c',       ':Gitsigns next_hunk | Gitsigns preview_hunk<CR>', default_opts)
+map('n', '[c',       ':exe "Gitsigns next_hunk" | exe "Gitsigns preview_hunk" <CR>', default_opts)
+map('n', ']c',       ':exe "Gitsigns prev_hunk" | exe "Gitsigns preview_hunk" <CR>', default_opts)

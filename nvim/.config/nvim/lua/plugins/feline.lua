@@ -1,3 +1,5 @@
+-- TODO: use nord colors
+
 local colors = {
   bg =     '#292E3D',
   fg =     '#eceff4',
@@ -64,7 +66,7 @@ local comps = {
         name = 'file_info',
         opts = {
           type = 'relative',
-          file_modified_icon = ''
+          file_modified_icon = ''
         }
       },
       hl = { fg = colors.fg },

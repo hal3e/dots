@@ -1,3 +1,5 @@
+-- TODO: use nord colors
+
 local bg = '#292E3D'
 
 require('bufferline').setup {

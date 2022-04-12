@@ -8,6 +8,11 @@ icons.setup {
          color = colors.nord4_gui,
          name = "default",
       },
+      rs = {
+         icon = "",
+         color = colors.nord12_gui,
+         name = "rs",
+      },
       c = {
          icon = "",
          color = colors.nord10_gui,

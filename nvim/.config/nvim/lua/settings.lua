@@ -66,34 +66,6 @@ opt.smarttab = true
 opt.smartindent = true    -- autoindent new lines
 opt.breakindent = true
 
--- Do not auto commenting new lines
-cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
-
--- Remove line lenght marker for selected filetypes
-cmd [[autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0]]
-
--- 2 spaces for selected filetypes
-cmd [[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
-]]
-
--- Disable IndentLine for markdown files (avoid concealing)
-cmd [[autocmd FileType markdown let g:indentLine_enabled=0]]
-
---opt.completeopt = 'menuone,noselect,noinsert'
-
--- Open a terminal pane on the right using :Term
-cmd [[command Term :botright vsplit term://$SHELL]]
-
--- Terminal visual tweaks
---- enter insert mode when switching to terminal
---- close terminal buffer on process exit
-cmd [[
-    autocmd TermOpen * setlocal listchars= nonumber norelativenumber nocursorline
-    autocmd TermOpen * startinsert
-    autocmd BufLeave term://* stopinsert
-]]
-
 local disabled_built_ins = {
     "netrw",
     "netrwPlugin",

@@ -62,6 +62,7 @@ map('n', '#', '#zz', default_opts)
 map('n', 'J', '<C-d>', default_opts)
 map('n', 'K', '<C-u>', default_opts)
 map('n', '<C-p>', '<C-o>', default_opts)
+map('n', '<C-u>', '<C-i>', default_opts)
 
 -- Telescope
 map('n', '<leader>f',       ':Telescope git_files<CR>', default_opts)

@@ -2,6 +2,7 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 cmp.setup {
+  preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -14,8 +15,8 @@ cmp.setup {
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-e>'] = cmp.mapping.select_prev_item(),
-    ['<C-j>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-k>'] = cmp.mapping.scroll_docs(4),
+    ['<C-y>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-o>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-m>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {

@@ -6,7 +6,8 @@ local opt = vim.opt         		-- global/buffer/windows-scoped options
 
 opt.shell = "/bin/dash"
 opt.lazyredraw = true
-opt.fillchars = { eob = " " }
+-- opt.fillchars = { eob = " "}
+opt.fillchars = { eob = " ", fold = " "}
 
 opt.shortmess = 'I'
 opt.showmode = false
@@ -14,6 +15,7 @@ opt.scrolloff = 5
 opt.timeoutlen = 175            -- By default timeoutlen is 1000 ms
 
 g.mapleader = ' '             -- change leader to a comma
+g.python3_host_prog = '/home/hal3e/bin/miniconda3/envs/py38/bin/python'
 
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
 opt.swapfile = false          -- don't use swapfile
@@ -49,6 +51,12 @@ exec([[
   augroup end
 ]], false)
 
+exec([[
+augroup filetypedetect
+  au! BufNewFile,BufRead *.[sS][wW] set syntax=rust
+augroup END
+]], false)
+
 opt.hidden = true         -- enable background buffers
 
 opt.undofile = true
@@ -60,7 +68,7 @@ opt.termguicolors = true      -- enable 24-bit RGB colors
 cmd [[colorscheme nord]]
 
 opt.expandtab = true      -- use spaces instead of tabs
-opt.shiftwidth = 2        -- shift 4 spaces when tab
+opt.shiftwidth = 4        -- shift 4 spaces when tab
 opt.tabstop = 2           -- 1 tab == 4 spaces
 opt.smarttab = true
 opt.smartindent = true    -- autoindent new lines
@@ -90,3 +98,6 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
 end
+
+cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]

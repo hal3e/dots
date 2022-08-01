@@ -28,6 +28,11 @@ icons.setup {
          color = colors.nord14_gui,
          name = "sh",
       },
+      tex = {
+         icon = "T",
+         color = colors.nord10_gui,
+         name = "tex",
+      },
       css = {
          icon = "",
          color = colors.nord10_gui,

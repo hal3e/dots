@@ -2,11 +2,8 @@ local g = vim.g
 vim.o.termguicolors = true
 
 g.nvim_tree_add_trailing = 0
-g.nvim_tree_gitignore = 0
-g.nvim_tree_quit_on_open = 0
 g.nvim_tree_git_hl = 1
 g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_disable_window_picker = 1
 g.nvim_tree_respect_buf_cwd = 1
 g.nvim_tree_width_allow_resize  = 1
 g.nvim_tree_special_files = {}
@@ -45,7 +42,6 @@ require('nvim-tree').setup{
   open_on_setup = false,
   disable_netrw = true,
   hijack_netrw = true,
-  auto_close = true,
   open_on_tab = false,
   hijack_cursor = true,
   update_cwd = true,
@@ -64,11 +60,24 @@ require('nvim-tree').setup{
   },
   view = {
      allow_resize = true,
-     side = "left",
+     side = "right",
      width = 30,
   },
   filters = {
     dotfiles = false,
     custom = {'.git', 'node_modules', '.cache', '.bin'}
+  },
+   actions = {
+    open_file = {
+      quit_on_open = false,
+      window_picker = {
+        enable = false,
+      }
+    }
+  },
+  git = {
+    enable = true,
+    ignore = false,
+    timeout = 200,
   }
 }

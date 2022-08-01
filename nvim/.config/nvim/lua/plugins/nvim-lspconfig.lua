@@ -1,25 +1,28 @@
 local nvim_lsp = require('lspconfig')
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
+-- -- Add additional capabilities supported by nvim-cmp
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- capabilities.textDocument.completion.completionItem.preselect = false
+-- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+-- capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+-- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     'documentation',
+--     'detail',
+--     'additionalTextEdits',
+--   },
+-- }
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+
+-- This stopped working because I installed rust-tools!
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -44,8 +47,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({float = false})<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({float = false})<CR>', opts)
   buf_set_keymap('n', '<space>l', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>ff', '<cmd>lua vim.buf.formatting()<CR>', opts)
 
@@ -93,13 +96,46 @@ end
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
     ts_settings = ts_settings,
     flags = {
       debounce_text_changes = 150,
     }
   }
 end
+
+nvim_lsp.rust_analyzer.setup {
+    on_attach=on_attach,
+    -- capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+              importGranularity = "crate",
+              importPrefix = "crate",
+            },
+            cargo = {
+              loadOutDirsFromCheck = true,
+              allFeatures = true,
+            },
+            procMacro = {
+              enable = true,
+            },
+            -- checkOnSave = {
+            --   command = "clippy",
+            -- },
+            experimental = {
+              procAttrMacros = true,
+            },
+            lens = {
+              methodReferences = true,
+              references = true,
+            },
+        }
+    },
+    flags = {
+      debounce_text_changes = 200,
+    }
+}
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -110,11 +146,13 @@ end
 
 vim.diagnostic.config({
     virtual_text = false,
+    virtual_lines = { only_current_line = true },
     signs = true,
-    float = {
-      focusable = false,
-      style = "minimal",
-      header = "",
-      prefix = "",
-    }
+    float = false
+--  {
+--       focusable = false,
+--       style = "minimal",
+--       header = "",
+--       prefix = "",
+--     }
 })

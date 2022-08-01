@@ -1,4 +1,3 @@
--- TODO: fix gitsigns jump to and preview
 local map = vim.api.nvim_set_keymap
 local default_opts = {noremap = true, silent = true}
 local cmd = vim.cmd
@@ -72,9 +71,22 @@ map('n', '<leader><space>', ':Telescope commands<CR>', default_opts)
 map('n', '<leader>th',       ':Telescope help_tags<CR>', default_opts)
 map('n', '<leader>gs',      ':Telescope git_status<CR>', default_opts)
 
--- Gitsigns
-map('n', '<leader>cp',       ':Gitsigns preview_hunk<CR>', default_opts)
-map('n', '<leader>cr',       ':Gitsigns reset_hunk<CR>', default_opts)
-map('n', '<leader>cd',       ':Gitsigns diffthis<CR>', default_opts)
-map('n', '[c',       ':exe "Gitsigns next_hunk" | exe "Gitsigns preview_hunk" <CR>', default_opts)
-map('n', ']c',       ':exe "Gitsigns prev_hunk" | exe "Gitsigns preview_hunk" <CR>', default_opts)
+-- Lsp
+-- Had to add this here because of rust-tools
+map('n', 'gc', '<cmd>lua vim.lsp.buf.declaration()<CR>', default_opts)
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', default_opts)
+map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', default_opts)
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', default_opts)
+map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', default_opts)
+map('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', default_opts)
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', default_opts)
+map('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', default_opts)
+map('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', default_opts)
+map('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', default_opts)
+map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', default_opts)
+map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', default_opts)
+map('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', default_opts)
+map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({float = false})<CR>', default_opts)
+map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({float = false})<CR>', default_opts)
+map('n', '<space>l', '<cmd>lua vim.diagnostic.set_loclist()<CR>', default_opts)
+map('n', '<space>ff', '<cmd>lua vim.buf.formatting()<CR>', default_opts)

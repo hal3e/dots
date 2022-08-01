@@ -101,7 +101,7 @@ return packer.startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufRead",
+    event = { "BufRead", "BufNewFile" },
     config = function()
       require('nvim-treesitter.configs').setup{
         highlight = {
@@ -126,11 +126,28 @@ return packer.startup(function(use)
   }
 
   use {
+   'simrat39/rust-tools.nvim',
+    after = "nvim-lspconfig",
+    config = function()
+      require('rust-tools').setup()
+    end,
+  }
+
+  use {
     'neovim/nvim-lspconfig',
     config = function()
       require('plugins.nvim-lspconfig')
     end,
   }
+
+  use {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  }
+
 
   use {
     "famiu/feline.nvim",
@@ -157,11 +174,57 @@ return packer.startup(function(use)
   }
 
 
-  use { 'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+  use {
+    'lewis6991/gitsigns.nvim',
     event = "BufRead",
     config = function()
-      require('gitsigns').setup()
+      require('gitsigns').setup {
+        on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then return ']c' end
+          vim.schedule(function() gs.next_hunk({preview = true}) end)
+          return '<Ignore>'
+        end, {expr=true})
+
+        map('n', '[c', function()
+          if vim.wo.diff then return '[c' end
+          vim.schedule(function() gs.prev_hunk({preview = true}) end)
+          return '<Ignore>'
+        end, {expr=true})
+
+        -- Actions
+        map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+        map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+        map('n', '<leader>hS', gs.stage_buffer)
+        map('n', '<leader>hu', gs.undo_stage_hunk)
+        map('n', '<leader>hr', gs.reset_buffer)
+        map('n', '<leader>hp', gs.preview_hunk)
+        map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+        map('n', '<leader>tb', gs.toggle_current_line_blame)
+        map('n', '<leader>hd', gs.diffthis)
+        map('n', '<leader>td', gs.toggle_deleted)
+
+        -- Text object
+        map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+      end
+      }
+
+    end,
+  }
+
+  use {
+    'j-hui/fidget.nvim',
+    config = function()
+      require('fidget').setup{}
     end,
   }
 

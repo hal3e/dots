@@ -1,21 +1,38 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export BROWSER:firefox
+SETUVAR --export CARGO_HOME:/home/hal3e/\x2elocal/share/cargo
+SETUVAR --export --path CUDA_CACHE_PATH:/home/hal3e/\x2ecache/nv
 SETUVAR --export EDITOR:nvim
+SETUVAR --export GNUPGHOME:/home/hal3e/bck/gnupg
 SETUVAR --export LANGUAGE:en_US\x2eUTF\x2d8
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
+SETUVAR --export NPM_CONFIG_USERCONFIG:/home/hal3e/\x2econfig/npm/npmrc
+SETUVAR --export PAGER:bat\x1e\x2dp
+SETUVAR --export PASSWORD_STORE_DIR:/home/hal3e/bck/pass
+SETUVAR --export PYLINTHOME:/home/hal3e/\x2ecache/pylint
+SETUVAR --export RUSTUP_HOME:/home/hal3e/\x2elocal/share/rustup
 SETUVAR --export SKIM_DEFAULT_OPTIONS:\x2d\x2dbind\x3dctrl\x2de\x3aup\x1e\x2d\x2dcolor\x3dbg\x2b\x3a\x2cspinner\x3a\x2381A1C1\x2chl\x3a\x2381a1c1\x2cmatched_bg\x3a\x2ccurrent_match_bg\x3a\x2cfg\x3a\x23D8DEE9\x2cheader\x3a\x2347516b\x2cinfo\x3a\x2381A1C1\x2cpointer\x3a\x2381A1C1\x2cmarker\x3a\x2381A1C1\x2cfg\x2b\x3a\x23D8DEE9\x2cprompt\x3a\x2381A1C1\x2chl\x2b\x3a\x2381a1c1
-SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/gnupg/S\x2egpg\x2dagent\x2essh
+SETUVAR --export SSH_AUTH_SOCK:/home/hal3e/bck/gnupg/S\x2egpg\x2dagent\x2essh
 SETUVAR --export SUDO_ASKPASS:/home/hal3e/bin/askpass/pass\x2dterm\x2esh
 SETUVAR --export SVDIR:/home/hal3e/\x2eservice/
 SETUVAR --export TERMINAL:st
+SETUVAR --export XAUTHORITY:\x1d
+SETUVAR --export XDG_CACHE_HOME:/home/hal3e/\x2ecache
+SETUVAR --export XDG_CONFIG_HOME:/home/hal3e/\x2econfig
+SETUVAR --export XDG_DATA_HOME:/home/hal3e/\x2elocal/share
+SETUVAR --export XDG_STATE_HOME:/home/hal3e/\x2elocal/\x2estate
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/hal3e/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/hal3e/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/hal3e\x24
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
+SETUVAR _fish_abbr_gc:git\x20checkout
+SETUVAR _fish_abbr_gcb:git\x20checkout\x20\x2db
+SETUVAR _fish_abbr_gcm:git\x20commit\x20\x2dm
+SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fisher_andreiborisov_2F_sponge_files:/home/hal3e/\x2econfig/fish/functions/_sponge_clear_state\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_exit\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_postexec\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_preexec\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_on_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/_sponge_remove_from_history\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/sponge_filter_failed\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/sponge_filter_matched\x2efish\x1e/home/hal3e/\x2econfig/fish/conf\x2ed/sponge\x2efish
 SETUVAR _fisher_hal3e_2F_lumo_2E_fish_files:/home/hal3e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/fish_right_prompt\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/host_info\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/humanize_duration\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/last_job_id\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/pwd_info\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/pwd_is_home\x2efish
 SETUVAR _fisher_jethrokuan_2F_z_files:/home/hal3e/\x2econfig/fish/functions/__z\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_add\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_clean\x2efish\x1e/home/hal3e/\x2econfig/fish/functions/__z_complete\x2efish\x1e/home/hal3e/\x2econfig/fish/conf\x2ed/z\x2efish
@@ -50,11 +67,12 @@ SETUVAR fish_pager_color_completion:white
 SETUVAR fish_pager_color_description:white
 SETUVAR fish_pager_color_prefix:79B3EC
 SETUVAR fish_pager_color_progress:normal
+SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_pager_color_selected_completion:79B3EC
 SETUVAR fish_pager_color_selected_description:A2D775
-SETUVAR fish_user_paths:/opt/texlive/2020/bin/x86_64\x2dlinux/\x1e/home/hal3e/\x2ecargo/bin/\x1e/home/hal3e/\x2elocal/bin
+SETUVAR fish_user_paths:/home/hal3e/\x2elocal/share/cargo/bin\x1e/home/hal3e/\x2efuelup/bin\x1e/opt/texlive/2021/bin/x86_64\x2dlinux/\x1e/home/hal3e/\x2elocal/bin
 SETUVAR sponge_allow_previously_successful:true
-SETUVAR sponge_delay:2
+SETUVAR sponge_delay:10
 SETUVAR sponge_filters:sponge_filter_failed\x1esponge_filter_matched
-SETUVAR sponge_regex_patterns:\x1d
-SETUVAR sponge_successful_exit_codes:0
+SETUVAR sponge_regex_patterns:\x5e\x28cd\x7cls\x29\x2e\x2a
+SETUVAR sponge_successful_exit_codes:0\x1e130

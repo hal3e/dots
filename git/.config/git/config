@@ -7,16 +7,17 @@
   c = commit
   s = status
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
+  ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --stat
   lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
 
 [credential]
-	helper = store --file ~/.git-credentials
+	helper = store --file ~/.config/git/credentials
 
 [init]
 	defaultBranch = master
 
 [core]
-	editor = nvim
+  editor = nvim
   pager = delta
 
 [delta]

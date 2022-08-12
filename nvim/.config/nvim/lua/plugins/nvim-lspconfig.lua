@@ -146,13 +146,11 @@ end
 
 vim.diagnostic.config({
     virtual_text = false,
-    virtual_lines = { only_current_line = true },
     signs = true,
-    float = false
---  {
---       focusable = false,
---       style = "minimal",
---       header = "",
---       prefix = "",
---     }
+    float = {
+      focusable = false,
+      style = "minimal",
+      header = "",
+      prefix = "",
+    }
 })

@@ -65,7 +65,9 @@ opt.lazyredraw = true     -- faster scrolling
 opt.synmaxcol = 240       -- max column for syntax highlight
 
 opt.termguicolors = true      -- enable 24-bit RGB colors
-cmd [[colorscheme nord]]
+vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+require("catppuccin").setup()
+cmd [[colorscheme catppuccin]]
 
 opt.expandtab = true      -- use spaces instead of tabs
 opt.shiftwidth = 4        -- shift 4 spaces when tab

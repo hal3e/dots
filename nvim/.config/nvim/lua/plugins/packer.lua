@@ -5,13 +5,15 @@ local packer = require 'packer'
 
 return packer.startup(function(use)
   use {
-    "wbthomason/packer.nvim",
-    event = "VimEnter",
+    'wbthomason/packer.nvim',
+    event = 'VimEnter',
   }
 
   use {
     'hal3e/nord.nvim'
   }
+
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use {
     'nvim-lua/plenary.nvim'
@@ -19,49 +21,49 @@ return packer.startup(function(use)
 
   use {
     'petertriho/nvim-scrollbar',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('scrollbar').setup()
     end,
   }
 
   use {
-    "kyazdani42/nvim-web-devicons",
-    after = "nord.nvim",
+    'kyazdani42/nvim-web-devicons',
+    after = 'nord.nvim',
     config = function()
       require('plugins.icons')
     end,
   }
 
   use {
-    "folke/todo-comments.nvim",
-    event = "BufRead",
-    requires = "nvim-lua/plenary.nvim",
+    'folke/todo-comments.nvim',
+    event = 'BufRead',
+    requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require("todo-comments").setup{
+      require('todo-comments').setup{
         keywords = {
-          FIX =  { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
-          TODO = { icon = " ", color = "info" },
-          HACK = { icon = " ", color = "warning" },
-          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-          PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+          FIX =  { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+          TODO = { icon = ' ', color = 'info' },
+          HACK = { icon = ' ', color = 'warning' },
+          WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+          PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
+          NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
         },
           colors = {
-          warning = { "DiagnosticSignWarn" }
+          warning = { 'DiagnosticSignWarn' }
         },
       } end,
   }
 
   use {
     'nvim-telescope/telescope.nvim',
-    cmd = "Telescope",
+    cmd = 'Telescope',
     config = function()
       require('telescope').setup{
         defaults = {
           mappings = {
             i = {
-              ["<C-e>"] = "move_selection_previous"
+              ['<C-e>'] = 'move_selection_previous'
             }
           }
         },
@@ -70,8 +72,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufRead',
     config = function()
       require('indent_blankline').setup{
         show_current_context = true,
@@ -80,8 +82,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "terrortylor/nvim-comment",
-    cmd = "CommentToggle",
+    'terrortylor/nvim-comment',
+    cmd = 'CommentToggle',
     config = function()
       require('nvim_comment').setup{
         comment_empty = false,
@@ -90,8 +92,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
+    'max397574/better-escape.nvim',
+    event = 'InsertEnter',
     config = function()
       require('better_escape').setup{
         mapping = 'nn',
@@ -100,8 +102,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufRead", "BufNewFile" },
+    'nvim-treesitter/nvim-treesitter',
+    event = { 'BufRead', 'BufNewFile' },
     config = function()
       require('nvim-treesitter.configs').setup{
         highlight = {
@@ -127,7 +129,7 @@ return packer.startup(function(use)
 
   use {
    'simrat39/rust-tools.nvim',
-    after = "nvim-lspconfig",
+    after = 'nvim-lspconfig',
     config = function()
       require('rust-tools').setup()
     end,
@@ -141,25 +143,16 @@ return packer.startup(function(use)
   }
 
   use {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  }
-
-
-  use {
-    "famiu/feline.nvim",
-    after = "nvim-lspconfig",
+    'famiu/feline.nvim',
+    after = 'nvim-lspconfig',
     config = function()
       require('plugins.feline')
     end,
   }
 
   use {
-    "akinsho/bufferline.nvim",
-    after = "nvim-web-devicons",
+    'akinsho/bufferline.nvim',
+    after = 'nvim-web-devicons',
     config = function()
       require('plugins.bufferline')
     end,
@@ -167,7 +160,7 @@ return packer.startup(function(use)
 
   use {
     'kyazdani42/nvim-tree.lua',
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
     config = function()
       require('plugins.nvim-tree')
     end,
@@ -176,7 +169,7 @@ return packer.startup(function(use)
 
   use {
     'lewis6991/gitsigns.nvim',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('gitsigns').setup {
         on_attach = function(bufnr)
@@ -229,10 +222,10 @@ return packer.startup(function(use)
   }
 
   use {
-    "norcalli/nvim-colorizer.lua",
-    event = "BufRead",
+    'norcalli/nvim-colorizer.lua',
+    event = 'BufRead',
     config = function()
-      require('colorizer').setup({ "*" }, {
+      require('colorizer').setup({ '*' }, {
         RGB = true,
         RRGGBB = true,
         names = true,
@@ -241,9 +234,18 @@ return packer.startup(function(use)
         hsl_fn = true,
         css = false,
         css_fn = false,
-        mode = "background",
+        mode = 'background',
        })
-       vim.cmd "ColorizerAttachToBuffer"
+       vim.cmd 'ColorizerAttachToBuffer'
       end,
   }
+
+  use {
+    'kylechui/nvim-surround',
+    event = 'BufRead',
+    config = function()
+        require('nvim-surround').setup({})
+    end
+  }
+
 end)

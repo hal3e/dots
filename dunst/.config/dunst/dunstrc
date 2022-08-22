@@ -11,10 +11,10 @@
     notification_limit = 0
 
     indicate_hidden = yes
-    transparency = 20
+    transparency = 5
 
     frame_width = 1
-    frame_color = "#bec8da"
+    frame_color = "#75829c"
 
     font = Hack 11
 
@@ -28,19 +28,18 @@
 
     icon_position = off
 
-
 [urgency_low]
-    background = "#2E3445"
-    foreground = "#eceff4"
+    background = "#24273A"
+    foreground = "#EAEEFA"
     timeout = 10
 
 [urgency_normal]
-    background = "#2E3445"
-    foreground = "#eceff4"
+    background = "#24273A"
+    foreground = "#EAEEFA"
     timeout = 10
 
 [urgency_critical]
     background = "#2E3445"
-    foreground = "#F7A6AE"
-    frame_color = "#F7A6AE"
+    foreground = "#ED8796"
+    frame_color = "#ED8796"
     timeout = 0

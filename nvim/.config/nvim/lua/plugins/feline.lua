@@ -1,186 +1,178 @@
--- TODO: use nord colors
-
 local colors = {
-  bg =     '#292E3D',
-  fg =     '#eceff4',
-  fg2 =    '#434C5E',
-  red =    '#bf616a',
-  cyan =   '#88c0d0',
-  blue =   '#81a1c1',
-  pink =   '#8fbcbb',
-  green =  '#a3be8c',
-  yellow = '#ebcb8b',
-  orange = '#ebcb8b',
-  violet = '#b48ead',
+    bg = '#1E2030',
+    fg = '#eaeefa',
+    fg2 = '#494D64',
+    red = '#ED8796',
+    cyan = '#8BD5CA',
+    blue = '#8AADF4',
+    pink = '#8fbcbb',
+    green = '#A6DA95',
+    yellow = '#EED49F',
+    orange = '#EED49F',
+    violet = '#F5BDE6',
 }
 
 local vi_mode_colors = {
-  NORMAL =  colors.blue,
-  INSERT =  colors.green,
-  VISUAL =  colors.yellow,
-  OP =      colors.cyan,
-  BLOCK =   colors.cyan,
-  REPLACE = colors.red,
-  ENTER =   colors.orange,
-  MORE =    colors.orange,
-  SELECT =  colors.pink,
-  COMMAND = colors.cyan,
-  SHELL =   colors.cyan,
-  TERM =    colors.green,
-  NONE =    colors.blue,
-  ['V-REPLACE'] = colors.red
+    NORMAL = colors.blue,
+    INSERT = colors.green,
+    VISUAL = colors.yellow,
+    OP = colors.cyan,
+    BLOCK = colors.cyan,
+    REPLACE = colors.red,
+    ENTER = colors.orange,
+    MORE = colors.orange,
+    SELECT = colors.pink,
+    COMMAND = colors.cyan,
+    SHELL = colors.cyan,
+    TERM = colors.green,
+    NONE = colors.blue,
+    ['V-REPLACE'] = colors.red
 }
 
-local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
-local lsp_get_diag = function(str)
-  local count = vim.lsp,diagnostic.get_count(0, str)
-  return (count > 0) and ' '..count..' ' or ''
-end
-
--- My components
+-- Components
 local comps = {
-  vi_mode = {
-    left = {
-      provider = function()
-        local label = ' '..vi_mode_utils.get_vim_mode()..' '
-        return label
-      end,
-      hl = function()
-        local set_color = {
-          name = vi_mode_utils.get_mode_highlight_name(),
-          fg = colors.bg,
-          bg = vi_mode_utils.get_mode_color(),
-          style = 'bold'
+    vi_mode = {
+        left = {
+            provider = function()
+                local label = ' ' .. vi_mode_utils.get_vim_mode() .. ' '
+                return label
+            end,
+            hl = function()
+                local set_color = {
+                    name = vi_mode_utils.get_mode_highlight_name(),
+                    fg = colors.bg,
+                    bg = vi_mode_utils.get_mode_color(),
+                    style = 'bold'
+                }
+                return set_color
+            end,
+            left_sep = ' ',
+            right_sep = ' '
         }
-        return set_color
-      end,
-      left_sep = ' ',
-      right_sep = ' '
-    }
-  },
-  file = {
-    info = {
-      provider = {
-        name = 'file_info',
-        opts = {
-          type = 'relative',
-          file_modified_icon = ''
+    },
+    file = {
+        info = {
+            provider = {
+                name = 'file_info',
+                opts = {
+                    type = 'relative',
+                    file_modified_icon = ''
+                }
+            },
+            hl = { fg = colors.fg },
+            icon = '',
+        },
+        type = {
+            provider = { name = 'file_type' },
+        },
+        os = {
+            provider = function()
+                local os = vim.bo.fileformat:lower()
+                local icon
+                if os == 'unix' then
+                    icon = '  '
+                elseif os == 'mac' then
+                    icon = '  '
+                else
+                    icon = '  '
+                end
+                return icon .. os
+            end,
+            hl = { fg = colors.fg },
+            left_sep = ' ',
+            right_sep = ' '
+        },
+        position = {
+            provider = { name = 'position' },
+            hl = {
+                fg = colors.violet,
+                style = 'bold'
+            },
+            left_sep = ' ',
+        },
+        line_percentage = {
+            provider = { name = 'line_percentage' },
+            hl = { fg = colors.green },
+            left_sep = ' ',
+            right_sep = ' '
+        },
+        scroll_bar = {
+            provider = { name = 'scroll_bar' },
+            hl = { fg = colors.green },
+            left_sep = ' ',
+            right_sep = ' '
+        },
+    },
+    -- LSP info
+    diagnos = {
+        err = {
+            provider = 'diagnostic_errors',
+            icon = ' ',
+            hl = { fg = colors.red },
+            left_sep = ' ',
+        },
+        warn = {
+            provider = 'diagnostic_warnings',
+            icon = ' ',
+            hl = { fg = colors.yellow },
+            left_sep = ' ',
+        },
+        info = {
+            provider = 'diagnostic_info',
+            icon = ' ',
+            hl = { fg = colors.green },
+            left_sep = ' ',
+        },
+        hint = {
+            provider = 'diagnostic_hints',
+            icon = ' ',
+            hl = { fg = colors.cyan },
+            left_sep = ' ',
+        },
+    },
+    lsp = {
+        name = {
+            provider = 'lsp_client_names',
+            icon = ' ',
+            hl = { fg = colors.pink },
+            left_sep = '  ',
         }
-      },
-      hl = { fg = colors.fg },
-      icon = '',
     },
-  type = {
-      provider = { name = 'file_type' },
-    },
-    os = {
-      provider = function()
-        local os = vim.bo.fileformat:lower()
-        local icon
-        if os == 'unix' then
-          icon = '  '
-        elseif os == 'mac' then
-          icon = '  '
-        else
-          icon = '  '
-        end
-        return icon .. os
-      end,
-      hl = { fg = colors.fg },
-      left_sep = ' ',
-      right_sep = ' '
-    },
-    position = {
-      provider = {name = 'position'},
-      hl = {
-        fg = colors.violet,
-        style = 'bold'
-      },
-      left_sep = ' ',
-    },
-    line_percentage = {
-      provider = { name = 'line_percentage' },
-      hl = { fg = colors.green},
-      left_sep = ' ',
-      right_sep = ' '
-    },
-    scroll_bar = {
-      provider = { name = 'scroll_bar' },
-      hl = { fg = colors.green },
-      left_sep = ' ',
-      right_sep = ' '
-    },
-  },
-  -- LSP info
-  diagnos = {
-    err = {
-      provider = 'diagnostic_errors',
-      icon = ' ',
-      hl = { fg = colors.red },
-      left_sep = ' ',
-    },
-    warn = {
-      provider = 'diagnostic_warnings',
-      icon = ' ',
-      hl = { fg = colors.yellow },
-      left_sep = ' ',
-    },
-    info = {
-      provider = 'diagnostic_info',
-      icon = ' ',
-      hl = { fg = colors.green },
-      left_sep = ' ',
-    },
-    hint = {
-      provider = 'diagnostic_hints',
-      icon = ' ',
-      hl = { fg = colors.cyan },
-      left_sep = ' ',
-    },
-  },
-  lsp = {
-    name = {
-      provider = 'lsp_client_names',
-      icon = ' ',
-      hl = { fg = colors.pink },
-      left_sep = '  ',
-    }
-  },
-  -- git info
-  git = {
-    branch = {
-      provider = 'git_branch',
-      icon = ' ',
-      hl = { fg = colors.blue },
-      left_sep = '  ',
-    },
-    add = {
-      provider = 'git_diff_added',
-      icon = '  ',
-      hl = { fg = colors.green },
-      left_sep = ' ',
+    -- git info
+    git = {
+        branch = {
+            provider = 'git_branch',
+            icon = ' ',
+            hl = { fg = colors.blue },
+            left_sep = '  ',
+        },
+        add = {
+            provider = 'git_diff_added',
+            icon = '  ',
+            hl = { fg = colors.green },
+            left_sep = ' ',
 
-    },
-    change = {
-      provider = 'git_diff_changed',
-      icon = '  ',
-      hl = { fg = colors.orange },
-      left_sep = ' ',
-    },
-    remove = {
-      provider = 'git_diff_removed',
-      icon = '  ',
-      hl = { fg = colors.red },
-      left_sep = ' ',
+        },
+        change = {
+            provider = 'git_diff_changed',
+            icon = '  ',
+            hl = { fg = colors.orange },
+            left_sep = ' ',
+        },
+        remove = {
+            provider = 'git_diff_removed',
+            icon = '  ',
+            hl = { fg = colors.red },
+            left_sep = ' ',
+        }
     }
-  }
 }
 
 local components = {
-  active = {},
-  inactive = {},
+    active = {},
+    inactive = {},
 }
 
 table.insert(components.active, {})
@@ -208,31 +200,31 @@ table.insert(components.active[2], comps.file.position)
 table.insert(components.active[2], comps.file.line_percentage)
 
 local InactiveStatusHL = {
-  fg = colors.fg2,
-  bg = colors.bg,
+    fg = colors.fg2,
+    bg = colors.bg,
 }
 
 components.inactive = {
-   {
-      {
-         provider = " ",
-         hl = InactiveStatusHL,
-      },
-   },
+    {
+        {
+            provider = " ",
+            hl = InactiveStatusHL,
+        },
+    },
 }
 
 require('feline').setup {
-  theme = {
-    fg = colors.fg,
-    bg = colors.bg,
-  },
-  components = components,
-  vi_mode_colors = vi_mode_colors,
-  force_inactive = {
-    filetypes = {
-      'NvimTree',
+    theme = {
+        fg = colors.fg,
+        bg = colors.bg,
     },
-    buftypes = {},
-    bufnames = {},
-  },
+    components = components,
+    vi_mode_colors = vi_mode_colors,
+    force_inactive = {
+        filetypes = {
+            'NvimTree',
+        },
+        buftypes = {},
+        bufnames = {},
+    },
 }

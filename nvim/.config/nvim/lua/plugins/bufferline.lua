@@ -1,53 +1,36 @@
--- TODO: use nord colors
-
-local bg = '#292E3D'
+local bg = '#1E2030'
 
 require('bufferline').setup {
-  options = {
-    always_show_bufferline = true,
-    show_tab_indicators = false,
-    show_buffer_close_icons = false,
-    max_name_length = 20,
-    max_prefix_length = 19,
-    tab_size = 21,
-    enforce_regular_tabs = false,
-    indicator_icon = ' ',
-    view = "multiwindow",
-    separator_style = "thin",
-    diagnostics = false,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-  },
-
-  highlights = {
-    fill = {
-      guibg = bg,
+    options = {
+        always_show_bufferline = true,
+        show_tab_indicators = false,
+        show_buffer_close_icons = false,
+        max_name_length = 20,
+        max_prefix_length = 19,
+        tab_size = 21,
+        enforce_regular_tabs = false,
+        view = "multiwindow",
+        separator_style = "thin",
+        diagnostics = false,
+        offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+        show_close_icon = false,
+        indicator = {
+            style = 'icon',
+            icon = ' ',
+        },
     },
 
-    background = {
-      guibg = bg,
-    },
+    highlights = {
+        fill = {
+            bg = bg,
+        },
 
-    buffer_selected = {
-      guibg = "#2E3445",
-      gui = "bold",
-    },
+        background = {
+            bg = bg,
+        },
 
-    separator = {
-      guifg = bg,
-      guibg = bg,
-    },
-
-    separator_selected = {
-      guifg = "#2E3445",
-      guibg = "#2E3445",
-    },
-
-    duplicate_selected = {
-      guibg = "#2E3445",
-    },
-
-    duplicate = {
-      guibg = bg,
+        buffer_selected = {
+            italic = false
+        },
     }
-  }
 }

@@ -5,6 +5,47 @@ local keymap = require('cmp.utils.keymap')
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
+-- local format_icons = {
+--     Namespace = "",
+--     Text = " ",
+--     Method = " ",
+--     Function = " ",
+--     Constructor = " ",
+--     Field = "ﰠ ",
+--     Variable = " ",
+--     Class = "ﴯ ",
+--     Interface = " ",
+--     Module = " ",
+--     Property = "ﰠ ",
+--     Unit = "塞 ",
+--     Value = " ",
+--     Enum = " ",
+--     Keyword = " ",
+--     Snippet = " ",
+--     Color = " ",
+--     File = " ",
+--     Reference = " ",
+--     Folder = " ",
+--     EnumMember = " ",
+--     Constant = " ",
+--     Struct = "פּ ",
+--     Event = " ",
+--     Operator = " ",
+--     TypeParameter = " ",
+--     Table = "",
+--     Object = " ",
+--     Tag = "",
+--     Array = "[]",
+--     Boolean = " ",
+--     Number = " ",
+--     Null = "ﳠ",
+--     String = " ",
+--     Calendar = "",
+--     Watch = " ",
+--     Package = "",
+--     Copilot = " ",
+-- }
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -16,10 +57,10 @@ cmp.setup {
         keyword_length = 2
     },
     mapping = {
-        ['<C-j>'] = cmp.mapping.select_next_item(),
-        ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-h>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-l>'] = cmp.mapping.scroll_docs(4),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-e>'] = cmp.mapping.select_prev_item(),
+        ['<C-y>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-o>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-c>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm { select = true },
@@ -45,15 +86,21 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'path' },
         { name = 'buffer' },
+        { name = 'path' },
     }
+    -- formatting = {
+    --     format = function(_, vim_item)
+    --         vim_item.kind = string.format("%s", format_icons[vim_item.kind])
+    --         return vim_item
+    --     end
+    -- }
 }
 
 -- Use buffer source for `/`.
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline({
-        ['<C-j>'] = {
+        ['<C->'] = {
             c = function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
@@ -62,7 +109,7 @@ cmp.setup.cmdline('/', {
                 end
             end,
         },
-        ['<C-k>'] = {
+        ['<C-e>'] = {
             c = function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
@@ -83,7 +130,7 @@ cmp.setup.cmdline('/', {
 -- Use cmdline & path source for ':'.
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline({
-        ['<C-j>'] = {
+        ['<C-n>'] = {
             c = function()
                 if cmp.visible() then
                     cmp.select_next_item()
@@ -92,7 +139,7 @@ cmp.setup.cmdline(':', {
                 end
             end,
         },
-        ['<C-k>'] = {
+        ['<C-e>'] = {
             c = function()
                 if cmp.visible() then
                     cmp.select_prev_item()

@@ -10,6 +10,14 @@ return packer.startup(function(use)
     }
 
     use {
+        "ggandor/leap.nvim",
+        after = 'nord.nvim',
+        config = function()
+            require('leap').add_default_mappings()
+        end,
+    }
+
+    use {
         'hal3e/nord.nvim'
     }
 
@@ -28,7 +36,7 @@ return packer.startup(function(use)
     }
 
     use {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         after = 'nord.nvim',
         config = function()
             require('plugins.icons')
@@ -64,8 +72,8 @@ return packer.startup(function(use)
                 defaults = {
                     mappings = {
                         i = {
-                            ['<C-j>'] = 'move_selection_next',
-                            ['<C-k>'] = 'move_selection_previous'
+                            ['<C-n>'] = 'move_selection_next',
+                            ['<C-e>'] = 'move_selection_previous'
                         }
                     }
                 },
@@ -142,7 +150,20 @@ return packer.startup(function(use)
         'simrat39/rust-tools.nvim',
         after = 'nvim-lspconfig',
         config = function()
-            require('rust-tools').setup()
+            require('rust-tools').setup({
+                server = {
+                    capabilities = require('plugins.nvim-lspconfig').capabilities,
+                    on_attach = require('plugins.nvim-lspconfig').on_attach,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            check = {
+                                command = "clippy",
+                                extraArgs = { "--all", "--", "-W", "clippy::all" },
+                            },
+                        },
+                    },
+                },
+            })
         end,
     }
 
@@ -163,7 +184,7 @@ return packer.startup(function(use)
 
 
     use {
-        'famiu/feline.nvim',
+        'freddiehaddad/feline.nvim',
         after = 'nvim-lspconfig',
         config = function()
             require('plugins.feline')
@@ -230,7 +251,6 @@ return packer.startup(function(use)
                     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
                 end
             }
-
         end,
     }
 
@@ -281,5 +301,4 @@ return packer.startup(function(use)
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim'
     }
-
 end)

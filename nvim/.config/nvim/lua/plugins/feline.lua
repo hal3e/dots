@@ -67,23 +67,6 @@ local comps = {
         type = {
             provider = { name = 'file_type' },
         },
-        os = {
-            provider = function()
-                local os = vim.bo.fileformat:lower()
-                local icon
-                if os == 'unix' then
-                    icon = '  '
-                elseif os == 'mac' then
-                    icon = '  '
-                else
-                    icon = '  '
-                end
-                return icon .. os
-            end,
-            hl = { fg = colors.fg },
-            left_sep = ' ',
-            right_sep = ' '
-        },
         position = {
             provider = { name = 'position' },
             hl = {
@@ -153,7 +136,6 @@ local comps = {
             icon = '  ',
             hl = { fg = colors.green },
             left_sep = ' ',
-
         },
         change = {
             provider = 'git_diff_changed',

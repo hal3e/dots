@@ -19,22 +19,24 @@ require('nvim-tree').setup({
             enable = false,
         },
         icons = {
+            padding = "",
             show = {
-                git = false,
                 file = true,
                 folder = true,
-                folder_arrow = false
+                folder_arrow = false,
+                git = false,
+                modified = false
             },
             glyphs = {
-                default = "",
-                symlink = "",
+                default = " ",
+                symlink = " ",
                 folder = {
-                    default = "",
-                    empty = "",
-                    empty_open = "",
-                    open = "",
-                    symlink = "",
-                    symlink_open = "",
+                    default = " ",
+                    empty = " ",
+                    empty_open = " ",
+                    open = " ",
+                    symlink = " ",
+                    symlink_open = " ",
                 }
             }
         }
@@ -46,9 +48,9 @@ require('nvim-tree').setup({
     diagnostics = {
         enable = true,
         icons = {
-            hint = "",
-            info = "",
-            warning = "",
+            hint = " ",
+            info = " ",
+            warning = " ",
             error = " ",
         }
     },
@@ -57,8 +59,7 @@ require('nvim-tree').setup({
         width = 30,
     },
     filters = {
-        dotfiles = false,
-        custom = { '.git$', 'node_modules', '.cache$', '.bin$' }
+        dotfiles = true,
     },
     actions = {
         open_file = {
@@ -70,7 +71,7 @@ require('nvim-tree').setup({
     },
     git = {
         enable = true,
-        ignore = false,
+        ignore = true,
         timeout = 200,
     },
     filesystem_watchers = {

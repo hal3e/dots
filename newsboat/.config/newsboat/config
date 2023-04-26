@@ -4,23 +4,23 @@ openbrowser-and-mark-jumps-to-next-unread yes
 toggleitemread-jumps-to-next-unread yes
 show-keymap-hint  no
 
-bind-key n down
-bind-key e up
-bind-key N next
-bind-key E prev
-bind-key Y next-feed articlelist
-bind-key O prev-feed articlelist
-bind-key o open
+bind-key j down
+bind-key k up
+bind-key J next
+bind-key K prev
+bind-key H next-feed articlelist
+bind-key L prev-feed articlelist
+bind-key l open
 bind-key G end
 bind-key g home
-bind-key y quit
-bind-key w toggle-article-read
-bind-key k next-unread
-bind-key ; prev-unread
-bind-key t show-urls
-bind-key p open-in-browser-and-mark-read
+bind-key h quit
+bind-key r toggle-article-read
+bind-key n next-unread
+bind-key p prev-unread
+bind-key f show-urls
+bind-key o open-in-browser-and-mark-read
 
-color listnormal         color15 default
+color listnormal         color8 default
 color listnormal_unread  green  default
 
 color listfocus          blue black

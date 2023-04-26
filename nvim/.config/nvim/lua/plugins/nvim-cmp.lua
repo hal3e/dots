@@ -57,12 +57,12 @@ cmp.setup {
         keyword_length = 2
     },
     mapping = {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-e>'] = cmp.mapping.select_prev_item(),
-        ['<C-y>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-o>'] = cmp.mapping.scroll_docs(4),
+        -- ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- ['<C-e>'] = cmp.mapping.select_prev_item(),
+        -- ['<C-y>'] = cmp.mapping.scroll_docs(-4),
+        -- ['<C-o>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-c>'] = cmp.mapping.close(),
+        -- ['<C-c>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<Tab>'] = function(fallback)
             if cmp.visible() then
@@ -100,7 +100,7 @@ cmp.setup {
 -- Use buffer source for `/`.
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline({
-        ['<C->'] = {
+        ['<C-n>'] = {
             c = function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
@@ -109,7 +109,7 @@ cmp.setup.cmdline({ '/', '?' }, {
                 end
             end,
         },
-        ['<C-e>'] = {
+        ['<C-p>'] = {
             c = function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
@@ -118,13 +118,10 @@ cmp.setup.cmdline({ '/', '?' }, {
                 end
             end,
         },
-        ['<CR>'] = {
-            c = cmp.mapping.confirm { select = true }
-        },
     }),
-    sources = {
+    sources = cmp.config.sources({
         { name = 'buffer' }
-    }
+    })
 })
 
 -- Use cmdline & path source for ':'.
@@ -139,7 +136,7 @@ cmp.setup.cmdline(':', {
                 end
             end,
         },
-        ['<C-e>'] = {
+        ['<C-p>'] = {
             c = function()
                 if cmp.visible() then
                     cmp.select_prev_item()

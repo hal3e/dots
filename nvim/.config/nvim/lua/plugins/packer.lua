@@ -17,15 +17,9 @@ return packer.startup(function(use)
         end,
     }
 
-    use {
-        'hal3e/nord.nvim'
-    }
-
     use { "catppuccin/nvim", as = "catppuccin" }
 
-    use {
-        'nvim-lua/plenary.nvim'
-    }
+    use { "nvim-lua/plenary.nvim" }
 
     use {
         'petertriho/nvim-scrollbar',
@@ -73,7 +67,7 @@ return packer.startup(function(use)
                     mappings = {
                         i = {
                             ['<C-n>'] = 'move_selection_next',
-                            ['<C-e>'] = 'move_selection_previous'
+                            ['<C-p>'] = 'move_selection_previous'
                         }
                     }
                 },
@@ -287,15 +281,6 @@ return packer.startup(function(use)
             require('nvim-surround').setup({})
         end
     }
-
-    use {
-        'lewis6991/spellsitter.nvim',
-        event = 'BufRead',
-        config = function()
-            require('spellsitter').setup()
-        end
-    }
-
 
     use {
         'sindrets/diffview.nvim',

@@ -23,7 +23,9 @@ local on_attach = function()
     buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -59,22 +61,22 @@ require 'lspconfig'.lua_ls.setup {
 local configs = require('lspconfig.configs')
 
 -- Check if the config is already defined (useful when reloading this file)
-if not configs.sway_lsp then
-    configs.sway_lsp = {
-        default_config = {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            cmd = { 'forc-lsp' },
-            filetypes = { 'sway' },
-            root_dir = function(fname)
-                return nvim_lsp.util.find_git_ancestor(fname)
-            end,
-            settings = {},
-        },
-    }
-end
+-- if not configs.sway_lsp then
+--     configs.sway_lsp = {
+--         default_config = {
+--             capabilities = capabilities,
+--             on_attach = on_attach,
+--             cmd = { 'forc-lsp' },
+--             filetypes = { 'sway' },
+--             root_dir = function(fname)
+--                 return nvim_lsp.util.find_git_ancestor(fname)
+--             end,
+--             settings = {},
+--         },
+--     }
+-- end
 
-nvim_lsp.sway_lsp.setup {}
+-- nvim_lsp.sway_lsp.setup {}
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do

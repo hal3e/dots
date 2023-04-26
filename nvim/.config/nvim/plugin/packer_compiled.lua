@@ -200,7 +200,7 @@ _G.packer_plugins = {
     url = "https://github.com/terrortylor/nvim-comment"
   },
   ["nvim-lspconfig"] = {
-    after = { "lsp_lines.nvim", "rust-tools.nvim", "feline.nvim" },
+    after = { "rust-tools.nvim", "lsp_lines.nvim", "feline.nvim" },
     config = { "\27LJ\2\0026\0\0\2\0\2\0\0046\0\0\0'\1\1\0B\0\2\1K\0\1\0\27plugins.nvim-lspconfig\frequire\0" },
     loaded = true,
     only_config = true,
@@ -276,17 +276,9 @@ _G.packer_plugins = {
     path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
-  ["spellsitter.nvim"] = {
-    config = { "\27LJ\2\0029\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\16spellsitter\frequire\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/hal3e/.local/share/nvim/site/pack/packer/opt/spellsitter.nvim",
-    url = "https://github.com/lewis6991/spellsitter.nvim"
-  },
   ["telescope.nvim"] = {
     commands = { "Telescope" },
-    config = { "\27LJ\2\2«\1\0\0\5\0\n\0\r6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\b\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2=\2\t\1B\0\2\1K\0\1\0\rdefaults\1\0\0\rmappings\1\0\0\6i\1\0\0\1\0\2\n<C-n>\24move_selection_next\n<C-e>\28move_selection_previous\nsetup\14telescope\frequire\0" },
+    config = { "\27LJ\2\2«\1\0\0\5\0\n\0\r6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\b\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2=\2\t\1B\0\2\1K\0\1\0\rdefaults\1\0\0\rmappings\1\0\0\6i\1\0\0\1\0\2\n<C-n>\24move_selection_next\n<C-p>\28move_selection_previous\nsetup\14telescope\frequire\0" },
     loaded = false,
     needs_bufread = true,
     only_cond = false,
@@ -339,15 +331,15 @@ vim.cmd [[ packadd leap.nvim ]]
 -- Config for: leap.nvim
 try_loadstring("\27LJ\2\2A\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0", "config", "leap.nvim")
 
-vim.cmd [[ packadd lsp_lines.nvim ]]
-
--- Config for: lsp_lines.nvim
-try_loadstring("\27LJ\2\0027\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14lsp_lines\frequire\0", "config", "lsp_lines.nvim")
-
 vim.cmd [[ packadd rust-tools.nvim ]]
 
 -- Config for: rust-tools.nvim
 try_loadstring("\27LJ\2\2¢\2\0\0\a\0\17\0\0276\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\15\0005\2\5\0006\3\0\0'\4\3\0B\3\2\0029\3\4\3=\3\4\0026\3\0\0'\4\3\0B\3\2\0029\3\6\3=\3\6\0025\3\f\0005\4\n\0005\5\a\0005\6\b\0=\6\t\5=\5\v\4=\4\r\3=\3\14\2=\2\16\1B\0\2\1K\0\1\0\vserver\1\0\0\rsettings\18rust-analyzer\1\0\0\ncheck\1\0\0\14extraArgs\1\5\0\0\n--all\a--\a-W\16clippy::all\1\0\1\fcommand\vclippy\14on_attach\1\0\0\17capabilities\27plugins.nvim-lspconfig\nsetup\15rust-tools\frequire\0", "config", "rust-tools.nvim")
+
+vim.cmd [[ packadd lsp_lines.nvim ]]
+
+-- Config for: lsp_lines.nvim
+try_loadstring("\27LJ\2\0027\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14lsp_lines\frequire\0", "config", "lsp_lines.nvim")
 
 vim.cmd [[ packadd feline.nvim ]]
 
@@ -394,7 +386,7 @@ vim.cmd [[au!]]
 time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'better-escape.nvim'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'packer.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim', 'nvim-scrollbar', 'nvim-surround', 'spellsitter.nvim', 'gitsigns.nvim', 'todo-comments.nvim', 'nvim-colorizer.lua'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim', 'nvim-colorizer.lua', 'nvim-scrollbar', 'nvim-surround', 'gitsigns.nvim', 'todo-comments.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

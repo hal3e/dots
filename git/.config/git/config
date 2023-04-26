@@ -6,9 +6,11 @@
   a = add
   c = commit
   s = status
-  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --all
-  ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit --stat
-  lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+  lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+  l = lb --all
+  ls = lb --stat
+  discard = reset HEAD --hard
+  wip = "!f() { git add . && git commit -m 'Work in progress'; }; f"
 
 [credential]
 	helper = store --file ~/.config/git/credentials
@@ -18,29 +20,6 @@
 
 [core]
   editor = nvim
-  pager = delta
 
-[delta]
-  syntax-theme = Nord
-  paging = always
-  navigate = true
-  whitespace-error-style = 22 reverse
-  features = side-by-side decorations
-
-[delta "decorations"]
-  line-numbers = true
-  line-numbers-minus-style = red
-  line-numbers-plus-style = green
-  line-numbers-left-format = "{nm:>4} "
-  line-numbers-right-format = "{np:>4} "
-  file-style = bold blue
-  file-decoration-style = blue ul
-  hunk-header-style = green
-  hunk-header-decoration-style = green ul
-  line-numbers-zero-style = white
-  minus-style = syntax "#80393d"
-  minus-emph-style = black red
-  minus-non-emph-style = syntax
-  plus-style = syntax "#648349 "
-  plus-non-emph-style = syntax
-  plus-emph-style = black green
+[push]
+	autoSetupRemote = true

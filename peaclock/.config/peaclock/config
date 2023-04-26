@@ -1,0 +1,23 @@
+block 1 1
+padding 0 0
+margin 0 0
+ratio 1 1
+
+mode stopwatch
+
+timer 10m:0s
+timer-exec 'notify-send -a peaclock "timer complete"'
+
+rate-input 250
+rate-status 1000
+
+set hour-24 on
+set seconds on
+set date off
+
+set auto-size on
+set auto-ratio on
+
+style active-bg #c3c9d5
+style prompt blue
+style success blue

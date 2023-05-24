@@ -112,6 +112,9 @@ map('n', '<leader>j', 'J', default_opts)
 map('n', '<leader>t', ':Telescope<CR>', default_opts)
 map('n', '<leader>f', ':Telescope git_files<CR>', default_opts)
 map('n', '<leader>r', ':Telescope live_grep<CR>', default_opts)
+map('n', '<leader>d', ':Telescope diagnostics<CR>', default_opts)
+map('n', '<leader>h', ':Telescope help_tags<CR>', default_opts)
+map('n', '<leader>ds', ':Telescope lsp_dynamic_workspace_symbols<CR>', default_opts)
 map('n', '<leader><Tab>', ':Telescope buffers<CR>', default_opts)
 
 -- Quickfix

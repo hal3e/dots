@@ -57,10 +57,10 @@ cmp.setup {
         keyword_length = 2
     },
     mapping = {
-        -- ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- ['<C-e>'] = cmp.mapping.select_prev_item(),
-        -- ['<C-y>'] = cmp.mapping.scroll_docs(-4),
-        -- ['<C-o>'] = cmp.mapping.scroll_docs(4),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-j>'] = cmp.mapping.scroll_docs(4),
+        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
         ['<C-Space>'] = cmp.mapping.complete(),
         -- ['<C-c>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm { select = true },

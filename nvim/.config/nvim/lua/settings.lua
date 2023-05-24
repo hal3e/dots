@@ -10,7 +10,7 @@ opt.report = 99999
 opt.shortmess = 'acstAFIW'
 opt.showmode = false
 opt.scrolloff = 5
-opt.timeoutlen = 175 -- By default timeoutlen is 1000 ms
+opt.timeoutlen = 225 -- By default timeoutlen is 1000 ms
 opt.mouse = ''
 opt.cmdheight = 0
 
@@ -44,8 +44,29 @@ opt.synmaxcol = 240                    -- max column for syntax highlight
 
 opt.termguicolors = true               -- enable 24-bit RGB colors
 vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-require("catppuccin").setup()
-cmd [[colorscheme catppuccin]]
+
+require("catppuccin").setup {
+    highlight_overrides = {
+        all = function(colors)
+            return {
+                DiagnosticVirtualTextError = {
+                    bg = colors.none
+                },
+                DiagnosticVirtualTextWarn = {
+                    bg = colors.none
+                },
+                DiagnosticVirtualTextInfo = {
+                    bg = colors.none
+                },
+                DiagnosticVirtualTextHint = {
+                    bg = colors.none
+                },
+            }
+        end,
+    },
+}
+cmd.colorscheme 'catppuccin'
+
 
 opt.expandtab = true -- use spaces instead of tabs
 opt.shiftwidth = 4   -- shift 4 spaces when tab

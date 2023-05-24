@@ -9,11 +9,22 @@ return packer.startup(function(use)
         event = 'VimEnter',
     }
 
+    use { 'hal3e/nord.nvim' }
+
     use {
         "ggandor/leap.nvim",
         after = 'nord.nvim',
         config = function()
             require('leap').add_default_mappings()
+        end,
+    }
+
+    use {
+        'saecki/crates.nvim',
+        event = { "BufRead Cargo.toml" },
+        requires = { { 'nvim-lua/plenary.nvim' } },
+        config = function()
+            require('crates').setup()
         end,
     }
 
@@ -234,12 +245,12 @@ return packer.startup(function(use)
                     map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
                     map('n', '<leader>hS', gs.stage_buffer)
                     map('n', '<leader>hu', gs.undo_stage_hunk)
-                    map('n', '<leader>hr', gs.reset_buffer)
-                    map('n', '<leader>hp', gs.preview_hunk)
+                    map('n', '<leader>hR', gs.reset_buffer)
                     map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-                    map('n', '<leader>tb', gs.toggle_current_line_blame)
+                    map('n', '<leader>htb', gs.toggle_current_line_blame)
                     map('n', '<leader>hd', gs.diffthis)
-                    map('n', '<leader>td', gs.toggle_deleted)
+                    map('n', '<leader>hD', function() gs.diffthis('~') end)
+                    map('n', '<leader>htd', gs.toggle_deleted)
 
                     -- Text object
                     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

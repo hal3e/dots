@@ -86,7 +86,10 @@ end
 vim.diagnostic.config({
     virtual_text = false,
     signs = true,
-    virtual_lines = true,
+    virtual_lines = {
+        only_current_line = true,
+        highlight_whole_line = false
+    },
     -- float = {
     --   focusable = false,
     --   style = "minimal",

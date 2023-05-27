@@ -117,6 +117,8 @@ map('n', '<leader>h', ':Telescope help_tags<CR>', default_opts)
 map('n', '<leader>ds', ':Telescope lsp_dynamic_workspace_symbols<CR>', default_opts)
 map('n', '<leader><Tab>', ':Telescope buffers<CR>', default_opts)
 
+map('n', '<leader>l', ':Lazy<CR>', default_opts)
+
 -- Quickfix
 map('n', '[q', ':try | cp | catch | clast | endtry<CR>zz', default_opts)
 map('n', ']q', ':try | cn | catch | cfirst | endtry<CR>zz', default_opts)

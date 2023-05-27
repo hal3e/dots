@@ -1,3 +1,3 @@
-require('plugins.packer')
-require('settings')
-require('keymaps')
+require('core.lazy')
+require('core.settings')
+require('core.keymaps')

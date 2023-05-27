@@ -38,34 +38,11 @@ opt.linebreak = true      -- wrap on word boundary
 opt.hidden = true         -- enable background buffers
 
 opt.undofile = true
-opt.history = 100                      -- remember n lines in history
-opt.lazyredraw = true                  -- faster scrolling
-opt.synmaxcol = 240                    -- max column for syntax highlight
+opt.history = 100        -- remember n lines in history
+opt.lazyredraw = true    -- faster scrolling
+opt.synmaxcol = 240      -- max column for syntax highlight
 
-opt.termguicolors = true               -- enable 24-bit RGB colors
-vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-
-require("catppuccin").setup {
-    highlight_overrides = {
-        all = function(colors)
-            return {
-                DiagnosticVirtualTextError = {
-                    bg = colors.none
-                },
-                DiagnosticVirtualTextWarn = {
-                    bg = colors.none
-                },
-                DiagnosticVirtualTextInfo = {
-                    bg = colors.none
-                },
-                DiagnosticVirtualTextHint = {
-                    bg = colors.none
-                },
-            }
-        end,
-    },
-}
-cmd.colorscheme 'catppuccin'
+opt.termguicolors = true -- enable 24-bit RGB colors
 
 
 opt.expandtab = true -- use spaces instead of tabs
@@ -135,28 +112,3 @@ vim.api.nvim_create_autocmd("FileType", {
     command = [[wincmd J]],
     pattern = "qf",
 })
-
-local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "tar",
-    "tarPlugin",
-    "getscript",
-    "getscriptPlugin",
-    "vimball",
-    "vimballPlugin",
-    "2html_plugin",
-    "logipat",
-    "rrhelper",
-    "spellfile_plugin",
-    "matchit"
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-    vim.g["loaded_" .. plugin] = 1
-end

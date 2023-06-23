@@ -54,15 +54,14 @@ cmp.setup {
     },
     completion = {
         completeopt = 'menu,menuone',
-        keyword_length = 2
+        keyword_length = 3
     },
     mapping = {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-j>'] = cmp.mapping.scroll_docs(4),
         ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        -- ['<C-c>'] = cmp.mapping.close(),
+        ['<C-c>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<Tab>'] = function(fallback)
             if cmp.visible() then
@@ -87,6 +86,7 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'buffer' },
+        { name = 'nvim_lua' },
         { name = 'path' },
     }
     -- formatting = {
@@ -99,6 +99,10 @@ cmp.setup {
 
 -- Use buffer source for `/`.
 cmp.setup.cmdline({ '/', '?' }, {
+    completion = {
+        completeopt = 'menu,menuone',
+        keyword_length = 3
+    },
     mapping = cmp.mapping.preset.cmdline({
         ['<C-n>'] = {
             c = function(fallback)
@@ -113,6 +117,15 @@ cmp.setup.cmdline({ '/', '?' }, {
             c = function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
+                else
+                    fallback()
+                end
+            end,
+        },
+        ['<C-l>'] = {
+            c = function(fallback)
+                if cmp.visible() then
+                    cmp.confirm { select = true }
                 else
                     fallback()
                 end
@@ -125,30 +138,42 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 -- Use cmdline & path source for ':'.
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline({
-        ['<C-n>'] = {
-            c = function()
-                if cmp.visible() then
-                    cmp.select_next_item()
-                else
-                    feedkeys.call(keymap.t('<C-z>'), 'n')
-                end
-            end,
-        },
-        ['<C-p>'] = {
-            c = function()
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                else
-                    feedkeys.call(keymap.t('<C-z>'), 'n')
-                end
-            end,
-        },
-    }),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    })
-})
+-- cmp.setup.cmdline(':', {
+--     completion = {
+--         keyword_length = 3
+--     },
+--     mapping = cmp.mapping.preset.cmdline({
+--         ['<C-n>'] = {
+--             c = function()
+--                 if cmp.visible() then
+--                     cmp.select_next_item()
+--                 else
+--                     feedkeys.call(keymap.t('<C-z>'), 'n')
+--                 end
+--             end,
+--         },
+--         ['<C-p>'] = {
+--             c = function()
+--                 if cmp.visible() then
+--                     cmp.select_prev_item()
+--                 else
+--                     feedkeys.call(keymap.t('<C-z>'), 'n')
+--                 end
+--             end,
+--         },
+--         ['<CR>'] = {
+--             c = function()
+--                 if cmp.visible() then
+--                     cmp.confirm { select = true }
+--                 else
+--                     feedkeys.call(keymap.t('<C-z>'), 'n')
+--                 end
+--             end,
+--         },
+--     }),
+--     sources = cmp.config.sources({
+--         { name = 'path' }
+--     }, {
+--         { name = 'cmdline' }
+--     })
+-- })

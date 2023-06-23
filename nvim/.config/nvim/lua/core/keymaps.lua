@@ -1,6 +1,5 @@
 local map = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
-local opt = vim.opt
 
 -- Clear search highlighting
 map('n', '<Esc>', ':nohl<CR>', default_opts)
@@ -16,6 +15,17 @@ map('n', '<C-h>', '<C-w>h', default_opts)
 map('n', '<C-j>', '<C-w>j', default_opts)
 map('n', '<C-k>', '<C-w>k', default_opts)
 map('n', '<C-l>', '<C-w>l', default_opts)
+
+-- CTRL+I and CTRL+O
+map('n', '<C-p>', '<C-o>zz', default_opts)
+map('n', '<C-n>', '<C-i>zz', default_opts)
+
+-- Redo with U
+map('n', 'U', '<C-r>', default_opts)
+
+-- Enter in normal mode makes new line
+map('n', 'oo', 'o<esc>', default_opts)
+map('n', 'OO', 'O<esc>', default_opts)
 
 local chars = { '_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '%', '`', '?' }
 for _, char in ipairs(chars) do
@@ -104,9 +114,14 @@ map('n', 'n', 'nzz', default_opts)
 map('n', 'N', 'Nzz', default_opts)
 map('n', '*', '*zz', default_opts)
 map('n', '#', '#zz', default_opts)
+map('n', 'H', '^', default_opts)
 map('n', 'J', '<C-d>zz', default_opts)
 map('n', 'K', '<C-u>zz', default_opts)
+map('n', 'L', '$', default_opts)
 map('n', '<leader>j', 'J', default_opts)
+
+-- Yank on visual will not move cursos
+map('v', 'y', 'ygv<esc>', default_opts)
 
 -- Telescope
 map('n', '<leader>t', ':Telescope<CR>', default_opts)
@@ -114,6 +129,7 @@ map('n', '<leader>f', ':Telescope git_files<CR>', default_opts)
 map('n', '<leader>r', ':Telescope live_grep<CR>', default_opts)
 map('n', '<leader>d', ':Telescope diagnostics<CR>', default_opts)
 map('n', '<leader>h', ':Telescope help_tags<CR>', default_opts)
+map('n', '<leader>u', ':Telescope resume<CR>', default_opts)
 map('n', '<leader>ds', ':Telescope lsp_dynamic_workspace_symbols<CR>', default_opts)
 map('n', '<leader><Tab>', ':Telescope buffers<CR>', default_opts)
 

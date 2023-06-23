@@ -1,5 +1,3 @@
-vim.opt.termguicolors = true -- enable 24-bit RGB colors
-
 require('nvim-tree').setup({
     open_on_setup = false,
     disable_netrw = true,
@@ -9,10 +7,12 @@ require('nvim-tree').setup({
     hijack_netrw = true,
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = false,
+    signcolumn = "yes",
     renderer = {
         add_trailing = false,
-        highlight_git = true,
-        highlight_opened_files = "all",
+        highlight_git = false,
+        highlight_opened_files = "icon",
+        highlight_modified = "icon",
         special_files = {},
         root_folder_modifier = table.concat { ":t:gs?$?", string.rep(" ", 1000), "?:gs?^??" },
         indent_markers = {
@@ -20,25 +20,36 @@ require('nvim-tree').setup({
         },
         icons = {
             padding = "",
+            git_placement = "signcolumn",
+            modified_placement = "after",
             show = {
                 file = true,
                 folder = true,
                 folder_arrow = false,
-                git = false,
-                modified = false
+                git = true,
+                modified = true,
             },
             glyphs = {
                 default = " ",
                 symlink = " ",
+                modified = " ●",
                 folder = {
                     default = " ",
                     empty = " ",
                     empty_open = " ",
                     open = " ",
                     symlink = " ",
-                    symlink_open = " ",
-                }
-            }
+                },
+                git = {
+                    unstaged = "┃",
+                    staged = "┃",
+                    unmerged = "┃",
+                    renamed = "",
+                    untracked = "┆",
+                    deleted = "",
+                    ignored = "",
+                },
+            },
         }
     },
     update_focused_file = {
@@ -47,6 +58,8 @@ require('nvim-tree').setup({
     },
     diagnostics = {
         enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = false,
         icons = {
             hint = " ",
             info = " ",
@@ -70,9 +83,16 @@ require('nvim-tree').setup({
         }
     },
     git = {
+        show_on_dirs = true,
+        show_on_open_dirs = false,
         enable = true,
         ignore = true,
         timeout = 200,
+    },
+    modified = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = false,
     },
     filesystem_watchers = {
         enable = true,

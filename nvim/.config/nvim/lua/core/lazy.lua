@@ -17,9 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup(
     {
-
-        { 'hal3e/nord.nvim' },
-
         {
             "ggandor/leap.nvim",
             event = 'BufRead',
@@ -32,7 +29,7 @@ require('lazy').setup(
         {
             'saecki/crates.nvim',
             event = { "BufRead Cargo.toml" },
-            dependencies = { { 'nvim-lua/plenary.nvim' } },
+            dependencies = { 'nvim-lua/plenary.nvim' },
             config = true,
             lazy = true
         },
@@ -41,34 +38,9 @@ require('lazy').setup(
             "catppuccin/nvim",
             as = "catppuccin",
             config = function()
-                vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-
-                require("catppuccin").setup {
-                    highlight_overrides = {
-                        all = function(colors)
-                            return {
-                                DiagnosticVirtualTextError = {
-                                    bg = colors.none
-                                },
-                                DiagnosticVirtualTextWarn = {
-                                    bg = colors.none
-                                },
-                                DiagnosticVirtualTextInfo = {
-                                    bg = colors.none
-                                },
-                                DiagnosticVirtualTextHint = {
-                                    bg = colors.none
-                                },
-                            }
-                        end,
-                    },
-                }
-                vim.cmd.colorscheme 'catppuccin'
+                require('plugins.catppuccin')
             end
-
         },
-
-        { "nvim-lua/plenary.nvim" },
 
         {
             'petertriho/nvim-scrollbar',
@@ -78,39 +50,33 @@ require('lazy').setup(
         },
 
         {
-            'nvim-tree/nvim-web-devicons',
-            config = function()
-                require('plugins.icons')
-            end,
-        },
-
-        {
             'folke/todo-comments.nvim',
             event = 'BufRead',
             dependencies = 'nvim-lua/plenary.nvim',
-            config = function()
-                require('todo-comments').setup {
-                    keywords = {
-                        FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
-                        TODO = { icon = ' ', color = 'info' },
-                        HACK = { icon = ' ', color = 'warning' },
-                        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-                        PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
-                        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
-                    },
-                    colors = {
-                        warning = { 'DiagnosticSignWarn' }
-                    },
-                }
-            end,
+            opts = {
+                keywords = {
+                    FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+                    TODO = { icon = ' ', color = 'info' },
+                    HACK = { icon = ' ', color = 'warning' },
+                    WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+                    PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
+                    NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
+                },
+            },
             lazy = true
         },
 
         {
             'nvim-telescope/telescope.nvim',
             cmd = 'Telescope',
+            dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' },
             config = function()
-                require('telescope').setup {
+                require("telescope").setup {
+                    extensions = {
+                        ["ui-select"] = {
+                            require("telescope.themes").get_cursor()
+                        }
+                    },
                     defaults = {
                         mappings = {
                             i = {
@@ -118,64 +84,56 @@ require('lazy').setup(
                                 ['<C-p>'] = 'move_selection_previous'
                             }
                         }
-                    },
+                    }
                 }
+
+                require("telescope").load_extension("ui-select")
             end,
-            dependencies = { { 'nvim-lua/plenary.nvim' } },
             lazy = true
         },
 
         {
             'lukas-reineke/indent-blankline.nvim',
             event = { 'BufReadPost', 'BufNewFile' },
-            config = function()
-                require('indent_blankline').setup {
-                    show_current_context = true,
-                    show_trailing_blankline_indent = false
-                }
-            end,
+            opts = {
+                show_current_context = true,
+                show_trailing_blankline_indent = false
+            },
             lazy = true
         },
 
         {
             'terrortylor/nvim-comment',
             cmd = 'CommentToggle',
-            config = function()
-                require('nvim_comment').setup {
-                    comment_empty = false,
-                    create_mappings = false,
-                }
-            end,
+            opts = {
+                comment_empty = false,
+                create_mappings = false,
+            },
             lazy = true
         },
 
         {
             'max397574/better-escape.nvim',
             event = 'InsertEnter',
-            config = function()
-                require('better_escape').setup {
-                    mapping = 'nn',
-                    timeout = 200
-                }
-            end,
+            opts = {
+                mapping = 'nn',
+                timeout = 200
+            },
             lazy = true
         },
 
         {
             'nvim-treesitter/nvim-treesitter',
-            config = function()
-                require('nvim-treesitter.configs').setup {
-                    highlight = {
-                        enable = true,
-                        use_languagetree = true,
-                    }
+            opts = {
+                ensure_installed = { "rust", "lua", "c" },
+                highlight = {
+                    enable = true,
                 }
-            end,
+            },
             dependencies = {
                 'nvim-treesitter/nvim-treesitter-context',
             }
         },
-
 
         {
             'hrsh7th/nvim-cmp',
@@ -193,19 +151,27 @@ require('lazy').setup(
             lazy = true
         },
 
-
-
         {
             'neovim/nvim-lspconfig',
-            event = { "BufReadPre", "BufNewFile" },
+            ft = { "rust", "lua" },
             config = function()
                 require('plugins.nvim-lspconfig')
             end,
             dependencies = {
                 'folke/neodev.nvim',
+                'simrat39/rust-tools.nvim',
+
                 {
                     'williamboman/mason.nvim',
                     config = true
+                },
+
+                {
+                    'williamboman/mason-lspconfig.nvim',
+                    opts =
+                    {
+                        ensure_installed = { "lua_ls", "rust_analyzer" },
+                    }
                 },
 
                 {
@@ -215,47 +181,10 @@ require('lazy').setup(
 
                 {
                     'j-hui/fidget.nvim',
+                    tag = 'legacy',
                     config = true,
                 },
-
-                {
-                    'simrat39/rust-tools.nvim',
-                    config = function()
-                        require('rust-tools').setup({
-                            server = {
-                                capabilities = require('plugins.nvim-lspconfig').capabilities,
-                                on_attach = require('plugins.nvim-lspconfig').on_attach,
-                                settings = {
-                                    ["rust-analyzer"] = {
-                                        check = {
-                                            command = "clippy",
-                                            extraArgs = { "--all", "--", "-W", "clippy::all" },
-                                        },
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                },
             },
-            lazy = true
-        },
-
-
-
-        {
-            'freddiehaddad/feline.nvim',
-            config = function()
-                require('plugins.feline')
-            end,
-        },
-
-        {
-            'akinsho/bufferline.nvim',
-            event = { "BufReadPost" },
-            config = function()
-                require('plugins.bufferline')
-            end,
             lazy = true
         },
 
@@ -265,53 +194,58 @@ require('lazy').setup(
             config = function()
                 require('plugins.nvim-tree')
             end,
+            dependencies = {
+                {
+                    'nvim-tree/nvim-web-devicons',
+                    config = function()
+                        require('plugins.icons')
+                    end,
+                },
+            },
         },
-
 
         {
             'lewis6991/gitsigns.nvim',
             event = 'BufRead',
-            config = function()
-                require('gitsigns').setup {
-                    on_attach = function(bufnr)
-                        local gs = package.loaded.gitsigns
+            opts = {
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
 
-                        local function map(mode, l, r, opts)
-                            opts = opts or {}
-                            opts.buffer = bufnr
-                            vim.keymap.set(mode, l, r, opts)
-                        end
-
-                        -- Navigation
-                        map('n', ']c', function()
-                            if vim.wo.diff then return ']c' end
-                            vim.schedule(function() gs.next_hunk({ preview = true }) end)
-                            return '<Ignore>'
-                        end, { expr = true })
-
-                        map('n', '[c', function()
-                            if vim.wo.diff then return '[c' end
-                            vim.schedule(function() gs.prev_hunk({ preview = true }) end)
-                            return '<Ignore>'
-                        end, { expr = true })
-
-                        -- Actions
-                        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-                        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-                        map('n', '<leader>hS', gs.stage_buffer)
-                        map('n', '<leader>hu', gs.undo_stage_hunk)
-                        map('n', '<leader>hR', gs.reset_buffer)
-                        map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-                        map('n', '<leader>htb', gs.toggle_current_line_blame)
-                        map('n', '<leader>hd', gs.diffthis)
-                        map('n', '<leader>hD', function() gs.diffthis('~') end)
-                        map('n', '<leader>htd', gs.toggle_deleted)
-
-                        -- Text object
-                        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                    local function map(mode, l, r, opts)
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
                     end
-                }
-            end,
+
+                    -- Navigation
+                    map('n', ']c', function()
+                        if vim.wo.diff then return ']c' end
+                        vim.schedule(function() gs.next_hunk({ preview = true }) end)
+                        return '<Ignore>'
+                    end, { expr = true })
+
+                    map('n', '[c', function()
+                        if vim.wo.diff then return '[c' end
+                        vim.schedule(function() gs.prev_hunk({ preview = true }) end)
+                        return '<Ignore>'
+                    end, { expr = true })
+
+                    -- Actions
+                    map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+                    map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+                    map('n', '<leader>hS', gs.stage_buffer)
+                    map('n', '<leader>hu', gs.undo_stage_hunk)
+                    map('n', '<leader>hR', gs.reset_buffer)
+                    map('n', '<leader>hb', function() gs.blame_line { full = true } end)
+                    map('n', '<leader>htb', gs.toggle_current_line_blame)
+                    map('n', '<leader>hd', gs.diffthis)
+                    map('n', '<leader>hD', function() gs.diffthis('~') end)
+                    map('n', '<leader>htd', gs.toggle_deleted)
+
+                    -- Text object
+                    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                end
+            },
             lazy = true
         },
 
@@ -341,15 +275,13 @@ require('lazy').setup(
         {
             'kylechui/nvim-surround',
             event = 'BufReadPost',
-            config = function()
-                require('nvim-surround').setup({})
-            end,
+            config = true,
             lazy = true
         },
 
         {
             'sindrets/diffview.nvim',
-            event = 'BufRead',
+            cmd = "DiffviewOpen",
             dependencies = 'nvim-lua/plenary.nvim',
             lazy = true
         },

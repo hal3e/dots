@@ -46,6 +46,7 @@ nvim_lsp.lua_ls.setup {
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
@@ -76,6 +77,21 @@ end
 
 nvim_lsp.sway_lsp.setup {}
 
+require('rust-tools').setup({
+    server = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                check = {
+                    command = "clippy",
+                    extraArgs = { "--all", "--", "-W", "clippy::all" },
+                },
+            },
+        },
+    },
+})
+
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
@@ -90,6 +106,7 @@ vim.diagnostic.config({
         only_current_line = true,
         highlight_whole_line = false
     },
+    severity_sort = true
     -- float = {
     --   focusable = false,
     --   style = "minimal",
@@ -97,5 +114,3 @@ vim.diagnostic.config({
     --   prefix = "",
     -- }
 })
-
-return { on_attach = on_attach, capabilities = capabilities }

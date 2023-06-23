@@ -1,4 +1,3 @@
-local cmd = vim.cmd -- execute Vim commands
 local g = vim.g     -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
 
@@ -13,6 +12,7 @@ opt.scrolloff = 5
 opt.timeoutlen = 225 -- By default timeoutlen is 1000 ms
 opt.mouse = ''
 opt.cmdheight = 0
+opt.laststatus = 0
 
 g.mapleader = ' ' -- change leader to a comma
 g.python3_host_prog = '/home/hal3e/bin/miniconda3/envs/py38/bin/python'
@@ -38,16 +38,13 @@ opt.linebreak = true      -- wrap on word boundary
 opt.hidden = true         -- enable background buffers
 
 opt.undofile = true
-opt.history = 100        -- remember n lines in history
-opt.lazyredraw = true    -- faster scrolling
-opt.synmaxcol = 240      -- max column for syntax highlight
+opt.history = 100     -- remember n lines in history
+opt.lazyredraw = true -- faster scrolling
+opt.synmaxcol = 240   -- max column for syntax highlight
 
-opt.termguicolors = true -- enable 24-bit RGB colors
-
-
-opt.expandtab = true -- use spaces instead of tabs
-opt.shiftwidth = 4   -- shift 4 spaces when tab
-opt.tabstop = 4      -- 1 tab == 4 spaces
+opt.expandtab = true  -- use spaces instead of tabs
+opt.shiftwidth = 4    -- shift 4 spaces when tab
+opt.tabstop = 4       -- 1 tab == 4 spaces
 opt.softtabstop = 4
 opt.smarttab = true
 opt.smartindent = true -- autoindent new lines
@@ -111,4 +108,23 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("quickfix-move-to_bottom", { clear = true }),
     command = [[wincmd J]],
     pattern = "qf",
+})
+
+vim.api.nvim_create_autocmd('VimEnter', {
+    group = vim.api.nvim_create_augroup('startup', { clear = true }),
+    pattern = '*',
+    callback = function()
+        -- Open file browser if argument is a folder
+        local arg = vim.api.nvim_eval('argv(0)')
+        if arg == "" then
+            vim.defer_fn(function()
+                if vim.fn.findfile('.gitignore') == "" then
+                    require('telescope.builtin').find_files()
+                else
+                    vim.cmd('silent NvimTreeToggle')
+                    require('telescope.builtin').git_files()
+                end
+            end, 50)
+        end
+    end
 })

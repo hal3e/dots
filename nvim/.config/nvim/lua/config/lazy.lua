@@ -18,17 +18,46 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(
     {
         {
-            "ggandor/leap.nvim",
-            event = 'BufRead',
-            config = function()
-                require('leap').add_default_mappings()
-            end,
-            lazy = true
+            'folke/flash.nvim',
+            event = "VeryLazy",
+            opts = {},
+            keys = {
+                {
+                    "s",
+                    mode = { "n", "x", "o" },
+                    function()
+                        -- default options: exact mode, multi window, all directions, with a backdrop
+                        require("flash").jump()
+                    end,
+                    desc = "Flash",
+                },
+                {
+                    "r",
+                    mode = { "n", "o", "x" },
+                    function()
+                        -- show labeled treesitter nodes around the cursor
+                        require("flash").treesitter()
+                    end,
+                    desc = "Flash Treesitter",
+                },
+                {
+                    "R",
+                    mode = "o",
+                    function()
+                        -- jump to a remote location to execute the operator
+                        require("flash").remote()
+                    end,
+                    desc = "Remote Flash",
+                },
+            },
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter',
+            }
         },
 
         {
             'saecki/crates.nvim',
-            event = { "BufRead Cargo.toml" },
+            event = { "BufReadPost Cargo.toml" },
             dependencies = { 'nvim-lua/plenary.nvim' },
             config = true,
             lazy = true
@@ -36,22 +65,24 @@ require('lazy').setup(
 
         {
             "catppuccin/nvim",
-            as = "catppuccin",
+            name = "catppuccin",
+            priority = 1000,
             config = function()
                 require('plugins.catppuccin')
-            end
+            end,
+            lazy = false
         },
 
         {
             'petertriho/nvim-scrollbar',
-            event = 'BufRead',
+            event = 'BufReadPost',
             config = true,
             lazy = true
         },
 
         {
             'folke/todo-comments.nvim',
-            event = 'BufRead',
+            event = 'BufReadPost',
             dependencies = 'nvim-lua/plenary.nvim',
             opts = {
                 keywords = {
@@ -105,16 +136,20 @@ require('lazy').setup(
         {
             'terrortylor/nvim-comment',
             cmd = 'CommentToggle',
-            opts = {
-                comment_empty = false,
-                create_mappings = false,
-            },
+            config = function()
+                require('nvim_comment').setup(
+                    {
+                        comment_empty = false,
+                        create_mappings = false,
+                    }
+                )
+            end,
             lazy = true
         },
 
         {
             'max397574/better-escape.nvim',
-            event = 'InsertEnter',
+            event = 'InsertCharPre',
             opts = {
                 mapping = 'nn',
                 timeout = 200
@@ -124,6 +159,7 @@ require('lazy').setup(
 
         {
             'nvim-treesitter/nvim-treesitter',
+            event = "VeryLazy",
             opts = {
                 ensure_installed = { "rust", "lua", "c" },
                 highlight = {
@@ -132,17 +168,22 @@ require('lazy').setup(
             },
             dependencies = {
                 'nvim-treesitter/nvim-treesitter-context',
-            }
+            },
+            lazy = true
         },
 
         {
             'hrsh7th/nvim-cmp',
             event = { "InsertEnter", "CmdlineEnter" },
             dependencies = {
-                'L3MON4D3/LuaSnip',
+                {
+                    'L3MON4D3/LuaSnip',
+                    dependencies = { "rafamadriz/friendly-snippets" },
+                },
                 'hrsh7th/cmp-nvim-lsp',
                 'hrsh7th/cmp-path',
                 'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-cmdline',
                 'saadparwaiz1/cmp_luasnip',
             },
             config = function()
@@ -153,7 +194,7 @@ require('lazy').setup(
 
         {
             'neovim/nvim-lspconfig',
-            ft = { "rust", "lua" },
+            ft = { "rust", "lua", "sway" },
             config = function()
                 require('plugins.nvim-lspconfig')
             end,
@@ -206,7 +247,7 @@ require('lazy').setup(
 
         {
             'lewis6991/gitsigns.nvim',
-            event = 'BufRead',
+            event = 'BufReadPost',
             opts = {
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
@@ -275,7 +316,11 @@ require('lazy').setup(
         {
             'kylechui/nvim-surround',
             event = 'BufReadPost',
-            config = true,
+            opts = {
+                keymaps = {
+                    visual = "SS",
+                }
+            },
             lazy = true
         },
 
@@ -286,6 +331,12 @@ require('lazy').setup(
             lazy = true
         },
     }, {
+        install = {
+            -- install missing plugins on startup. This doesn't increase startup time.
+            missing = true,
+            -- try to load one of these colorschemes when starting an installation during startup
+            colorscheme = { "catppuccin" },
+        },
         performance = {
             rtp = {
                 -- disable some rtp plugins

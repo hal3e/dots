@@ -133,7 +133,7 @@ map('n', '<leader>u', ':Telescope resume<CR>', default_opts)
 map('n', '<leader>ds', ':Telescope lsp_dynamic_workspace_symbols<CR>', default_opts)
 map('n', '<leader><Tab>', ':Telescope buffers<CR>', default_opts)
 
-map('n', '<leader>l', ':Lazy<CR>', default_opts)
+vim.keymap.set('n', '<leader>l', function() vim.cmd('Lazy') end, default_opts)
 
 -- Quickfix
 map('n', '[q', ':try | cp | catch | clast | endtry<CR>zz', default_opts)

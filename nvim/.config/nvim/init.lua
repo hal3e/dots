@@ -1,3 +1,3 @@
-require('core.lazy')
-require('core.settings')
-require('core.keymaps')
+require('config.lazy')
+require('config.settings')
+require('config.keymaps')

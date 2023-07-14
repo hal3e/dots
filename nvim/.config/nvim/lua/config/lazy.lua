@@ -9,7 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
         'clone',
         '--filter=blob:none',
         'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
+        '--branch=stable',
         lazypath,
     }
 end
@@ -20,7 +20,13 @@ require('lazy').setup(
         {
             'folke/flash.nvim',
             event = "VeryLazy",
-            opts = {},
+            opts = {
+                modes = {
+                    char = {
+                        enabled = false,
+                    }
+                }
+            },
             keys = {
                 {
                     "s",
@@ -32,7 +38,7 @@ require('lazy').setup(
                     desc = "Flash",
                 },
                 {
-                    "r",
+                    "vv",
                     mode = { "n", "o", "x" },
                     function()
                         -- show labeled treesitter nodes around the cursor
@@ -41,7 +47,7 @@ require('lazy').setup(
                     desc = "Flash Treesitter",
                 },
                 {
-                    "R",
+                    "r",
                     mode = "o",
                     function()
                         -- jump to a remote location to execute the operator

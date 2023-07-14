@@ -1,15 +1,11 @@
 [user]
-  email = hal3e.git@gmail.com
+  email = git@hal3e.io
   name = hal3e
 
 [alias]
-  a = add
-  c = commit
-  s = status
   lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
   l = lb --all
   ls = lb --stat
-  discard = reset HEAD --hard
   wip = "!f() { git add . && git commit -m 'Work in progress'; }; f"
 
 [credential]

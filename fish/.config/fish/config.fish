@@ -7,10 +7,22 @@ function last_history_item
   echo $history[1]
 end
 
-function last_history_token
-    echo "$history[1]" | read --array --tokenize result
+function last_history_argument
+    echo $history[1] | read --array --tokenize result
     echo "$result[-1]"
 end
+
+function first_history_argument
+    echo $history[1] | read --array --tokenize result
+    echo "$result[2]"
+end
+
+function all_history_arguments
+    echo $history[1] | read --array --tokenize result
+    echo "$result[2..]"
+end
+
+abbr -a -- sf 'source ~/.config/fish/config.fish'
 
 abbr -a -- mw 'monero-wallet-cli'
 abbr -a -- md 'monerod --data-dir ~/mnt/monero/'
@@ -41,7 +53,9 @@ abbr -a -- fb 'forc build -t --path packages/fuels'
 abbr -a -- ff 'forc fmt --path packages/fuels'
 
 abbr -a !! --position anywhere --function last_history_item
-abbr -a !# --position anywhere --function last_history_token
+abbr -a !\* --position anywhere --function all_history_arguments
+abbr -a !\$ --position anywhere --function last_history_argument
+abbr -a !^ --position anywhere --function first_history_argument
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

@@ -6,50 +6,51 @@
 # via the key configuration menu of the interactive user
 # interface. It should not be edited directly.
 
-generic-cancel  ESC 
-generic-select  SPC 
-generic-credits  @ 
-generic-help  ? 
-generic-quit  q Q 
-generic-save  s S ^S 
-generic-reload  W 
-generic-copy  m 
-generic-paste  ; ^V 
-generic-change-view  TAB 
-generic-import  u U 
-generic-export  x X 
-generic-goto  g G 
-generic-other-cmd  p P 
-generic-config-menu  M 
-generic-redraw  ^W 
-generic-add-appt  ^A 
-generic-add-todo  ^B 
-generic-prev-day  B ^Y 
-generic-next-day  b ^O 
-generic-prev-week  D ^E 
-generic-next-week  d 
-generic-prev-month  L 
-generic-next-month  l 
-generic-prev-year  J 
-generic-next-year  j 
-generic-scroll-down  ^K 
-generic-scroll-up  ^ 
-generic-goto-today  ^G 
-generic-command  I 
-move-right  o O RGT 
-move-left  y Y LFT 
-move-down  n N DWN 
-move-up  e E UP 
-start-of-week  0 
-end-of-week  $ 
-add-item  a A 
-del-item  h H 
-edit-item  r R 
-view-item  c C RET 
-pipe-item  | 
-flag-item  ! 
-repeat  w 
-edit-note  k K 
-view-note  > 
-raise-priority  + 
-lower-priority  - 
+generic-cancel  ESC
+generic-select  SPC
+generic-credits  @
+generic-help  ?
+generic-quit  q
+generic-save  s
+generic-reload  R
+generic-copy  c
+generic-paste  p
+generic-change-view  TAB
+generic-prev-view  KEY_BTAB
+generic-import  i
+generic-export  x
+generic-goto  g
+generic-other-cmd  ;
+generic-config-menu  C
+generic-redraw  ^R
+generic-add-appt  ^A
+generic-add-todo  ^T
+generic-prev-day  T
+generic-next-day  t
+generic-prev-week  W
+generic-next-week  w
+generic-prev-month  M
+generic-next-month  m
+generic-prev-year  N
+generic-next-year  n
+generic-scroll-down  J
+generic-scroll-up  K
+generic-goto-today  ^G
+generic-command  :
+move-right  l
+move-left  h
+move-down  j
+move-up  k
+start-of-week  0
+end-of-week  $
+add-item  a
+del-item  d
+edit-item  e
+view-item  v RET
+pipe-item  |
+flag-item  !
+repeat  r
+edit-note  E
+view-note  >
+raise-priority  +
+lower-priority  -

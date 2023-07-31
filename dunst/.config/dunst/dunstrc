@@ -21,7 +21,8 @@
     padding = 2
     horizontal_padding = 10
 
-    format = "%s\n%b"
+    #format = "%s\n%b"
+    format = "<span foreground='#8BD5CA'>%s</span>\n%b"
 
     alignment = center
     vertical_alignment = center
@@ -42,4 +43,4 @@
     background = "#2E3445"
     foreground = "#ED8796"
     frame_color = "#ED8796"
-    timeout = 0
+    timeout = 20

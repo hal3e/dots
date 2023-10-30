@@ -1,0 +1,20 @@
+xrdb -merge "$XDG_CONFIG_HOME/X11/xresources"
+
+# set workman keymap and map CAPS to BCKSPC
+setxkbmap workman && xset r 66
+
+# check for updates
+/home/hal3e/bin/xbps-num-packages.sh &
+
+# start DM programs
+dunst &
+picom &
+slstatus &
+
+# start daemons
+gpg-agent --daemon
+calcurse --daemon
+
+/home/hal3e/bin/startup.sh &
+
+exec dbus-launch --sh-syntax --exit-with-session dwm

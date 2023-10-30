@@ -117,21 +117,13 @@ map('n', '#', '#zz', default_opts)
 map('n', 'H', '^', default_opts)
 map('n', 'J', '<C-d>zz', default_opts)
 map('n', 'K', '<C-u>zz', default_opts)
+map('v', 'J', '<C-d>zz', default_opts)
+map('v', 'K', '<C-u>zz', default_opts)
 map('n', 'L', '$', default_opts)
 map('n', '<leader>j', 'J', default_opts)
 
 -- Yank on visual will not move cursos
 map('v', 'y', 'ygv<esc>', default_opts)
-
--- Telescope
-map('n', '<leader>t', ':Telescope<CR>', default_opts)
-map('n', '<leader>f', ':Telescope git_files<CR>', default_opts)
-map('n', '<leader>r', ':Telescope live_grep<CR>', default_opts)
-map('n', '<leader>d', ':Telescope diagnostics<CR>', default_opts)
-map('n', '<leader>h', ':Telescope help_tags<CR>', default_opts)
-map('n', '<leader>u', ':Telescope resume<CR>', default_opts)
-map('n', '<leader>ds', ':Telescope lsp_dynamic_workspace_symbols<CR>', default_opts)
-map('n', '<leader><Tab>', ':Telescope buffers<CR>', default_opts)
 
 vim.keymap.set('n', '<leader>l', function() vim.cmd('Lazy') end, default_opts)
 

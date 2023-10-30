@@ -19,6 +19,7 @@ bind-key n next-unread
 bind-key p prev-unread
 bind-key f show-urls
 bind-key o open-in-browser-and-mark-read
+bind-key O open-all-unread-in-browser-and-mark-read
 
 color listnormal         color8 default
 color listnormal_unread  green  default

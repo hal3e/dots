@@ -24,8 +24,8 @@ end
 
 abbr -a -- sf 'source ~/.config/fish/config.fish'
 
-abbr -a -- mw 'monero-wallet-cli'
-abbr -a -- md 'monerod --data-dir ~/mnt/monero/'
+abbr -a -- mw 'TERM=xterm ~/mnr/monero/monero-wallet-cli'
+abbr -a -- md '~/mnr/monero/monerod --data-dir ~/mnt/monero/'
 
 abbr -a -- gs 'git status'
 abbr -a -- ga 'git add .'
@@ -40,17 +40,19 @@ abbr -a -- gpa 'git pull --all'
 abbr -a -- gmm 'git merge master'
 abbr -a -- gcb 'git checkout -b'
 abbr -a -- gcm 'git checkout master'
-abbr -a -- gpr 'git fetch --prune && git remote prune origin'
+abbr -a -- grm 'git rebase master'
+abbr -a -- gR 'git fetch --prune && git remote prune origin'
 abbr -a --set-cursor -- gm 'git commit -m "%"'
 
 abbr -a -- cca 'cargo check --all-targets --workspace --tests'
 abbr -a -- ccaf 'cargo check --all-targets --all-features --workspace --tests'
-abbr -a -- cta 'cargo test --all-targets --workspace'
-abbr -a -- ctaf 'cargo test --all-targets --all-features --workspace'
-abbr -a -- cpa 'cargo clippy --all-targets'
-abbr -a -- cpaf 'cargo clippy --all-targets --all-features'
+abbr -a -- ct 'cargo nextest run '
+abbr -a -- cta 'cargo nextest run --all-targets --workspace'
+abbr -a -- ctaf 'cargo nextest run --all-targets --all-features --workspace'
+abbr -a -- cpa 'cargo +nightly clippy --all-targets'
+abbr -a -- cpaf 'cargo +nightly clippy --all-targets --all-features'
 
-abbr -a -- fb 'forc build -t --path packages/fuels'
+abbr -a -- fb 'forc build -t --error-on-warnings --path packages/fuels'
 abbr -a -- ff 'forc fmt --path packages/fuels'
 
 abbr -a !! --position anywhere --function last_history_item

@@ -17,6 +17,85 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup(
     {
+        -- {
+        --     'AlexvZyl/nordic.nvim',
+        --     lazy = false,
+        --     priority = 1000,
+        --     config = function()
+        --         require 'nordic'.load()
+        --     end
+        -- },
+        -- { "EdenEast/nightfox.nvim" }, -- lazy
+
+        {
+            'jose-elias-alvarez/null-ls.nvim',
+            ft = { "sh", "bash" },
+            config = function()
+                local null_ls = require("null-ls")
+
+                null_ls.setup({
+                    sources = {
+                        null_ls.builtins.diagnostics.shellcheck.with({ filetypes = { "sh", "bash" } }),
+                        null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "bash" } }),
+                    },
+                })
+            end,
+            dependencies = {
+                {
+                    'williamboman/mason.nvim',
+                    config = true
+                }
+            },
+            lazy = true
+        },
+
+        {
+            'ThePrimeagen/harpoon',
+            event = { "BufReadPost" },
+            keys = {
+                {
+                    '<leader>n',
+                    mode = { "n" },
+                    function()
+                        require("harpoon.ui").nav_next()
+                    end,
+                    desc = "harpoon next file",
+                },
+                {
+                    '<leader>p',
+                    mode = { "n" },
+                    function()
+                        require("harpoon.ui").nav_prev()
+                    end,
+                    desc = "harpoon previous file",
+                },
+                {
+                    '<leader>h',
+                    mode = { "n" },
+                    function()
+                        require("harpoon.mark").add_file()
+                    end,
+                    desc = "harpoon add file",
+                },
+                {
+                    '<leader>o',
+                    mode = { "n" },
+                    function()
+                        require("harpoon.ui").toggle_quick_menu()
+                    end,
+                    desc = "harpoon quick menu",
+                }
+            },
+            config = true,
+            lazy = true
+        },
+
+        {
+            "hal3e/vim-ledger",
+            event = { "BufReadPost *.ldg" },
+            lazy = true
+        },
+
         {
             'folke/flash.nvim',
             event = "VeryLazy",
@@ -58,7 +137,8 @@ require('lazy').setup(
             },
             dependencies = {
                 'nvim-treesitter/nvim-treesitter',
-            }
+            },
+            lazy = true
         },
 
         {
@@ -86,29 +166,32 @@ require('lazy').setup(
             lazy = true
         },
 
-        {
-            'folke/todo-comments.nvim',
-            event = 'BufReadPost',
-            dependencies = 'nvim-lua/plenary.nvim',
-            opts = {
-                keywords = {
-                    FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
-                    TODO = { icon = ' ', color = 'info' },
-                    HACK = { icon = ' ', color = 'warning' },
-                    WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-                    PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
-                    NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
-                },
-            },
-            lazy = true
-        },
 
         {
             'nvim-telescope/telescope.nvim',
             cmd = 'Telescope',
-            dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' },
+            dependencies = {
+                'nvim-lua/plenary.nvim',
+                "debugloop/telescope-undo.nvim",
+                'nvim-telescope/telescope-ui-select.nvim',
+                {
+                    'folke/todo-comments.nvim',
+                    dependencies = 'nvim-lua/plenary.nvim',
+                    opts = {
+                        keywords = {
+                            FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+                            TODO = { icon = ' ', color = 'info' },
+                            HACK = { icon = ' ', color = 'warning' },
+                            WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+                            PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
+                            NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
+                        },
+                    },
+                },
+            },
             config = function()
-                require("telescope").setup {
+                local telescope = require("telescope")
+                telescope.setup {
                     extensions = {
                         ["ui-select"] = {
                             require("telescope.themes").get_cursor()
@@ -124,13 +207,29 @@ require('lazy').setup(
                     }
                 }
 
-                require("telescope").load_extension("ui-select")
+                telescope.load_extension("undo")
+                telescope.load_extension("todo-comments")
+                telescope.load_extension("ui-select")
+
+                local builtin = require('telescope.builtin')
+                local all_pickers = function() builtin.builtin({ include_extensions = true }) end
+
+                local default_opts = { noremap = true, silent = true }
+                vim.keymap.set('n', '<leader>t', all_pickers, default_opts)
+                vim.keymap.set('n', '<leader>f', builtin.git_files, default_opts)
+                vim.keymap.set('n', '<leader>r', builtin.live_grep, default_opts)
+                vim.keymap.set('n', '<leader>d', builtin.diagnostics, default_opts)
+                vim.keymap.set('n', '<leader>H', builtin.help_tags, default_opts)
+                vim.keymap.set('n', '<leader>u', builtin.resume, default_opts)
+                vim.keymap.set('n', '<leader>ds', builtin.lsp_dynamic_workspace_symbols, default_opts)
+                vim.keymap.set('n', '<leader><Tab>', builtin.buffers, default_opts)
             end,
             lazy = true
         },
 
         {
             'lukas-reineke/indent-blankline.nvim',
+            tag = 'v2.20.8',
             event = { 'BufReadPost', 'BufNewFile' },
             opts = {
                 show_current_context = true,
@@ -148,6 +247,7 @@ require('lazy').setup(
                         comment_empty = false,
                         create_mappings = false,
                     }
+
                 )
             end,
             lazy = true
@@ -166,12 +266,23 @@ require('lazy').setup(
         {
             'nvim-treesitter/nvim-treesitter',
             event = "VeryLazy",
-            opts = {
-                ensure_installed = { "rust", "lua", "c" },
-                highlight = {
-                    enable = true,
-                }
-            },
+            config = function()
+                require('nvim-treesitter.configs').setup(
+                    {
+                        ensure_installed = { "rust", "lua", "c" },
+                        sync_install = false,
+                        auto_install = false,
+                        ignore_install = {},
+                        modules = {},
+                        highlight = {
+                            enable = true,
+                        }
+                    }
+
+                )
+
+                require('treesitter-context').setup()
+            end,
             dependencies = {
                 'nvim-treesitter/nvim-treesitter-context',
             },
@@ -199,8 +310,15 @@ require('lazy').setup(
         },
 
         {
+            'williamboman/mason.nvim',
+            event = "VeryLazy",
+            config = true,
+            lazy = true
+        },
+
+        {
             'neovim/nvim-lspconfig',
-            ft = { "rust", "lua", "sway" },
+            ft = { "rust", "lua", "sway", "sh", "bash" },
             config = function()
                 require('plugins.nvim-lspconfig')
             end,
@@ -348,26 +466,32 @@ require('lazy').setup(
                 -- disable some rtp plugins
                 disabled_plugins = {
                     "2html_plugin",
+                    "tohtml",
                     "getscript",
                     "getscriptPlugin",
                     "gzip",
                     "logipat",
-                    "matchit",
-                    "matchparen",
                     "netrw",
-                    "netrwFileHandlers",
                     "netrwPlugin",
                     "netrwSettings",
-                    "rrhelper",
-                    "spellfile_plugin",
+                    "netrwFileHandlers",
+                    "matchit",
                     "tar",
                     "tarPlugin",
-                    "tohtml",
-                    "tutor",
+                    "rrhelper",
+                    "spellfile_plugin",
                     "vimball",
                     "vimballPlugin",
                     "zip",
                     "zipPlugin",
+                    "tutor",
+                    "rplugin",
+                    "syntax",
+                    "synmenu",
+                    "optwin",
+                    "compiler",
+                    "bugreport",
+                    "ftplugin",
                 },
             },
         },

@@ -1,6 +1,10 @@
 Articles
 https://endtimes.dev/feed.xml Articles "~Endtimes"
 
+HackerNews
+https://hnrss.org/show?points=250&comments=50 HackerNews "~Best posts"
+https://hnrss.org/bestcomments HackerNews "~Best comments"
+
 
 Reddit
 https://reddit.com/r/linux/top.rss?t=month Reddit "~Linux"
@@ -24,6 +28,7 @@ https://reddit.com/r/luciddreaming/top.rss?t=month Reddit "~Lucid dreaming"
 YouTube
 https://youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw YouTube "~The Primeagen"
 https://youtube.com/feeds/videos.xml?channel_id=UCUyeluBRhGPCW4rPe_UvBZQ YouTube "~The PrimeTime"
+https://youtube.com/feeds/videos.xml?channel_id=UCVk4b-svNJoeytrrlOixebQ YouTube "~The Vimeagen"
 https://youtube.com/feeds/videos.xml?channel_id=UCS0N5baNlQWJCUrhCEo8WlA YouTube "~Ben Eater"
 https://youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA YouTube "~Luke Smith"
 https://youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg YouTube "~Distro Tube"
@@ -35,6 +40,7 @@ https://youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg YouTube
 https://youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA YouTube "~Mental Outlaw"
 https://youtube.com/feeds/videos.xml?channel_id=UC3ltptWa0xfrDweghW94Acg YouTube "~Karl Jobst"
 https://youtube.com/feeds/videos.xml?channel_id=UC3azLjQuz9s5qk76KEXaTvA YouTube "~Suckerpinch"
+https://youtube.com/feeds/videos.xml?channel_id=UC_iD0xppBwwsrM9DegC5cQQ YouTube "~Jon Gjengset"
 
 
 Podcasts

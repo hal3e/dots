@@ -67,6 +67,10 @@ if not configs.sway_lsp then
             on_attach = on_attach,
             cmd = { 'forc-lsp' },
             filetypes = { 'sway' },
+            init_options = {
+                -- Any initialization options
+                logging = { level = 'trace' }
+            },
             root_dir = function(fname)
                 return nvim_lsp.util.find_git_ancestor(fname)
             end,
@@ -83,6 +87,7 @@ require('rust-tools').setup({
         on_attach = on_attach,
         settings = {
             ["rust-analyzer"] = {
+                procMacro = { enable = true, attributes = { enable = true } },
                 check = {
                     command = "clippy",
                     extraArgs = { "--all", "--", "-W", "clippy::all" },

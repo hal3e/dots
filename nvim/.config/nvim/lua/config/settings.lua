@@ -14,7 +14,7 @@ opt.mouse = ''
 opt.cmdheight = 0
 opt.laststatus = 0
 
-g.mapleader = ' ' -- change leader to a comma
+g.mapleader = ' ' -- change leader to space
 g.python3_host_prog = '/home/hal3e/bin/miniconda3/envs/py38/bin/python'
 
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
@@ -55,6 +55,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
         vim.lsp.buf.format()
     end
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("format-ldg", { clear = true }),
+    command = [[call ledger#align_commodity_buffer()]],
+    pattern = "*.ldg"
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -128,3 +134,38 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
     end
 })
+
+-- add when nvim > 0.9.4
+-- local function get_custom_foldtxt_suffix(foldstart)
+--     local fold_suffix_str = string.format(
+--         "  %s [%s lines]",
+--         '┉',
+--         vim.v.foldend - foldstart + 1
+--     )
+
+--     return { fold_suffix_str, "Folded" }
+-- end
+
+-- local function get_custom_foldtext(foldtxt_suffix, foldstart)
+--     local line = vim.api.nvim_buf_get_lines(0, foldstart - 1, foldstart, false)[1]
+
+--     return {
+--         { line, "Normal" },
+--         foldtxt_suffix
+--     }
+-- end
+
+-- _G.get_foldtext = function()
+--     local foldstart = vim.v.foldstart
+--     local ts_foldtxt = vim.treesitter.foldtext()
+--     local foldtxt_suffix = get_custom_foldtxt_suffix(foldstart)
+
+--     if type(ts_foldtxt) == "string" then
+--         return get_custom_foldtext(foldtxt_suffix, foldstart)
+--     end
+
+--     table.insert(ts_foldtxt, foldtxt_suffix)
+--     return ts_foldtxt
+-- end
+
+-- vim.opt.foldtext = "v:lua.get_foldtext()"

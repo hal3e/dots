@@ -17,27 +17,56 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup(
     {
-        -- {
-        --     'AlexvZyl/nordic.nvim',
-        --     lazy = false,
-        --     priority = 1000,
-        --     config = function()
-        --         require 'nordic'.load()
-        --     end
-        -- },
-        -- { "EdenEast/nightfox.nvim" }, -- lazy
+        'farmergreg/vim-lastplace',
 
         {
-            'jose-elias-alvarez/null-ls.nvim',
+            'nvimtools/none-ls.nvim',
             ft = { "sh", "bash" },
             config = function()
                 local null_ls = require("null-ls")
 
+                local null_helpers = require("null-ls.helpers")
+                local methods = require("null-ls.methods")
+
+                local DIAGNOSTICS = methods.internal.DIAGNOSTICS
+
+                local shellcheck = null_helpers.make_builtin({
+                    name = "shellcheck",
+                    meta = {
+                        url = "https://www.shellcheck.net/",
+                        description = "A shell script static analysis tool.",
+                    },
+                    method = DIAGNOSTICS,
+                    generator_opts = {
+                        command = "shellcheck",
+                        args = { "--format", "json1", "--source-path=$DIRNAME", "--external-sources", "-" },
+                        to_stdin = true,
+                        format = "json",
+                        check_exit_code = function(code)
+                            return code <= 1
+                        end,
+                        on_output = function(params)
+                            local parser = null_helpers.diagnostics.from_json({
+                                attributes = { code = "code" },
+                                severities = {
+                                    info = null_helpers.diagnostics.severities["information"],
+                                    style = null_helpers.diagnostics.severities["hint"],
+                                },
+                            })
+
+                            return parser({ output = params.output.comments })
+                        end,
+                    },
+                    factory = null_helpers.generator_factory,
+                })
+
                 null_ls.setup({
                     sources = {
-                        null_ls.builtins.diagnostics.shellcheck.with({ filetypes = { "sh", "bash" } }),
+                        shellcheck.with({ filetypes = { "sh", "bash" } }),
                         null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "bash" } }),
                     },
+                    on_attach =
+                        require('plugins.nvim-lspconfig').on_attach
                 })
             end,
             dependencies = {
@@ -173,6 +202,7 @@ require('lazy').setup(
             dependencies = {
                 'nvim-lua/plenary.nvim',
                 "debugloop/telescope-undo.nvim",
+                "nvim-telescope/telescope-live-grep-args.nvim",
                 'nvim-telescope/telescope-ui-select.nvim',
                 {
                     'folke/todo-comments.nvim',
@@ -210,6 +240,7 @@ require('lazy').setup(
                 telescope.load_extension("undo")
                 telescope.load_extension("todo-comments")
                 telescope.load_extension("ui-select")
+                telescope.load_extension("live_grep_args")
 
                 local builtin = require('telescope.builtin')
                 local all_pickers = function() builtin.builtin({ include_extensions = true }) end
@@ -218,6 +249,7 @@ require('lazy').setup(
                 vim.keymap.set('n', '<leader>t', all_pickers, default_opts)
                 vim.keymap.set('n', '<leader>f', builtin.git_files, default_opts)
                 vim.keymap.set('n', '<leader>r', builtin.live_grep, default_opts)
+                vim.keymap.set('n', '<leader>ra', telescope.extensions.live_grep_args.live_grep_args, default_opts)
                 vim.keymap.set('n', '<leader>d', builtin.diagnostics, default_opts)
                 vim.keymap.set('n', '<leader>H', builtin.help_tags, default_opts)
                 vim.keymap.set('n', '<leader>u', builtin.resume, default_opts)
@@ -257,8 +289,13 @@ require('lazy').setup(
             'max397574/better-escape.nvim',
             event = 'InsertCharPre',
             opts = {
-                mapping = 'nn',
-                timeout = 200
+                mappings = {
+                    i = {
+                        n = {
+                            n = "<Esc>",
+                        },
+                    },
+                },
             },
             lazy = true
         },
@@ -278,13 +315,16 @@ require('lazy').setup(
                             enable = true,
                         }
                     }
-
                 )
-
-                require('treesitter-context').setup()
             end,
             dependencies = {
-                'nvim-treesitter/nvim-treesitter-context',
+                {
+                    'nvim-treesitter/nvim-treesitter-context',
+                    opts = {
+                        max_lines = 1
+                    },
+                    lazy = true,
+                }
             },
             lazy = true
         },
@@ -317,6 +357,19 @@ require('lazy').setup(
         },
 
         {
+            "j-hui/fidget.nvim",
+            event = "VeryLazy",
+            tag = "v1.2.0",
+            opts = {
+                notification = {
+                    override_vim_notify = true,
+
+                }
+            },
+            lazy = true
+        },
+
+        {
             'neovim/nvim-lspconfig',
             ft = { "rust", "lua", "sway", "sh", "bash" },
             config = function()
@@ -344,11 +397,6 @@ require('lazy').setup(
                     config = true
                 },
 
-                {
-                    'j-hui/fidget.nvim',
-                    tag = 'legacy',
-                    config = true,
-                },
             },
             lazy = true
         },
@@ -450,7 +498,7 @@ require('lazy').setup(
 
         {
             'sindrets/diffview.nvim',
-            cmd = "DiffviewOpen",
+            cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
             dependencies = 'nvim-lua/plenary.nvim',
             lazy = true
         },

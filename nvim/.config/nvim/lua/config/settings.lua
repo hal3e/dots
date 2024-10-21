@@ -5,6 +5,10 @@ opt.shell = "/bin/dash"
 opt.lazyredraw = true
 opt.fillchars = { eob = " ", fold = " " }
 
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldtext = ''
+
 opt.report = 99999
 opt.shortmess = 'acstAFIW'
 opt.showmode = false
@@ -27,7 +31,6 @@ opt.number = true         -- show line number
 opt.relativenumber = true -- show line number
 
 opt.showmatch = true      -- highlight matching parenthesis
-opt.foldmethod = 'indent' -- enable folding (default 'foldmarker')
 opt.foldlevelstart = 99
 opt.splitright = true     -- vertical split to the right
 opt.splitbelow = true     -- orizontal split to the bottom
@@ -124,10 +127,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
         local arg = vim.api.nvim_eval('argv(0)')
         if arg == "" then
             vim.defer_fn(function()
+                vim.cmd('silent NvimTreeToggle')
                 if vim.fn.findfile('.gitignore') == "" then
                     require('telescope.builtin').find_files()
                 else
-                    vim.cmd('silent NvimTreeToggle')
                     require('telescope.builtin').git_files()
                 end
             end, 50)
@@ -135,37 +138,18 @@ vim.api.nvim_create_autocmd('VimEnter', {
     end
 })
 
--- add when nvim > 0.9.4
--- local function get_custom_foldtxt_suffix(foldstart)
---     local fold_suffix_str = string.format(
---         "  %s [%s lines]",
---         '┉',
---         vim.v.foldend - foldstart + 1
---     )
+vim.api.nvim_create_autocmd('RecordingEnter', {
+    group = vim.api.nvim_create_augroup('MacroRecordingEnter', { clear = true }),
+    callback = function(ctx)
+        local msg = 'Recording macro @' .. vim.fn.reg_recording() .. '\n'
+        vim.notify(msg)
+    end,
+})
 
---     return { fold_suffix_str, "Folded" }
--- end
-
--- local function get_custom_foldtext(foldtxt_suffix, foldstart)
---     local line = vim.api.nvim_buf_get_lines(0, foldstart - 1, foldstart, false)[1]
-
---     return {
---         { line, "Normal" },
---         foldtxt_suffix
---     }
--- end
-
--- _G.get_foldtext = function()
---     local foldstart = vim.v.foldstart
---     local ts_foldtxt = vim.treesitter.foldtext()
---     local foldtxt_suffix = get_custom_foldtxt_suffix(foldstart)
-
---     if type(ts_foldtxt) == "string" then
---         return get_custom_foldtext(foldtxt_suffix, foldstart)
---     end
-
---     table.insert(ts_foldtxt, foldtxt_suffix)
---     return ts_foldtxt
--- end
-
--- vim.opt.foldtext = "v:lua.get_foldtext()"
+vim.api.nvim_create_autocmd('RecordingLeave', {
+    group = vim.api.nvim_create_augroup('MacroRecordingLeave', { clear = true }),
+    callback = function(ctx)
+        local msg = 'Finished recording macro @' .. vim.fn.reg_recording() .. '\n'
+        vim.notify(msg)
+    end,
+})

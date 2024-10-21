@@ -30,9 +30,11 @@ require("catppuccin").setup {
                 },
                 NvimTreeOpenedFile         = {
                     fg = colors.green
-
                 },
-
+                TreesitterContextBottom    = {
+                    style = {},
+                    bg = colors.base
+                },
             }
         end,
     },

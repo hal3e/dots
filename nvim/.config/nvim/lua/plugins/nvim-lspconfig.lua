@@ -56,7 +56,7 @@ nvim_lsp.lua_ls.setup {
     },
 }
 
--- Install Sway LSP as a custom	server
+-- -- Install Sway LSP as a custom	server
 local configs = require('lspconfig.configs')
 
 -- Check if the config is already defined (useful when reloading this file)
@@ -119,3 +119,5 @@ vim.diagnostic.config({
     --   prefix = "",
     -- }
 })
+
+return { on_attach }

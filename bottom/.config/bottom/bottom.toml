@@ -1,31 +1,24 @@
 [flags]
-rate = 1000
+rate = "1s"
 left_legend = true
 time_delta = 1000
 hide_time = true
 battery = true
 disable_click = true
-color = "nord"
 show_table_scroll_position = true
+temperature_type = "celsius"
 
-[colors]
-table_header_color="LightGreen"
-widget_title_color="LightBlue"
-avg_cpu_color="Red"
-cpu_core_colors=["LightMagenta", "LightYellow", "LightCyan", "LightGreen", "LightBlue", "LightRed", "Cyan", "Green", "Blue", "Red"]
-ram_color="LightBlue"
-swap_color="#D08770"
-rx_color="LightBlue"
-tx_color="#D08770"
-border_color="DarkGray"
-highlighted_border_color="LightBlue"
-text_color="Gray"
-selected_text_color="Black"
-selected_bg_color="LightBlue"
-graph_color="#616E88"
-high_battery_color="Green"
-medium_battery_color="Yellow"
-low_battery_color="Red"
+[styles.graphs]
+graph_color = "dark gray"
+legend_text = {color = "light blue"}
+
+[styles.widgets]
+border_color = "dark gray"
+selected_border_color = "light blue"
+widget_title = {color = "gray"}
+text = {color = "gray"}
+selected_text = {color = "black", bg_color = "light blue"}
+disabled_text = {color = "dark gray"}
 
 [[row]]
   ratio=20

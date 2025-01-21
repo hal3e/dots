@@ -71,9 +71,7 @@ if not configs.sway_lsp then
                 -- Any initialization options
                 logging = { level = 'trace' }
             },
-            root_dir = function(fname)
-                return nvim_lsp.util.find_git_ancestor(fname)
-            end,
+            root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
             settings = {},
         },
     }

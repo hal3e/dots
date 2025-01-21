@@ -3,7 +3,7 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 
 opt.shell = "/bin/dash"
 opt.lazyredraw = true
-opt.fillchars = { eob = " ", fold = " " }
+vim.opt.fillchars:append({ fold = " ", eob = " " })
 
 opt.foldmethod = 'expr'
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -140,7 +140,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 vim.api.nvim_create_autocmd('RecordingEnter', {
     group = vim.api.nvim_create_augroup('MacroRecordingEnter', { clear = true }),
-    callback = function(ctx)
+    callback = function()
         local msg = 'Recording macro @' .. vim.fn.reg_recording() .. '\n'
         vim.notify(msg)
     end,
@@ -148,7 +148,7 @@ vim.api.nvim_create_autocmd('RecordingEnter', {
 
 vim.api.nvim_create_autocmd('RecordingLeave', {
     group = vim.api.nvim_create_augroup('MacroRecordingLeave', { clear = true }),
-    callback = function(ctx)
+    callback = function()
         local msg = 'Finished recording macro @' .. vim.fn.reg_recording() .. '\n'
         vim.notify(msg)
     end,

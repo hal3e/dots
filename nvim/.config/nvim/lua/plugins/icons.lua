@@ -93,6 +93,11 @@ icons.setup {
             color = colors['maroon'],
             name = "license",
         },
+        ["SECURITY.md"] = {
+            icon = " ", --
+            color = colors['maroon'],
+            name = "security",
+        },
         js = {
             icon = " ",
             color = colors['blue'],
@@ -102,6 +107,16 @@ icons.setup {
             icon = " ",
             color = colors['surface2'],
             name = "gitignore",
+        },
+        [".dockerignore"] = {
+            icon = " ",
+            color = colors['surface2'],
+            name = "dockerignore",
+        },
+        [".env"] = {
+            icon = " ",
+            color = colors['surface2'],
+            name = "env",
         },
         yml = {
             icon = " ",

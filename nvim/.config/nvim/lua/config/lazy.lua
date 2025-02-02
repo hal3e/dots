@@ -371,7 +371,7 @@ require('lazy').setup(
 
         {
             'neovim/nvim-lspconfig',
-            ft = { "rust", "lua", "sway", "sh", "bash" },
+            ft = { "rust", "lua", "sway", "sh", "bash", "vue", "js", "ts" },
             config = function()
                 require('plugins.nvim-lspconfig')
             end,

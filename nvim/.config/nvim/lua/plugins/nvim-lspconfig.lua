@@ -56,6 +56,88 @@ nvim_lsp.lua_ls.setup {
     },
 }
 
+nvim_lsp.ts_ls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        typescript = {
+            tsserver = {
+                useSyntaxServer = false,
+            },
+            inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+    },
+}
+
+nvim_lsp.volar.setup({
+    capabilities = capabilities,
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+    init_options = {
+        typescript = {
+            tsdk = vim.fn.expand("$HOME/node_modules/typescript/lib")
+            -- ou si typescript est installé globalement :
+            -- tsdk = vim.fn.expand("$HOME/.pnpm/global/5/node_modules/typescript/lib")
+        },
+        vue = {
+            hybridMode = false,
+        },
+        languageFeatures = {
+            implementation = true,
+            references = true,
+            definition = true,
+            typeDefinition = true,
+            callHierarchy = true,
+            hover = true,
+            rename = true,
+            signatureHelp = true,
+            codeAction = true,
+            diagnostics = true,
+            documentHighlight = true,
+            documentLink = true,
+            workspaceSymbol = true,
+            codeLens = true,
+            completion = {
+                defaultTagNameCase = 'both',
+                defaultAttrNameCase = 'kebabCase',
+                getDocumentNameCasesRequest = false,
+                getDocumentSelectionRequest = false,
+            }
+        }
+
+    },
+    settings = {
+        typescript = {
+            inlayHints = {
+                enumMemberValues = {
+                    enabled = true,
+                },
+                functionLikeReturnTypes = {
+                    enabled = true,
+                },
+                propertyDeclarationTypes = {
+                    enabled = true,
+                },
+                parameterTypes = {
+                    enabled = true,
+                    suppressWhenArgumentMatchesName = true,
+                },
+                variableTypes = {
+                    enabled = true,
+                },
+            },
+        },
+    },
+})
+
 -- -- Install Sway LSP as a custom	server
 local configs = require('lspconfig.configs')
 

@@ -88,6 +88,11 @@ icons.setup {
             color = colors['yellow'],
             name = "md",
         },
+        ["README.md"] = {
+            icon = " ", --
+            color = colors['green'],
+            name = "readme",
+        },
         license = {
             icon = " ", --
             color = colors['maroon'],

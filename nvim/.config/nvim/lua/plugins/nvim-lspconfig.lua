@@ -28,6 +28,10 @@ local on_attach = function()
     buf_set_keymap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({float=false})<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({float=false})<CR>', opts)
+    buf_set_keymap('n', '[r',
+        '<cmd>lua vim.diagnostic.goto_prev({float=false, severity=vim.diagnostic.severity.ERROR})<CR>', opts)
+    buf_set_keymap('n', ']r',
+        '<cmd>lua vim.diagnostic.goto_next({float=false, severity=vim.diagnostic.severity.ERROR})<CR>', opts)
 end
 
 nvim_lsp.lua_ls.setup {
@@ -160,6 +164,13 @@ if not configs.sway_lsp then
 end
 
 nvim_lsp.sway_lsp.setup {}
+
+require('lspconfig').typos_lsp.setup({
+    cmd_env = { RUST_LOG = "error" },
+    init_options = {
+        diagnosticSeverity = "Error"
+    }
+})
 
 require('rust-tools').setup({
     server = {

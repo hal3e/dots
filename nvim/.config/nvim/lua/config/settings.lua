@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = vim.api.nvim_create_augroup("sway-sytnax", { clear = true }),
+    group = vim.api.nvim_create_augroup("sway-syntax", { clear = true }),
     command = [[set filetype=sway]],
     pattern = "*.[sS][wW]"
 })
@@ -84,16 +84,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
 })
 
-local toogle_nums = vim.api.nvim_create_augroup("toogle-line-nums", { clear = true })
+local toggle_nums = vim.api.nvim_create_augroup("toggle-line-nums", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
-    group = toogle_nums,
+    group = toggle_nums,
     callback = function()
         vim.wo.relativenumber = false
     end
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
-    group = toogle_nums,
+    group = toggle_nums,
     callback = function()
         vim.wo.relativenumber = true
     end

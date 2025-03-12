@@ -122,7 +122,7 @@ map('v', 'K', '<C-u>zz', default_opts)
 map('n', 'L', '$', default_opts)
 map('n', '<leader>j', 'J', default_opts)
 
--- Yank on visual will not move cursos
+-- Yank on visual will not move cursor
 map('v', 'y', 'ygv<esc>', default_opts)
 
 vim.keymap.set('n', '<leader>l', function() vim.cmd('Lazy') end, default_opts)

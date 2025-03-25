@@ -1,24 +1,50 @@
-[user]
-  email = git@hal3e.io
-  name = hal3e
-
 [alias]
-  lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
-  l = lb --all
-  ls = lb --stat
-  wip = "!f() { git add . && git commit -m 'Work in progress'; }; f"
+    l = lb --all
+    lb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Cgreen(%cr) %C(bold blue)%an%Creset' --abbrev-commit
+    ls = lb --stat
+    wip = "!f() { git add . && git commit -m 'work in progress'; }; f"
 
-[credential]
-	helper = store --file ~/.config/git/credentials
+[branch]
+    sort = -committerdate
 
-[init]
-	defaultBranch = master
+[column]
+    ui = auto
 
 [core]
-  editor = nvim
+    editor = nvim
+
+[credential]
+    helper = store --file ~/.config/git/credentials
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[fetch]
+	all = true
+
+[help]
+	autocorrect = prompt
+
+[init]
+    defaultBranch = master
 
 [pull]
     rebase = true
 
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
+	followTags = true
+
+[rerere]
+	autoupdate = true
+	enabled = true
+
+[tag]
+    sort = -version:refname
+
+[user]
+    email = git@hal3e.io
+    name = hal3e

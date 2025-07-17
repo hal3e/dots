@@ -17,7 +17,34 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup(
     {
-        'farmergreg/vim-lastplace',
+        {
+            'felpafel/inlay-hint.nvim',
+            event = 'LspAttach',
+            config = true,
+        },
+
+        {
+            'echasnovski/mini.statusline',
+            event = "VeryLazy",
+            opts = {
+                content = {
+                    active = function()
+                        local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+                        local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+                        local location      = MiniStatusline.section_location({ trunc_width = 75 })
+
+                        return MiniStatusline.combine_groups({
+                            { hl = mode_hl,                  strings = { mode } },
+                            '%<', -- Mark general truncate point
+                            { hl = 'MiniStatuslineFilename', strings = { filename } },
+                            '%=', -- End left alignment
+                            { hl = mode_hl, strings = { location } },
+                        })
+                    end
+                },
+            },
+            lazy = true
+        },
 
         {
             'nvimtools/none-ls.nvim',
@@ -49,8 +76,10 @@ require('lazy').setup(
                             local parser = null_helpers.diagnostics.from_json({
                                 attributes = { code = "code" },
                                 severities = {
-                                    info = null_helpers.diagnostics.severities["information"],
-                                    style = null_helpers.diagnostics.severities["hint"],
+                                    info = null_helpers.diagnostics.severities
+                                        ["information"],
+                                    style = null_helpers.diagnostics.severities
+                                        ["hint"],
                                 },
                             })
 
@@ -75,47 +104,6 @@ require('lazy').setup(
                     config = true
                 }
             },
-            lazy = true
-        },
-
-        {
-            'ThePrimeagen/harpoon',
-            event = { "BufReadPost" },
-            keys = {
-                {
-                    '<leader>n',
-                    mode = { "n" },
-                    function()
-                        require("harpoon.ui").nav_next()
-                    end,
-                    desc = "harpoon next file",
-                },
-                {
-                    '<leader>p',
-                    mode = { "n" },
-                    function()
-                        require("harpoon.ui").nav_prev()
-                    end,
-                    desc = "harpoon previous file",
-                },
-                {
-                    '<leader>h',
-                    mode = { "n" },
-                    function()
-                        require("harpoon.mark").add_file()
-                    end,
-                    desc = "harpoon add file",
-                },
-                {
-                    '<leader>o',
-                    mode = { "n" },
-                    function()
-                        require("harpoon.ui").toggle_quick_menu()
-                    end,
-                    desc = "harpoon quick menu",
-                }
-            },
-            config = true,
             lazy = true
         },
 
@@ -189,14 +177,6 @@ require('lazy').setup(
         },
 
         {
-            'petertriho/nvim-scrollbar',
-            event = 'BufReadPost',
-            config = true,
-            lazy = true
-        },
-
-
-        {
             'nvim-telescope/telescope.nvim',
             cmd = 'Telescope',
             dependencies = {
@@ -249,7 +229,8 @@ require('lazy').setup(
                 vim.keymap.set('n', '<leader>t', all_pickers, default_opts)
                 vim.keymap.set('n', '<leader>f', builtin.git_files, default_opts)
                 vim.keymap.set('n', '<leader>r', builtin.live_grep, default_opts)
-                vim.keymap.set('n', '<leader>ra', telescope.extensions.live_grep_args.live_grep_args, default_opts)
+                vim.keymap.set('n', '<leader>ra', telescope.extensions.live_grep_args.live_grep_args,
+                    default_opts)
                 vim.keymap.set('n', '<leader>d', builtin.diagnostics, default_opts)
                 vim.keymap.set('n', '<leader>H', builtin.help_tags, default_opts)
                 vim.keymap.set('n', '<leader>u', builtin.resume, default_opts)
@@ -267,21 +248,6 @@ require('lazy').setup(
                 show_current_context = true,
                 show_trailing_blankline_indent = false
             },
-            lazy = true
-        },
-
-        {
-            'terrortylor/nvim-comment',
-            cmd = 'CommentToggle',
-            config = function()
-                require('nvim_comment').setup(
-                    {
-                        comment_empty = false,
-                        create_mappings = false,
-                    }
-
-                )
-            end,
             lazy = true
         },
 
@@ -315,16 +281,22 @@ require('lazy').setup(
                             enable = true,
                         }
                     }
+
                 )
             end,
             dependencies = {
-                {
-                    'nvim-treesitter/nvim-treesitter-context',
-                    opts = {
-                        max_lines = 1
-                    },
-                    lazy = true,
-                }
+                'nvim-treesitter/nvim-treesitter-context',
+                opts = {
+                    enable = true,
+                    multiwindow = false,
+                    max_lines = 1,
+                    min_window_height = 0,
+                    line_numbers = true,
+                    trim_scope = 'outer',
+                    mode = 'cursor',
+                    separator = nil,
+                },
+                lazy = true
             },
             lazy = true
         },
@@ -359,7 +331,6 @@ require('lazy').setup(
         {
             "j-hui/fidget.nvim",
             event = "VeryLazy",
-            tag = "v1.2.0",
             opts = {
                 notification = {
                     override_vim_notify = true,
@@ -371,29 +342,14 @@ require('lazy').setup(
 
         {
             'neovim/nvim-lspconfig',
-            ft = { "rust", "lua", "sway", "sh", "bash", "vue", "js", "ts" },
+            ft = { "rust", "lua", "sway", "sh", "bash" },
             config = function()
                 require('plugins.nvim-lspconfig')
             end,
             dependencies = {
                 'folke/neodev.nvim',
-                'simrat39/rust-tools.nvim',
-
                 {
                     'williamboman/mason.nvim',
-                    config = true
-                },
-
-                {
-                    'williamboman/mason-lspconfig.nvim',
-                    opts =
-                    {
-                        ensure_installed = { "lua_ls", "rust_analyzer" },
-                    }
-                },
-
-                {
-                    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
                     config = true
                 },
 
@@ -403,7 +359,7 @@ require('lazy').setup(
 
         {
             'kyazdani42/nvim-tree.lua',
-            cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+            cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFocus' },
             config = function()
                 require('plugins.nvim-tree')
             end,
@@ -414,6 +370,7 @@ require('lazy').setup(
                         require('plugins.icons')
                     end,
                 },
+                'nvim-treesitter/nvim-treesitter',
             },
         },
 
@@ -498,8 +455,15 @@ require('lazy').setup(
 
         {
             'sindrets/diffview.nvim',
-            cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+            event = "VeryLazy",
             dependencies = 'nvim-lua/plenary.nvim',
+            config = function()
+                local default_opts = { noremap = true, silent = true }
+
+                vim.keymap.set('n', '<leader>do', ":DiffviewOpen<CR>", default_opts)
+                vim.keymap.set('n', '<leader>dc', ":DiffviewClose<CR>", default_opts)
+                vim.keymap.set('n', '<leader>dr', ":DiffviewRefresh<CR>", default_opts)
+            end,
             lazy = true
         },
     }, {
@@ -515,10 +479,7 @@ require('lazy').setup(
                 disabled_plugins = {
                     "2html_plugin",
                     "tohtml",
-                    "getscript",
-                    "getscriptPlugin",
                     "gzip",
-                    "logipat",
                     "netrw",
                     "netrwPlugin",
                     "netrwSettings",
@@ -526,10 +487,7 @@ require('lazy').setup(
                     "matchit",
                     "tar",
                     "tarPlugin",
-                    "rrhelper",
                     "spellfile_plugin",
-                    "vimball",
-                    "vimballPlugin",
                     "zip",
                     "zipPlugin",
                     "tutor",

@@ -1,6 +1,19 @@
 local map = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 
+-- Map lowercase to uppercase marks
+for i = string.byte("a"), string.byte("z") do
+    local l = string.char(i)
+    local u = string.upper(l)
+    map('n', 'm' .. l, 'm' .. u, default_opts)
+    map('n', '`' .. l, '`' .. u, default_opts)
+    map('n', "'" .. l, "'" .. u, default_opts)
+end
+
+-- Do not copy when pasting over text
+map('x', 'p', 'P', default_opts)
+map('x', 'P', 'p', default_opts)
+
 -- Clear search highlighting
 map('n', '<Esc>', ':nohl<CR>', default_opts)
 
@@ -27,6 +40,7 @@ map('n', 'U', '<C-r>', default_opts)
 map('n', 'oo', 'o<esc>', default_opts)
 map('n', 'OO', 'O<esc>', default_opts)
 
+-- Add custom text objects
 local chars = { '_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '%', '`', '?' }
 for _, char in ipairs(chars) do
     for _, mode in ipairs({ 'x', 'o' }) do
@@ -35,50 +49,6 @@ for _, char in ipairs(chars) do
         map(mode, "i" .. char, i_cmd, default_opts)
         map(mode, "a" .. char, a_cmd, default_opts)
     end
-end
-
-function Select_indent(around)
-    local start_indent = vim.fn.indent(vim.fn.line('.'))
-    local blank_line_pattern = '^%s*$'
-
-    if string.match(vim.fn.getline('.'), blank_line_pattern) then
-        return
-    end
-
-    if vim.v.count > 0 then
-        start_indent = start_indent - vim.o.shiftwidth * (vim.v.count - 1)
-        if start_indent < 0 then
-            start_indent = 0
-        end
-    end
-
-    local prev_line = vim.fn.line('.') - 1
-    local prev_blank_line = function(line) return string.match(vim.fn.getline(line), blank_line_pattern) end
-    while prev_line > 0 and (prev_blank_line(prev_line) or vim.fn.indent(prev_line) >= start_indent) do
-        vim.cmd('-')
-        prev_line = vim.fn.line('.') - 1
-    end
-    if around then
-        vim.cmd('-')
-    end
-
-    vim.cmd('normal! 0V')
-
-    local next_line = vim.fn.line('.') + 1
-    local next_blank_line = function(line) return string.match(vim.fn.getline(line), blank_line_pattern) end
-    local last_line = vim.fn.line('$')
-    while next_line <= last_line and (next_blank_line(next_line) or vim.fn.indent(next_line) >= start_indent) do
-        vim.cmd('+')
-        next_line = vim.fn.line('.') + 1
-    end
-    if around then
-        vim.cmd('+')
-    end
-end
-
-for _, mode in ipairs({ 'x', 'o' }) do
-    map(mode, 'ii', ':<c-u>lua Select_indent()<cr>', default_opts)
-    map(mode, 'ai', ':<c-u>lua Select_indent(true)<cr>', default_opts)
 end
 
 -- Fast saving with <leader> and w
@@ -101,13 +71,11 @@ map('n', '<leader>ss', ':set spell!<CR>', default_opts)
 map('n', '<leader>s', 'ea<C-X><C-S>', default_opts)
 
 -- Buffers
-map('n', '<Tab>', ':bn<CR>', default_opts)
-map('n', '<S-Tab>', ':bp<CR>', default_opts)
 map('n', '<leader>c', ':silent w | bp | bd #<CR>', default_opts)
 
 -- Commentary
-map('n', '<C-_>', ':CommentToggle<CR>', default_opts)
-map('v', '<C-_>', ':CommentToggle<CR>', default_opts)
+map('n', '<C-_>', 'gcc', { noremap = false, silent = true })
+map('v', '<C-_>', 'gc', { noremap = false, silent = true })
 
 -- Movement
 map('n', 'n', 'nzz', default_opts)
@@ -115,18 +83,16 @@ map('n', 'N', 'Nzz', default_opts)
 map('n', '*', '*zz', default_opts)
 map('n', '#', '#zz', default_opts)
 map('n', 'H', '^', default_opts)
+map('v', 'H', '^', default_opts)
+map('o', 'H', '^', default_opts)
+map('n', 'L', '$', default_opts)
+map('v', 'L', '$', default_opts)
+map('o', 'L', '$', default_opts)
 map('n', 'J', '<C-d>zz', default_opts)
 map('n', 'K', '<C-u>zz', default_opts)
 map('v', 'J', '<C-d>zz', default_opts)
 map('v', 'K', '<C-u>zz', default_opts)
-map('n', 'L', '$', default_opts)
 map('n', '<leader>j', 'J', default_opts)
 
 -- Yank on visual will not move cursor
 map('v', 'y', 'ygv<esc>', default_opts)
-
-vim.keymap.set('n', '<leader>l', function() vim.cmd('Lazy') end, default_opts)
-
--- Quickfix
-map('n', '[q', ':try | cp | catch | clast | endtry<CR>zz', default_opts)
-map('n', ']q', ':try | cn | catch | cfirst | endtry<CR>zz', default_opts)

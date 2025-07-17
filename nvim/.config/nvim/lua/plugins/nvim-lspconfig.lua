@@ -26,8 +26,6 @@ local on_attach = function()
     buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({float=false})<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({float=false})<CR>', opts)
     buf_set_keymap('n', '[r',
         '<cmd>lua vim.diagnostic.goto_prev({float=false, severity=vim.diagnostic.severity.ERROR})<CR>', opts)
     buf_set_keymap('n', ']r',
@@ -60,27 +58,27 @@ nvim_lsp.lua_ls.setup {
     },
 }
 
-nvim_lsp.ts_ls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        typescript = {
-            tsserver = {
-                useSyntaxServer = false,
-            },
-            inlayHints = {
-                includeInlayParameterNameHints = 'all',
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-            },
-        },
-    },
-}
+-- nvim_lsp.ts_ls.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     typescript = {
+--       tsserver = {
+--         useSyntaxServer = false,
+--       },
+--       inlayHints = {
+--         includeInlayParameterNameHints = 'all',
+--         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+--         includeInlayFunctionParameterTypeHints = true,
+--         includeInlayVariableTypeHints = true,
+--         includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+--         includeInlayPropertyDeclarationTypeHints = true,
+--         includeInlayFunctionLikeReturnTypeHints = true,
+--         includeInlayEnumMemberValueHints = true,
+--       },
+--     },
+--   },
+-- }
 
 nvim_lsp.volar.setup({
     capabilities = capabilities,
@@ -116,7 +114,6 @@ nvim_lsp.volar.setup({
                 getDocumentSelectionRequest = false,
             }
         }
-
     },
     settings = {
         typescript = {
@@ -165,27 +162,24 @@ end
 
 nvim_lsp.sway_lsp.setup {}
 
-require('lspconfig').typos_lsp.setup({
+nvim_lsp.typos_lsp.setup({
     cmd_env = { RUST_LOG = "error" },
     init_options = {
         diagnosticSeverity = "Error"
     }
 })
 
-require('rust-tools').setup({
-    server = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-            ["rust-analyzer"] = {
-                procMacro = { enable = true, attributes = { enable = true } },
-                check = {
-                    command = "clippy",
-                    extraArgs = { "--all", "--", "-W", "clippy::all" },
-                },
-            },
-        },
-    },
+nvim_lsp.rust_analyzer.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    -- settings = {
+    --     ["rust-analyzer"] = {
+    --         check = {
+    --             command = "clippy",
+    --             extraArgs = { "--all-features", "--all-targets", "--workspace" },
+    --         },
+    --     },
+    -- },
 })
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -199,8 +193,7 @@ vim.diagnostic.config({
     virtual_text = false,
     signs = true,
     virtual_lines = {
-        only_current_line = true,
-        highlight_whole_line = false
+        current_line = true,
     },
     severity_sort = true
     -- float = {

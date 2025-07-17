@@ -35,6 +35,9 @@ require("catppuccin").setup {
                     style = {},
                     bg = colors.base
                 },
+                QuickFixLine               = {
+                    bg = colors.surface0, style = {} },
+
             }
         end,
     },

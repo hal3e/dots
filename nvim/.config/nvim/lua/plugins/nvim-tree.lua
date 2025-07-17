@@ -116,7 +116,7 @@ require('nvim-tree').setup({
     view = {
         signcolumn = "yes",
         side = "right",
-        width = 30,
+        width = 35,
     },
     filters = {
         dotfiles = true,

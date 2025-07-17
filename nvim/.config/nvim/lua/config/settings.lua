@@ -3,11 +3,31 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 
 opt.shell = "/bin/dash"
 opt.lazyredraw = true
-vim.opt.fillchars:append({ fold = " ", eob = " " })
+opt.fillchars:append({ fold = " ", eob = " " })
 
+opt.spell = true
+
+-- Nice and simple folding:
+opt.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
 opt.foldmethod = 'expr'
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.foldtext = ''
+opt.foldcolumn = "0"
+
+-- Default to treesitter folding
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- Prefer LSP folding if client supports it
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup("lsp-fold", { clear = true }),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client ~= nil and client:supports_method('textDocument/foldingRange') then
+            local win = vim.api.nvim_get_current_win()
+            vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        end
+    end,
+})
 
 opt.report = 99999
 opt.shortmess = 'acstAFIW'
@@ -16,7 +36,7 @@ opt.scrolloff = 5
 opt.timeoutlen = 225 -- By default timeoutlen is 1000 ms
 opt.mouse = ''
 opt.cmdheight = 0
-opt.laststatus = 0
+opt.laststatus = 3
 
 g.mapleader = ' ' -- change leader to space
 g.python3_host_prog = '/home/hal3e/bin/miniconda3/envs/py38/bin/python'
@@ -31,7 +51,6 @@ opt.number = true         -- show line number
 opt.relativenumber = true -- show line number
 
 opt.showmatch = true      -- highlight matching parenthesis
-opt.foldlevelstart = 99
 opt.splitright = true     -- vertical split to the right
 opt.splitbelow = true     -- orizontal split to the bottom
 opt.ignorecase = true     -- ignore case letters when search
@@ -56,7 +75,9 @@ opt.breakindent = true
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("format", { clear = true }),
     callback = function()
-        vim.lsp.buf.format()
+        vim.lsp.buf.format {
+            filter = function(client) return client.name ~= "volar" end
+        }
     end
 })
 
@@ -99,13 +120,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end
 })
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = vim.api.nvim_create_augroup("set-spell", { clear = true }),
-    callback = function()
-        vim.wo.spell = true
-    end
-})
-
 vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("close-nvimtree-if-last", { clear = true }),
     command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
@@ -119,6 +133,17 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
 })
 
+-- open nvim-tree after file is loaded
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+    callback = function(args)
+        if vim.fn.expand "%:p" ~= "" then
+            vim.api.nvim_del_autocmd(args.id)
+            vim.cmd "noautocmd NvimTreeOpen"
+            vim.cmd "noautocmd wincmd p"
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('startup', { clear = true }),
     pattern = '*',
@@ -127,7 +152,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
         local arg = vim.api.nvim_eval('argv(0)')
         if arg == "" then
             vim.defer_fn(function()
-                vim.cmd('silent NvimTreeToggle')
                 if vim.fn.findfile('.gitignore') == "" then
                     require('telescope.builtin').find_files()
                 else

@@ -1,19 +1,21 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.opt.termguicolors = true -- enable 24-bit RGB colors
-
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable',
-        lazypath,
-    }
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out,                            "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 require('lazy').setup(
     {
@@ -94,16 +96,8 @@ require('lazy').setup(
                         shellcheck.with({ filetypes = { "sh", "bash" } }),
                         null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "bash" } }),
                     },
-                    on_attach =
-                        require('plugins.nvim-lspconfig').on_attach
                 })
             end,
-            dependencies = {
-                {
-                    'williamboman/mason.nvim',
-                    config = true
-                }
-            },
             lazy = true
         },
 
@@ -322,13 +316,6 @@ require('lazy').setup(
         },
 
         {
-            'williamboman/mason.nvim',
-            event = "VeryLazy",
-            config = true,
-            lazy = true
-        },
-
-        {
             "j-hui/fidget.nvim",
             event = "VeryLazy",
             opts = {
@@ -336,23 +323,6 @@ require('lazy').setup(
                     override_vim_notify = true,
 
                 }
-            },
-            lazy = true
-        },
-
-        {
-            'neovim/nvim-lspconfig',
-            ft = { "rust", "lua", "sway", "sh", "bash" },
-            config = function()
-                require('plugins.nvim-lspconfig')
-            end,
-            dependencies = {
-                'folke/neodev.nvim',
-                {
-                    'williamboman/mason.nvim',
-                    config = true
-                },
-
             },
             lazy = true
         },

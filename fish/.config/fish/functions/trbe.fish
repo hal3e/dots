@@ -1,4 +1,3 @@
-# Defined in - @ line 1
-function trbe --wraps='~/bin/trans bs:en' --description 'alias trbe=~/bin/trans bs:en'
+function trbe
   ~/bin/trans bs:en $argv;
 end

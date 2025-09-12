@@ -23,16 +23,18 @@ function all_history_arguments
 end
 
 abbr -a -- n 'nvim'
+abbr -a -- nws 'newsboat'
 
 abbr -a -- sf 'source ~/.config/fish/config.fish'
 
 abbr -a -- mw 'TERM=xterm ~/mnr/monero/monero-wallet-cli'
-abbr -a -- md '~/mnr/monero/monerod --data-dir ~/mnt/monero/'
+abbr -a -- md '~/mnr/monero/monerod --data-dir ~/mnt/extern/monero'
 
 abbr -a -- se 'sudoedit -A'
 
+abbr -a -- g 'git'
 abbr -a -- gs 'git status'
-abbr -a -- ga 'git add .'
+abbr -a -- ga 'git add -u'
 abbr -a -- gc 'git checkout'
 abbr -a -- gd 'git diff'
 abbr -a -- gds 'git diff --staged'
@@ -42,11 +44,11 @@ abbr -a -- gU 'git reset --soft HEAD~1'
 abbr -a -- gpf 'git push --force'
 abbr -a -- gca 'git commit --amend'
 abbr -a -- gpa 'git pull --all'
-abbr -a -- gmm 'git merge master'
+abbr -a -- gmm 'git merge main'
 abbr -a -- gcb 'git checkout -b'
-abbr -a -- gcm 'git checkout master'
+abbr -a -- gcm 'git checkout main'
 abbr -a -- grm 'git rebase master'
-abbr -a -- gR 'git fetch --prune && git remote prune origin'
+abbr -a -- gR 'git fetch --prune --prune-tags'
 abbr -a --set-cursor -- gm 'git commit -m "%"'
 
 abbr -a -- cc 'cargo clean'
@@ -55,15 +57,10 @@ abbr -a -- ccw 'cargo check --workspace'
 abbr -a -- cca 'cargo check --all-targets --workspace --tests'
 abbr -a -- ccaf 'cargo check --all-targets --all-features --workspace --tests'
 abbr -a -- ct 'cargo nextest run'
-abbr -a -- cta 'cargo nextest run --all-targets --workspace'
-abbr -a -- ctaf 'cargo nextest run --all-targets --all-features --workspace'
+abbr -a -- ctn "cargo nextest run --workspace --no-fail-fast --exclude integration -E 'not test(deterministic)' --run-ignored all"
 abbr -a -- cpa 'cargo +nightly clippy --all-targets'
 abbr -a -- cpaf 'cargo +nightly clippy --all-targets --all-features'
 abbr -a -- cfn '~/bin/cargo-format-nightly.sh'
-
-abbr -a -- fb 'forc build --path e2e --release'
-abbr -a -- fc 'forc clean --path e2e'
-abbr -a -- ff 'forc fmt --path e2e'
 
 abbr -a !! --position anywhere --function last_history_item
 abbr -a !\* --position anywhere --function all_history_arguments

@@ -1,3 +1,3 @@
-function ranger --wraps='ranger' --description 'change ranger cache folder'
+function ranger
     ~/bin/ranger.sh
 end

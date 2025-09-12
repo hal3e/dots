@@ -1,3 +1,3 @@
-function wget --description 'alias wget=wget --hsts-file=~/.local/share/wget-hsts'
+function wget
  command wget --hsts-file=~/.local/share/wget-hsts $argv;
 end

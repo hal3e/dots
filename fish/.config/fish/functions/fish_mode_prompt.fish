@@ -1,14 +1,21 @@
 function fish_mode_prompt
-  switch $fish_bind_mode
-    case default
-      echo 'n'
-    case insert
-      echo 'i'
-    case replace_one
-      echo 'r'
-    case visual
-      echo 'v'
-    case '*'
-      echo '?'
-  end
+    if test "$fish_key_bindings" != fish_default_key_bindings
+        set --local vi_mode_color
+        set --local vi_mode_symbol
+        switch $fish_bind_mode
+            case default
+                set vi_mode_color (set_color $fish_color_selection)
+                set vi_mode_symbol n
+            case insert
+                set vi_mode_color (set_color $fish_color_selection)
+                set vi_mode_symbol i
+            case replace replace_one
+                set vi_mode_color (set_color $fish_color_match)
+                set vi_mode_symbol r
+            case visual
+                set vi_mode_color (set_color $fish_color_match)
+                set vi_mode_symbol v
+        end
+        echo -e "$vi_mode_color $vi_mode_symbol \x1b[0m "
+    end
 end

@@ -1,4 +1,4 @@
-function pomodoro --wraps=./tomatoshell --description 'alias pomodoro=./tomatoshell'
+function pomodoro
   cd ~/pro/tomatoshell/
   ./tomatoshell $argv;
 end

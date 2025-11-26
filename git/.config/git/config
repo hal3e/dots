@@ -12,6 +12,7 @@
 
 [core]
     editor = nvim
+	excludesFile = ~/.config/git/ignore
 
 [credential]
     helper = store --file ~/.config/git/credentials

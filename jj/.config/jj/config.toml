@@ -1,0 +1,50 @@
+[ui]
+default-command = "log"
+conflict-marker-style = "git"
+
+[fix.tools.rustfmt]
+command  = ["rustfmt", "--edition", "2024", "--emit", "stdout"]
+patterns = ["glob:**/*.rs"]
+
+[fix.tools.cargo-sort]
+command  = ["cargo-sort-stdin"]
+patterns = ["glob:**/Cargo.toml"]
+
+[revset-aliases]
+"trunk()" = "main"
+
+'archived()' = '::bookmarks(glob:"archive/*") ~ immutable()'
+'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
+
+[revsets]
+log = 'default_log() ~ archived()'
+
+[aliases]
+forkdiff = ["diff", "--from", "fork_point(@ | main@origin)", "--to", "@"]
+
+log-archive = ["log", "-r", "archived()"]
+log-all = ["log", "-r", "default_log() | archived()"]
+
+[templates]
+log = '''
+label(
+  if(empty, "empty", if(description, "described", "no_description")),
+  builtin_log_compact,
+)
+'''
+
+[colors]
+"empty change_id" = "green"
+"empty working_copy change_id" = "green"
+
+"no_description change_id" = "yellow"
+"no_description working_copy change_id" = "yellow"
+
+"described change_id" = "blue"
+"described working_copy change_id" = "blue"
+
+"author email" = "green"
+"working_copy author email" = "green"
+
+timestamp = "cyan"
+"working_copy timestamp" = "cyan"

@@ -32,6 +32,18 @@ abbr -a -- md '~/mnr/monero/monerod --data-dir ~/mnt/extern/monero'
 
 abbr -a -- se 'sudoedit -A'
 
+abbr -a -- j 'jj'
+abbr -a -- jd 'jj diff'
+abbr -a -- je 'jj edit'
+abbr -a -- jf 'jj git fetch'
+abbr -a -- jn 'jj new'
+abbr -a -- jp 'jj git push'
+abbr -a -- jpa 'jj git push --all'
+abbr -a -- jr 'jj rebase'
+abbr -a -- js 'jj squash'
+abbr -a -- jsh 'jj show'
+abbr -a --set-cursor -- jm 'jj commit -m "%"'
+
 abbr -a -- g 'git'
 abbr -a -- gs 'git status'
 abbr -a -- ga 'git add -u'
@@ -69,8 +81,3 @@ abbr -a !^ --position anywhere --function first_history_argument
 
 abbr -a -- clip 'xclip -i -selection clipboard'
 abbr -a --set-cursor -- cclip 'cat % | xclip -i -selection clipboard'
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /home/hal3e/bin/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<

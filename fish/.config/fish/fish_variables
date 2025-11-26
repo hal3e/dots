@@ -11,7 +11,7 @@ SETUVAR --export LANGUAGE:en_US\x2eUTF\x2d8
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
 SETUVAR --export NPM_CONFIG_USERCONFIG:/home/hal3e/\x2econfig/npm/npmrc
-SETUVAR --export PAGER:less
+SETUVAR --export PAGER:less\x1e\x2dFRX
 SETUVAR --export PASSWORD_STORE_DIR:/home/hal3e/bck/pass
 SETUVAR --export PGDATA:/home/postgres
 SETUVAR --export PYLINTHOME:/home/hal3e/\x2ecache/pylint
@@ -25,7 +25,7 @@ SETUVAR --export XAUTHORITY:/home/hal3e/\x2elocal/share/Xauthority
 SETUVAR --export XDG_CACHE_HOME:/home/hal3e/\x2ecache
 SETUVAR --export XDG_CONFIG_HOME:/home/hal3e/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/hal3e/\x2elocal/share
-SETUVAR --export XDG_STATE_HOME:/home/hal3e/\x2elocal/\x2estate
+SETUVAR --export XDG_STATE_HOME:/home/hal3e/\x2elocal/state
 SETUVAR --export XINITRC:/home/hal3e/\x2econfig/X11/xinitrc
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
@@ -40,11 +40,7 @@ SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fish
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/hydro\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ehal3e/lumo\x2efish\x1ejethrokuan/z\x1eandreiborisov/sponge\x1ejorgebucaran/hydro
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR _hydro_git_18655:master\u2022\x20
-SETUVAR _hydro_git_22828:\x1d
-SETUVAR _hydro_git_29710:main\u2022\x20
-SETUVAR _hydro_git_32291:main\x20
-SETUVAR _hydro_git_411:main\x20
+SETUVAR _hydro_git_9887:master\u2022\x20
 SETUVAR fish_color_autosuggestion:afafaf
 SETUVAR fish_color_cancel:normal
 SETUVAR fish_color_command:79B3EC
@@ -85,7 +81,7 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dreverse
 SETUVAR fish_pager_color_selected_completion:79B3EC
 SETUVAR fish_pager_color_selected_description:A2D775
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/hal3e/\x2elocal/share/cargo/bin\x1e/home/hal3e/\x2efuelup/bin\x1e/opt/texlive/2021/bin/x86_64\x2dlinux/\x1e/home/hal3e/\x2elocal/bin
+SETUVAR fish_user_paths:/home/hal3e/\x2elocal/share/cargo/bin\x1e/home/hal3e/\x2elocal/bin
 SETUVAR hydro_color_git:blue
 SETUVAR hydro_symbol_prompt:\x3e
 SETUVAR sponge_allow_previously_successful:true

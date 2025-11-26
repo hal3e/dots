@@ -3,7 +3,7 @@ function upgrade
   sudo xbps-remove -Oo || return 2
   xcheckrestart || return 3
 
-  pkill rstat || return 4
-  ~/pro/rstat/target/release/rstat&
+  pkill stsr || return 4
+  stsr &
   disown
 end

@@ -1,3 +1,3 @@
 function ls
-  eza -l --group-directories-first --git $argv;
+  eza --group-directories-first --tree --level=1 $argv;
 end

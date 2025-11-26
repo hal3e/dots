@@ -1,3 +1,3 @@
 function cat
-  bat -p --theme=OneHalfDark $argv;
+  bat -p --theme="ansi" $argv;
 end

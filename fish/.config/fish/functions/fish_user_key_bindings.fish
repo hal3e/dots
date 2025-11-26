@@ -18,6 +18,9 @@ function fish_user_key_bindings
 
   bind -M insert \b backward-kill-path-component
 
+  bind -M default H beginning-of-line
+  bind -M default L end-of-line
+
   for mode in default insert visual
     bind -M $mode \r -m $mode execute
   end

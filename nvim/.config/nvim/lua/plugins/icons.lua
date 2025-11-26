@@ -48,6 +48,11 @@ icons.setup {
             color = colors['teal'],
             name = "dockf",
         },
+        ["docker-compose.yaml"] = {
+            icon = " ",
+            color = colors['teal'],
+            name = "docker-compose",
+        },
         html = {
             icon = " ",
             color = colors['green'],
@@ -183,6 +188,11 @@ icons.setup {
             color = colors['blue'],
             name = "toml",
         },
+        nix = {
+            icon = " ",
+            color = colors['blue'],
+            name = "nix",
+        },
         ts = {
             icon = " ",
             color = colors['teal'],
@@ -232,6 +242,11 @@ icons.setup {
             icon = " ",
             color = colors['red'],
             name = "fish",
+        },
+        scad = {
+            icon = " ",
+            color = colors['yellow'],
+            name = "scad",
         },
     },
 }

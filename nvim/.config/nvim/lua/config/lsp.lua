@@ -9,12 +9,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local opts = { noremap = true, silent = true }
 
         buf_set_keymap('n', 'gc', vim.lsp.buf.declaration, opts)
-        buf_set_keymap('n', 'gd', vim.lsp.buf.definition, opts)
+        buf_set_keymap('n', 'gd', require('telescope.builtin').lsp_definitions, opts)
         buf_set_keymap('n', 'gh', vim.lsp.buf.hover, opts)
-        buf_set_keymap('n', 'gi', vim.lsp.buf.implementation, opts)
+        buf_set_keymap('n', 'gi', require('telescope.builtin').lsp_implementations, opts)
         buf_set_keymap('n', 'gs', vim.lsp.buf.signature_help, opts)
-        buf_set_keymap('n', 'gt', vim.lsp.buf.type_definition, opts)
-        buf_set_keymap('n', 'gr', vim.lsp.buf.references, opts)
+        buf_set_keymap('n', 'gt', require('telescope.builtin').lsp_type_definitions, opts)
+        buf_set_keymap('n', 'gr', require('telescope.builtin').lsp_references, opts)
         buf_set_keymap('n', '<leader>rn', vim.lsp.buf.rename, opts)
         buf_set_keymap('n', '<leader>a', vim.lsp.buf.code_action, opts)
         buf_set_keymap('x', '<leader>a', vim.lsp.buf.code_action, opts)
@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('typos_lsp')
+vim.lsp.enable('openscad_lsp')
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do

@@ -96,3 +96,7 @@ map('n', '<leader>j', 'J', default_opts)
 
 -- Yank on visual will not move cursor
 map('v', 'y', 'ygv<esc>', default_opts)
+
+-- Cycle through quickfix list items
+map('n', ']q', '<Cmd>silent! try | cnext      | catch | cfirst | endtry<CR>', default_opts)
+map('n', '[q', '<Cmd>silent! try | cprevious  | catch | clast  | endtry<CR>', default_opts)

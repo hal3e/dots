@@ -93,6 +93,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     pattern = "*.[sS][wW]"
 })
 
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    group = vim.api.nvim_create_augroup("open-scad-syntax", { clear = true }),
+    command = [[set filetype=openscad]],
+    pattern = "*.scad"
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("remove-whitespace", { clear = true }),
     command = [[%s/\s\+$//e]]

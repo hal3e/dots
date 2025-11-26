@@ -1,4 +1,5 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim' if not vim.loop.fs_stat(lazypath) then
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
     local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
     local out = vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
     if vim.v.shell_error ~= 0 then
@@ -219,6 +220,11 @@ require('lazy').setup(
                                 ["<C-p>"] = actions.move_selection_previous,
                             },
                         },
+
+                        layout_config = {
+                            preview_width = 0.55,
+                        },
+
                     },
                     extensions = {
                         ["ui-select"] = require("telescope.themes").get_cursor(),
@@ -286,17 +292,20 @@ require('lazy').setup(
         {
             'nvim-treesitter/nvim-treesitter',
             lazy = false,
-            branch = 'master',
-            build = ':TSUpdate',
-            config = function()
+            branch = 'main',
+            config = function(plugin)
+                vim.opt.runtimepath:prepend(plugin.dir .. '/runtime')
                 require('nvim-treesitter').setup({})
-                -- require('nvim-treesitter').install { 'rust', 'lua', 'c' }
-
-
                 vim.api.nvim_create_autocmd('FileType', {
-                    pattern = { 'rust', 'lua', 'c' },
-                    callback = function()
-                        vim.treesitter.start()
+                    pattern = {
+                        'rust', 'lua', 'c',
+                        'typescript', 'typescriptreact',
+                        'javascript', 'javascriptreact',
+                        'json', 'jsonc',
+                        'html', 'css',
+                    },
+                    callback = function(args)
+                        pcall(vim.treesitter.start, args.buf)
                     end,
                 })
             end,
@@ -348,6 +357,9 @@ require('lazy').setup(
             opts = {
                 notification = {
                     override_vim_notify = true,
+                    window = {
+                        avoid = { 'NvimTree' },
+                    },
 
                 }
             },

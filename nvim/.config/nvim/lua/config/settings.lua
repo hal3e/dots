@@ -3,6 +3,8 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 
 opt.diffopt = "internal,filler,closeoff,indent-heuristic,inline:char"
 
+opt.runtimepath:append('/usr/share/tree-sitter')
+
 opt.shell = "/bin/dash"
 opt.lazyredraw = true
 opt.fillchars:append({ fold = " ", eob = " " })

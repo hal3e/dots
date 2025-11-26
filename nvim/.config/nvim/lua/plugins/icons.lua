@@ -18,6 +18,11 @@ icons.setup {
             color = colors['blue'],
             name = "c",
         },
+        ino = {
+            icon = " ",
+            color = colors['blue'],
+            name = "ino",
+        },
         h = {
             icon = " ",
             color = colors['green'],
@@ -92,6 +97,11 @@ icons.setup {
             icon = " ",
             color = colors['yellow'],
             name = "md",
+        },
+        ["Makefile"] = {
+            icon = " ",
+            color = colors['blue'],
+            name = "makefile",
         },
         ["README.md"] = {
             icon = " ",

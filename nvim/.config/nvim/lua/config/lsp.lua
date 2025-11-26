@@ -34,6 +34,9 @@ vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('typos_lsp')
 vim.lsp.enable('openscad_lsp')
 vim.lsp.enable('bash_ls')
+vim.lsp.enable('iwe')
+vim.lsp.enable('vtsls')
+vim.lsp.enable('tinymist')
 
 vim.diagnostic.config({
     signs = {

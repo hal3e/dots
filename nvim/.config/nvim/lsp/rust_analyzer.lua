@@ -110,7 +110,8 @@ return {
         ["rust-analyzer"] = {
             check = {
                 command = "clippy",
-                extraArgs = { "--all", "--", "-W", "clippy::all", "-W", "clippy::pedantic", "-W", "clippy::nursery" },
+                extraArgs = { "--all", "--", "-W", "clippy::all" }
+                -- extraArgs = { "--all", "--", "-W", "clippy::all", "-W", "clippy::pedantic" }
                 -- extraArgs = { "--all", "--", "-W", "clippy::nursery", "-W", "clippy::pedantic" },
             },
         },

@@ -94,19 +94,19 @@ icons.setup {
             name = "md",
         },
         ["README.md"] = {
-            icon = " ", --
-            color = colors['green'],
-            name = "readme",
+            icon = " ",
+            color = colors['blue'],
+            name = "rdm",
         },
-        license = {
-            icon = " ", --
-            color = colors['maroon'],
+        ["LICENSE"] = {
+            icon = " ",
+            color = colors['green'],
             name = "license",
         },
         ["SECURITY.md"] = {
-            icon = " ", --
+            icon = " ",
             color = colors['maroon'],
-            name = "security",
+            name = "sec",
         },
         js = {
             icon = " ",

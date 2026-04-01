@@ -1,6 +1,8 @@
 local g = vim.g     -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
 
+opt.diffopt = "internal,filler,closeoff,indent-heuristic,inline:char"
+
 opt.shell = "/bin/dash"
 opt.lazyredraw = true
 opt.fillchars:append({ fold = " ", eob = " " })
@@ -14,6 +16,7 @@ opt.foldlevelstart = 99
 opt.foldmethod = 'expr'
 opt.foldtext = ''
 opt.foldcolumn = "0"
+opt.updatetime = 750
 
 -- Default to treesitter folding
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -85,12 +88,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("format-ldg", { clear = true }),
     command = [[call ledger#align_commodity_buffer()]],
     pattern = "*.ldg"
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = vim.api.nvim_create_augroup("sway-syntax", { clear = true }),
-    command = [[set filetype=sway]],
-    pattern = "*.[sS][wW]"
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -183,3 +180,97 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
         vim.notify(msg)
     end,
 })
+
+vim.api.nvim_create_autocmd("VimResized", {
+    group = vim.api.nvim_create_augroup("resize-splits-when-terminal-resized", { clear = true }),
+    command = "wincmd =",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("no-auto-comment", { clear = true }),
+    callback = function()
+        vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+    end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+    group = vim.api.nvim_create_augroup("LspReferenceHighlight", { clear = true }),
+    desc = "Highlight references under cursor",
+    callback = function()
+        -- Only run if the cursor is not in insert mode
+        if vim.fn.mode() ~= "i" then
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
+            local supports_highlight = false
+            for _, client in ipairs(clients) do
+                if client.server_capabilities.documentHighlightProvider then
+                    supports_highlight = true
+                    break -- Found a supporting client, no need to check others
+                end
+            end
+
+            -- 3. Proceed only if an LSP is active AND supports the feature
+            if supports_highlight then
+                vim.lsp.buf.clear_references()
+                vim.lsp.buf.document_highlight()
+            end
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("CursorMovedI", {
+    group = "LspReferenceHighlight",
+    desc = "Clear highlights when entering insert mode",
+    callback = function()
+        vim.lsp.buf.clear_references()
+    end,
+})
+
+require('vim._core.ui2').enable({
+    enable = true,
+    msg = {
+        targets = {
+            [''] = 'msg',
+            empty = 'cmd',
+            bufwrite = 'msg',
+            confirm = 'cmd',
+            emsg = 'pager',
+            echo = 'msg',
+            echomsg = 'msg',
+            echoerr = 'pager',
+            completion = 'cmd',
+            list_cmd = 'pager',
+            lua_error = 'pager',
+            lua_print = 'msg',
+            progress = 'pager',
+            rpc_error = 'pager',
+            quickfix = 'msg',
+            search_cmd = 'cmd',
+            search_count = 'cmd',
+            shell_cmd = 'pager',
+            shell_err = 'pager',
+            shell_out = 'pager',
+            shell_ret = 'msg',
+            undo = 'msg',
+            verbose = 'pager',
+            wildlist = 'cmd',
+            wmsg = 'msg',
+            typed_cmd = 'cmd',
+        },
+        cmd = {
+            height = 0.2,
+        },
+        dialog = {
+            height = 0.2,
+        },
+        msg = {
+            height = 0.2,
+            timeout = 5000,
+        },
+        pager = {
+            height = 0.5,
+        },
+    },
+})
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>U", require("undotree").open)

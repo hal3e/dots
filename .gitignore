@@ -1,2 +1,10 @@
+git/.config/git/config.local
+
+jj/.config/jj/repos/
+jj/.config/jj/conf.d/99-local.toml
+
+fish/.config/fish/fish_variables
+fish/.config/fish/conf.d/99-local.fish
+
 nvim/.config/nvim/.netrwhist
 nvim/.config/nvim/autoload/

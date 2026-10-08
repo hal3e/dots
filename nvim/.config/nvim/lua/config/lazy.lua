@@ -265,11 +265,12 @@ require('lazy').setup(
 
         {
             'lukas-reineke/indent-blankline.nvim',
-            tag = 'v2.20.8',
+            main = 'ibl',
             event = { 'BufReadPost', 'BufNewFile' },
             opts = {
-                show_current_context = true,
-                show_trailing_blankline_indent = false
+                whitespace = {
+                    remove_blankline_trail = true,
+                },
             },
             lazy = true
         },

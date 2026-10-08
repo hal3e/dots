@@ -41,14 +41,53 @@ map('n', 'oo', 'o<esc>', default_opts)
 map('n', 'OO', 'O<esc>', default_opts)
 
 -- Add custom text objects
+local function select_delimited(char, include_delimiters)
+    local line = vim.api.nvim_get_current_line()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local column = cursor[2] + 1
+    local left, right
+    local pos = line:find(char, 1, true)
+
+    -- Find enclosing delimiters, or the next pair when the cursor precedes them.
+    while pos do
+        left, right = right, pos
+        if left and right > column then
+            break
+        end
+        pos = line:find(char, pos + #char, true)
+    end
+
+    -- At end of line, accept the preceding pair only when
+    -- the cursor is on the final delimiter.
+    if not pos and right ~= column then
+        right = nil
+    end
+
+    local first = left and (include_delimiters and left or left + #char)
+    local last = right and (include_delimiters and right or right - 1)
+    if not first or not last or first > last then
+        -- Cancel before any queued keys can act on an incomplete selection.
+        vim.api.nvim_feedkeys(vim.keycode('<Esc>'), 'in', false)
+        return
+    end
+
+    local mode = vim.fn.mode()
+    if mode == 'v' or mode == 'V' or mode == vim.keycode('<C-v>') then
+        vim.cmd.normal({ args = { vim.keycode('<Esc>') }, bang = true })
+    end
+    vim.api.nvim_win_set_cursor(0, { cursor[1], first - 1 })
+    vim.cmd.normal({ args = { 'v' }, bang = true })
+    vim.api.nvim_win_set_cursor(0, { cursor[1], vim.o.selection == 'exclusive' and last or last - 1 })
+end
+
 local chars = { '_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '%', '`', '?' }
 for _, char in ipairs(chars) do
-    for _, mode in ipairs({ 'x', 'o' }) do
-        local i_cmd = string.format(':<C-u>silent! normal! f%sF%slvt%s<CR>', char, char, char)
-        local a_cmd = string.format(':<C-u>silent! normal! f%sF%svf%s<CR>', char, char, char)
-        map(mode, "i" .. char, i_cmd, default_opts)
-        map(mode, "a" .. char, a_cmd, default_opts)
-    end
+    vim.keymap.set({ 'x', 'o' }, 'i' .. char, function()
+        select_delimited(char, false)
+    end, default_opts)
+    vim.keymap.set({ 'x', 'o' }, 'a' .. char, function()
+        select_delimited(char, true)
+    end, default_opts)
 end
 
 -- Fast saving with <leader> and w

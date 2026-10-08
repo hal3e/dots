@@ -1,4 +1,3 @@
-local g = vim.g     -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
 
 opt.diffopt = "internal,filler,closeoff,indent-heuristic,inline:char"
@@ -49,7 +48,6 @@ opt.timeoutlen = 225 -- By default timeoutlen is 1000 ms
 opt.mouse = ''
 opt.laststatus = 3
 opt.signcolumn = 'yes'        -- Reserve space so deferred signs do not shift the text.
-g.mapleader = ' '             -- change leader to space
 
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
 opt.swapfile = false          -- don't use swapfile

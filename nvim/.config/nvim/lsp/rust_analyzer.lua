@@ -14,7 +14,7 @@ local function reload_workspace(bufnr)
     local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'rust_analyzer' }
     for _, client in ipairs(clients) do
         vim.notify 'Reloading Cargo Workspace'
-        client.request('rust-analyzer/reloadWorkspace', nil, function(err)
+        client:request('rust-analyzer/reloadWorkspace', nil, function(err)
             if err then
                 error(tostring(err))
             end
@@ -84,8 +84,11 @@ return {
                 on_dir(cargo_workspace_root or cargo_crate_dir)
             else
                 vim.schedule(function()
-                    vim.notify(('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output
-                        .stderr))
+                    vim.notify(('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(
+                        output.code,
+                        table.concat(cmd, ' '),
+                        output.stderr
+                    ))
                 end)
             end
         end)

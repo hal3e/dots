@@ -40,11 +40,9 @@ opt.showmode = false
 opt.scrolloff = 5
 opt.timeoutlen = 225 -- By default timeoutlen is 1000 ms
 opt.mouse = ''
-opt.cmdheight = 0
 opt.laststatus = 3
-
-g.mapleader = ' ' -- change leader to space
-g.python3_host_prog = '/home/hal3e/bin/miniconda3/envs/py38/bin/python'
+opt.signcolumn = 'yes'        -- Reserve space so deferred signs do not shift the text.
+g.mapleader = ' '             -- change leader to space
 
 opt.clipboard = 'unnamedplus' -- copy/paste to system clipboard
 opt.swapfile = false          -- don't use swapfile
@@ -167,14 +165,12 @@ vim.api.nvim_create_autocmd('VimEnter', {
     callback = function()
         -- Open a file picker when no path arguments are supplied.
         if vim.fn.argc() == 0 then
-            vim.defer_fn(function()
-                local builtin = require('telescope.builtin')
-                if is_git_repo(vim.fn.getcwd()) then
-                    builtin.git_files()
-                else
-                    builtin.find_files()
-                end
-            end, 50)
+            local builtin = require('telescope.builtin')
+            if is_git_repo(vim.fn.getcwd()) then
+                builtin.git_files()
+            else
+                builtin.find_files()
+            end
         end
     end
 })
@@ -285,6 +281,9 @@ require('vim._core.ui2').enable({
         },
     },
 })
+
+-- Hide the command line after ui2 attaches to avoid an extra startup screen clear.
+opt.cmdheight = 0
 
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>U", require("undotree").open)

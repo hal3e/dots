@@ -21,6 +21,7 @@ require('lazy').setup(
     {
         {
             'MeanderingProgrammer/render-markdown.nvim',
+            ft = 'markdown',
             dependencies = {
                 'nvim-treesitter/nvim-treesitter',
                 {
@@ -43,7 +44,6 @@ require('lazy').setup(
 
         {
             'nvim-mini/mini.statusline',
-            event = 'VeryLazy',
             config = function()
                 local statusline = require('mini.statusline')
                 statusline.setup({
@@ -64,7 +64,7 @@ require('lazy').setup(
                     }
                 })
             end,
-            lazy = true
+            lazy = false
         },
 
         {
@@ -246,7 +246,7 @@ require('lazy').setup(
 
         {
             "folke/todo-comments.nvim",
-            event = "BufReadPost",
+            event = { 'BufReadPost', 'BufNewFile' },
             dependencies = { "nvim-lua/plenary.nvim" },
             opts = {
                 keywords = {
@@ -331,6 +331,7 @@ require('lazy').setup(
 
         {
             'hrsh7th/nvim-cmp',
+            module = false,
             event = { 'InsertEnter', 'CmdlineEnter' },
             dependencies = {
                 'hrsh7th/cmp-nvim-lsp',
@@ -389,7 +390,7 @@ require('lazy').setup(
 
         {
             'lewis6991/gitsigns.nvim',
-            event = 'BufReadPost',
+            event = { 'BufReadPost', 'BufNewFile' },
             opts = {
                 on_attach = function(bufnr)
                     local gs = require('gitsigns')
@@ -442,7 +443,7 @@ require('lazy').setup(
 
         {
             'catgoose/nvim-colorizer.lua',
-            event = 'BufReadPre',
+            event = { 'BufReadPost', 'BufNewFile' },
             opts = {
                 filetypes = { '*' },
                 user_default_options = {

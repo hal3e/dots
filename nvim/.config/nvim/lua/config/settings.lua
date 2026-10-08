@@ -138,14 +138,26 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
 })
 
--- open nvim-tree after file is loaded
+local function is_git_repo(directory)
+    vim.fn.system({ "git", "-C", directory, "rev-parse", "--show-toplevel" })
+    return vim.v.shell_error == 0
+end
+
+-- Open nvim-tree once, when a file inside a Git working tree is loaded.
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
     callback = function(args)
-        if vim.fn.expand "%:p" ~= "" then
-            vim.api.nvim_del_autocmd(args.id)
-            vim.cmd "noautocmd NvimTreeOpen"
-            vim.cmd "noautocmd wincmd p"
+        local filename = vim.api.nvim_buf_get_name(args.buf)
+        if filename == "" or vim.bo[args.buf].buftype ~= "" then
+            return
         end
+
+        if not is_git_repo(vim.fn.fnamemodify(filename, ":h")) then
+            return
+        end
+
+        vim.api.nvim_del_autocmd(args.id)
+        vim.cmd "noautocmd NvimTreeOpen"
+        vim.cmd "noautocmd wincmd p"
     end,
 })
 
@@ -153,14 +165,14 @@ vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('startup', { clear = true }),
     pattern = '*',
     callback = function()
-        -- Open file browser if argument is a folder
-        local arg = vim.api.nvim_eval('argv(0)')
-        if arg == "" then
+        -- Open a file picker when no path arguments are supplied.
+        if vim.fn.argc() == 0 then
             vim.defer_fn(function()
-                if vim.fn.findfile('.gitignore') == "" then
-                    require('telescope.builtin').find_files()
+                local builtin = require('telescope.builtin')
+                if is_git_repo(vim.fn.getcwd()) then
+                    builtin.git_files()
                 else
-                    require('telescope.builtin').git_files()
+                    builtin.find_files()
                 end
             end, 50)
         end

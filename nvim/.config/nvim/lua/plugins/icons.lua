@@ -208,6 +208,11 @@ icons.setup {
             color = colors['teal'],
             name = "ts",
         },
+        ["test.ts"] = {
+            icon = " ",
+            color = colors['teal'],
+            name = "testts",
+        },
         tsx = {
             icon = " ",
             color = colors['teal'],

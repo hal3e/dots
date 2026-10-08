@@ -268,6 +268,9 @@ require('lazy').setup(
             main = 'ibl',
             event = { 'BufReadPost', 'BufNewFile' },
             opts = {
+                scope = {
+                    enabled = false,
+                },
                 whitespace = {
                     remove_blankline_trail = true,
                 },

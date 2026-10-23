@@ -1,3 +1,9 @@
+require('plugins.catppuccin')
+
+vim.pack.add({
+    { src = 'https://github.com/nvim-tree/nvim-web-devicons', name = 'nvim-web-devicons', version = 'master' },
+}, { confirm = false })
+
 local icons = require("nvim-web-devicons")
 local colors = require("catppuccin.palettes").get_palette("macchiato")
 

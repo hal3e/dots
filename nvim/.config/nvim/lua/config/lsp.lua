@@ -1,8 +1,8 @@
 -- Lsp keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup("lsp-keymaps", { clear = true }),
-    callback = function()
-        local bufnr = 0 -- only current buffer
+    callback = function(args)
+        local bufnr = args.buf
         local function buf_set_keymap(mode, lhs, rhs, opts)
             vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('force', opts or {}, { buffer = bufnr }))
         end

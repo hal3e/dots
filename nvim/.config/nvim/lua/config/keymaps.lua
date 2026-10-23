@@ -61,10 +61,7 @@ map('n', '<leader>q', ':wqa<CR>', default_opts)
 map('n', '<leader>x', ':close<CR>', default_opts)
 
 -- Open terminal
-map('n', '<C-b>', ':Term<CR>', { noremap = true })
-
--- Nvim-tree
-map('n', '<leader>e', ':silent NvimTreeToggle<CR>', default_opts)
+map('n', '<C-b>', '<Cmd>terminal<CR>', default_opts)
 
 -- Used for spelling <Leader>s enters spell menu, enter exits to normal mode
 map('n', '<leader>ss', ':set spell!<CR>', default_opts)

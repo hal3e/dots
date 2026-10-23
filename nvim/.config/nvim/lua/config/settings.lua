@@ -6,7 +6,6 @@ opt.diffopt = "internal,filler,closeoff,indent-heuristic,inline:char"
 opt.runtimepath:append('/usr/share/tree-sitter')
 
 opt.shell = "/bin/dash"
-opt.lazyredraw = true
 opt.fillchars:append({ fold = " ", eob = " " })
 
 opt.spell = true
@@ -22,14 +21,22 @@ opt.updatetime = 750
 
 -- Default to treesitter folding
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- Prefer LSP folding if client supports it
-vim.api.nvim_create_autocmd('LspAttach', {
+-- Use LSP folding in windows displaying a buffer with a folding-capable client.
+vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach', 'BufWinEnter' }, {
     group = vim.api.nvim_create_augroup("lsp-fold", { clear = true }),
     callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client ~= nil and client:supports_method('textDocument/foldingRange') then
-            local win = vim.api.nvim_get_current_win()
-            vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        local foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf, method = 'textDocument/foldingRange' })) do
+            -- LspDetach runs before the departing client is removed from the buffer.
+            if args.event ~= 'LspDetach' or client.id ~= args.data.client_id then
+                foldexpr = 'v:lua.vim.lsp.foldexpr()'
+                break
+            end
+        end
+        for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+            if foldexpr == 'v:lua.vim.lsp.foldexpr()' or vim.wo[win][0].foldexpr == 'v:lua.vim.lsp.foldexpr()' then
+                vim.wo[win][0].foldexpr = foldexpr
+            end
         end
     end,
 })
@@ -63,13 +70,12 @@ opt.linebreak = true      -- wrap on word boundary
 opt.hidden = true         -- enable background buffers
 
 opt.undofile = true
-opt.history = 100     -- remember n lines in history
-opt.lazyredraw = true -- faster scrolling
-opt.synmaxcol = 240   -- max column for syntax highlight
+opt.history = 100    -- remember n lines in history
+opt.synmaxcol = 240  -- max column for syntax highlight
 
-opt.expandtab = true  -- use spaces instead of tabs
-opt.shiftwidth = 4    -- shift 4 spaces when tab
-opt.tabstop = 4       -- 1 tab == 4 spaces
+opt.expandtab = true -- use spaces instead of tabs
+opt.shiftwidth = 4   -- shift 4 spaces when tab
+opt.tabstop = 4      -- 1 tab == 4 spaces
 opt.softtabstop = 4
 opt.smarttab = true
 opt.smartindent = true -- autoindent new lines
@@ -77,10 +83,14 @@ opt.breakindent = true
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("format", { clear = true }),
-    callback = function()
-        vim.lsp.buf.format {
-            filter = function(client) return client.name ~= "volar" end
-        }
+    callback = function(args)
+        local function allow_formatter(client)
+            return client.name ~= "volar"
+        end
+        local clients = vim.lsp.get_clients({ bufnr = args.buf, method = 'textDocument/formatting' })
+        if vim.iter(clients):any(allow_formatter) then
+            vim.lsp.buf.format({ bufnr = args.buf, filter = allow_formatter, async = false })
+        end
     end
 })
 
@@ -98,7 +108,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("remove-whitespace", { clear = true }),
-    command = [[%s/\s\+$//e]]
+    callback = function(args)
+        -- Markdown uses trailing spaces for hard line breaks.
+        if vim.bo[args.buf].filetype == 'markdown' or not vim.bo[args.buf].modifiable then
+            return
+        end
+        local view = vim.fn.winsaveview()
+        vim.cmd([[keepjumps %s/\s\+$//e]])
+        vim.fn.winrestview(view)
+    end,
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -125,9 +143,22 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("close-nvimtree-if-last", { clear = true }),
-    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+    callback = function(args)
+        if vim.fn.winnr('$') == 1 and vim.bo[args.buf].filetype == 'NvimTree' then
+            local win = vim.api.nvim_get_current_win()
+            -- Let the window close that triggered BufEnter finish before quitting.
+            vim.schedule(function()
+                if vim.api.nvim_get_current_win() == win
+                    and vim.api.nvim_get_current_buf() == args.buf
+                    and vim.fn.winnr('$') == 1
+                    and vim.bo[args.buf].filetype == 'NvimTree'
+                then
+                    vim.cmd.quit()
+                end
+            end)
+        end
+    end,
     pattern = "NvimTree*",
-    nested = true,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -154,8 +185,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
         end
 
         vim.api.nvim_del_autocmd(args.id)
-        vim.cmd "noautocmd NvimTreeOpen"
-        vim.cmd "noautocmd wincmd p"
+        local win = vim.api.nvim_get_current_win()
+        vim.cmd.NvimTreeOpen()
+        if vim.api.nvim_win_is_valid(win) then
+            vim.api.nvim_set_current_win(win)
+        end
     end,
 })
 
@@ -227,9 +261,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
     end,
 })
 
-vim.api.nvim_create_autocmd("CursorMovedI", {
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertEnter" }, {
     group = "LspReferenceHighlight",
-    desc = "Clear highlights when entering insert mode",
+    desc = "Clear references when moving or entering insert mode",
     callback = function()
         vim.lsp.buf.clear_references()
     end,

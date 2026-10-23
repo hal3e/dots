@@ -1,3 +1,10 @@
+require('plugins.icons')
+require('plugins.treesitter')
+
+vim.pack.add({
+    { src = 'https://github.com/kyazdani42/nvim-tree.lua', name = 'nvim-tree.lua', version = 'master' },
+}, { confirm = false })
+
 local function on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -123,3 +130,5 @@ require('nvim-tree').setup({
     },
     on_attach = on_attach
 })
+
+vim.keymap.set('n', '<leader>e', ':silent NvimTreeToggle<CR>', { silent = true })

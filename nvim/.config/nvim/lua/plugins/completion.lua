@@ -1,7 +1,19 @@
+vim.pack.add({
+    { src = 'https://github.com/rafamadriz/friendly-snippets', name = 'friendly-snippets', version = 'main' },
+    { src = 'https://github.com/L3MON4D3/LuaSnip',             name = 'LuaSnip',           version = vim.version.range('2') },
+    { src = 'https://github.com/hrsh7th/nvim-cmp',             name = 'nvim-cmp',          version = 'main' },
+    { src = 'https://github.com/hrsh7th/cmp-nvim-lsp',         name = 'cmp-nvim-lsp',      version = 'main' },
+    { src = 'https://github.com/hrsh7th/cmp-buffer',           name = 'cmp-buffer',        version = 'main' },
+    { src = 'https://github.com/hrsh7th/cmp-path',             name = 'cmp-path',          version = 'main' },
+    { src = 'https://github.com/hrsh7th/cmp-cmdline',          name = 'cmp-cmdline',       version = 'main' },
+    { src = 'https://github.com/saadparwaiz1/cmp_luasnip',     name = 'cmp_luasnip',       version = 'master' },
+}, { confirm = false })
+
+-- Register friendly-snippets once; LuaSnip loads each filetype's snippets on demand.
+require('luasnip.loaders.from_vscode').lazy_load()
+
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-
-require("luasnip/loaders/from_vscode").lazy_load()
 
 local kinds = {
     Array = "  array",
@@ -76,10 +88,8 @@ cmp.setup {
     sources = cmp.config.sources({
         { name = "nvim_lsp", priority = 1000 },
         { name = "luasnip",  priority = 750 },
-        { name = 'nvim_lua', priority = 500 },
         { name = 'buffer',   priority = 250, keyword_length = 2 },
         { name = "path",     priority = 50 },
-        { name = "crates",   priority = 10 },
     }),
     matching = {
         disallow_fuzzy_matching = true,
@@ -89,13 +99,6 @@ cmp.setup {
         format = function(entry, item)
             item.kind = kinds[item.kind]
             item.menu = ''
-            -- item.menu = ({
-            --     nvim_lsp = "lsp",
-            --     nvim_lua = "lua",
-            --     luasnip = "snip",
-            --     buffer = "buff",
-            --     path = "path",
-            -- })[entry.source.name]
             return item
         end,
     },
